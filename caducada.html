@@ -29,9 +29,8 @@
   img { display: block; max-width: 100%; height: auto; }
   :focus-visible { outline: 3px solid #2E5A4A; outline-offset: 3px; border-radius: 3px; }
 
-  /* El toldo, en pequeño */
-  .cab { position: relative; background: var(--groc); padding: clamp(14px, 2.6svh, 24px) var(--canal) clamp(16px, 2.8svh, 26px); color: var(--verd); }
-  .cab::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 20px; background: radial-gradient(circle at 50% 0, var(--groc) 19.5px, transparent 20px) 0 0 / 40px 20px repeat-x; }
+  /* La cabecera, en el amarillo de la residencia */
+  .cab { position: relative; background: var(--groc); border-bottom: 4px solid var(--verd); padding: clamp(14px, 2.6svh, 24px) var(--canal) clamp(16px, 2.8svh, 26px); color: var(--verd); }
   .cab p { font-family: 'Zodiak', Georgia, serif; font-weight: 500; font-size: clamp(.95rem, .85rem + .4vw, 1.2rem); line-height: 1.1; }
   .cab strong { display: block; font-family: 'Zodiak', Georgia, serif; font-weight: 500; font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.8rem); line-height: 1.05; }
 
