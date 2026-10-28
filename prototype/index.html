@@ -57,11 +57,11 @@
 </script>
 <link rel="preload" href="assets/fonts/zodiak.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/commissioner.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="assets/img/jardin-960.webp" imagesrcset="assets/img/jardin-640.webp 640w, assets/img/jardin-960.webp 960w, assets/img/jardin-1280.webp 1280w, assets/img/jardin-1600.webp 1600w" imagesizes="(min-width: 900px) 46vw, 90vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/base.css?v=2">
-<link rel="stylesheet" href="assets/css/home.css?v=2">
-<script src="assets/js/base.js?v=2" defer></script>
-<script src="assets/js/home.js?v=2" defer></script>
+<link rel="preload" as="image" href="assets/img/jardin-960.webp" imagesrcset="assets/img/jardin-640.webp 640w, assets/img/jardin-960.webp 960w, assets/img/jardin-1280.webp 1280w, assets/img/jardin-1600.webp 1600w" imagesizes="(min-width: 600px) 46vw, 84vw" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/base.css?v=3">
+<link rel="stylesheet" href="assets/css/home.css?v=3">
+<script src="assets/js/base.js?v=3" defer></script>
+<script src="assets/js/home.js?v=3" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -107,6 +107,7 @@
   <symbol id="i-visita" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M9 15.2l2.1 2.1 4-4.1"/></symbol>
   <symbol id="i-foto" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 15.5l-5-5-8.8 9"/></symbol>
   <symbol id="i-baixa" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+  <symbol id="i-casa" viewBox="0 0 24 24"><path d="M4 11.2 12 4.5l8 6.7"/><path d="M6.3 9.5v10h11.4v-10"/><path d="M10 19.5v-5.3h4v5.3"/></symbol>
   <symbol id="i-puja" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
   <symbol id="i-metro" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="14.5" rx="3.5"/><path d="M5 11.5h14M8.5 21l1.6-3.5M15.5 21l-1.6-3.5"/><circle cx="9" cy="14.5" r=".6"/><circle cx="15" cy="14.5" r=".6"/></symbol>
   <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="15" rx="2.5"/><path d="M4 11h16M4 6.5h16M7.5 21v-3M16.5 21v-3"/><circle cx="8" cy="14.5" r=".6"/><circle cx="16" cy="14.5" r=".6"/></symbol>
@@ -129,17 +130,19 @@
 
 <header class="cab" data-cab>
   <div class="cab__dins">
-    <a class="marca" href="https://www.residenciasantmiquel.net/">
+    <a class="marca" href="#inici">
       <span class="marca__nom">Sant Miquel Arcàngel</span>
       <span class="marca__sub"><span lang="ca">Residència d'avis al Putxet</span><span lang="es">Residencia de mayores en el Putxet</span></span>
     </a>
     <nav class="menu" aria-label="Menú">
       <ul>
-        <li><a href="https://www.residenciasantmiquel.net/" aria-current="page"><span lang="ca">Inici</span><span lang="es">Inicio</span></a></li>
-        <li><a href="https://www.residenciasantmiquel.net/tallers-i-activitats/"><span lang="ca">Tallers i activitats</span><span lang="es">Talleres y actividades</span></a></li>
-        <li><a href="https://www.residenciasantmiquel.net/instal-lacions-serveis/"><span lang="ca">Instal·lacions i serveis</span><span lang="es">Instalaciones y servicios</span></a></li>
-        <li><a href="https://www.residenciasantmiquel.net/fotos-nadal/"><span lang="ca">Fotos de Nadal</span><span lang="es">Fotos de Navidad</span></a></li>
-        <li><a href="https://www.residenciasantmiquel.net/contacte/"><span lang="ca">Contacte</span><span lang="es">Contacto</span></a></li>
+        <li><a href="#places"><span lang="ca">Places</span><span lang="es">Plazas</span></a></li>
+        <li><a href="#equip"><span lang="ca">L'equip</span><span lang="es">El equipo</span></a></li>
+        <li><a href="#casa"><span lang="ca">La casa</span><span lang="es">La casa</span></a></li>
+        <li><a href="#tallers"><span lang="ca">Tallers</span><span lang="es">Talleres</span></a></li>
+        <li><a href="#festes"><span lang="ca">Festes</span><span lang="es">Fiestas</span></a></li>
+        <li><a href="#arribar"><span lang="ca">Com arribar</span><span lang="es">Cómo llegar</span></a></li>
+        <li><a href="#visita"><span lang="ca">Contacte</span><span lang="es">Contacto</span></a></li>
       </ul>
     </nav>
     <div class="cab__eines">
@@ -153,11 +156,13 @@
 
 <div class="menu-mobil" id="menu-mobil" data-menu hidden>
   <ul>
-    <li><a href="https://www.residenciasantmiquel.net/" aria-current="page"><span lang="ca">Inici</span><span lang="es">Inicio</span></a></li>
-    <li><a href="https://www.residenciasantmiquel.net/tallers-i-activitats/"><span lang="ca">Tallers i activitats</span><span lang="es">Talleres y actividades</span></a></li>
-    <li><a href="https://www.residenciasantmiquel.net/instal-lacions-serveis/"><span lang="ca">Instal·lacions i serveis</span><span lang="es">Instalaciones y servicios</span></a></li>
-    <li><a href="https://www.residenciasantmiquel.net/fotos-nadal/"><span lang="ca">Fotos de Nadal</span><span lang="es">Fotos de Navidad</span></a></li>
-    <li><a href="https://www.residenciasantmiquel.net/contacte/"><span lang="ca">Contacte</span><span lang="es">Contacto</span></a></li>
+    <li><a href="#places"><span lang="ca">Places</span><span lang="es">Plazas</span></a></li>
+    <li><a href="#equip"><span lang="ca">L'equip</span><span lang="es">El equipo</span></a></li>
+    <li><a href="#casa"><span lang="ca">La casa</span><span lang="es">La casa</span></a></li>
+    <li><a href="#tallers"><span lang="ca">Tallers</span><span lang="es">Talleres</span></a></li>
+    <li><a href="#festes"><span lang="ca">Festes</span><span lang="es">Fiestas</span></a></li>
+    <li><a href="#arribar"><span lang="ca">Com arribar</span><span lang="es">Cómo llegar</span></a></li>
+    <li><a href="#visita"><span lang="ca">Contacte</span><span lang="es">Contacto</span></a></li>
   </ul>
   <div class="menu-mobil__eines">
     <button class="eina eina--text" type="button" data-text-gran aria-pressed="false" aria-label="Text gran" data-aria-es="Texto grande"><span class="eina__aa" aria-hidden="true"><small>A</small>A</span><span lang="ca">Text gran</span><span lang="es">Texto grande</span></button>
@@ -168,50 +173,36 @@
 
 <main id="contingut">
 
-  <!-- 1 · HERO «Tendal»: su toldo amarillo se abre con el nombre -->
-  <section class="hero" data-hero aria-labelledby="hero-titol">
-    <div class="tendal" data-tendal>
-      <div class="tendal__roda">
-        <div class="tendal__pendent" aria-hidden="true"></div>
-        <div class="tendal__barra" aria-hidden="true"></div>
-        <div class="tendal__tela">
-          <h1 class="tendal__nom" id="hero-titol">
-            <span class="tendal__pre"><span lang="ca">Residència d'avis</span><span lang="es">Residencia de mayores</span></span>
-            <span class="tendal__gran"><span class="nom-p" style="--w:0">Sant</span> <span class="nom-p" style="--w:1">Miquel</span> <span class="nom-p" style="--w:2">Arcàngel</span></span>
-          </h1>
-          <figure class="tendal__facana">
-            <span class="tendal__foto"><img data-foto src="assets/img/fachada-800.webp" srcset="assets/img/fachada-480.webp 480w, assets/img/fachada-800.webp 800w, assets/img/fachada-1200.webp 1200w" sizes="(min-width: 900px) 26vw, 1px" width="800" height="279" alt="La façana de la residència al carrer d'Escipió, 17, amb el tendal groc sobre la porta" data-alt-es="La fachada de la residencia en la calle Escipió, 17, con el toldo amarillo sobre la puerta" fetchpriority="high"></span>
-            <figcaption><svg class="icona" aria-hidden="true"><use href="#i-pin"/></svg><span lang="ca">C/ d'Escipió, 17</span><span lang="es">C/ Escipió, 17</span></figcaption>
-          </figure>
-        </div>
-        <div class="tendal__volant" aria-hidden="true" data-bucle data-volant><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i><i style="--i:30"></i><i style="--i:31"></i><i style="--i:32"></i><i style="--i:33"></i><i style="--i:34"></i><i style="--i:35"></i><i style="--i:36"></i><i style="--i:37"></i><i style="--i:38"></i><i style="--i:39"></i><i style="--i:40"></i><i style="--i:41"></i><i style="--i:42"></i><i style="--i:43"></i><i style="--i:44"></i><i style="--i:45"></i><i style="--i:46"></i><i style="--i:47"></i><i style="--i:48"></i><i style="--i:49"></i><i style="--i:50"></i><i style="--i:51"></i><i style="--i:52"></i><i style="--i:53"></i><i style="--i:54"></i><i style="--i:55"></i><i style="--i:56"></i><i style="--i:57"></i></div>
+  <!-- 1 · HERO: el titular con la palabra que cambia y la casa en un carrusel de fotos colgadas en la pared de sus salas -->
+  <section class="hero" id="inici" data-hero aria-labelledby="hero-titol">
+    <div class="hero__text">
+      <h1 class="hero__titol" id="hero-titol">
+        <span class="sr" lang="ca">Residència d'avis Sant Miquel Arcàngel: una casa al Putxet amb jardí, habitacions exteriors, pèrgola, tallers i festes.</span><span class="sr" lang="es">Residencia de mayores Sant Miquel Arcàngel: una casa en el Putxet con jardín, habitaciones exteriores, pérgola, talleres y fiestas.</span>
+        <span class="titol__fix" aria-hidden="true"><span lang="ca">Una casa al Putxet</span><span lang="es">Una casa en el Putxet</span></span>
+        <span class="titol__roda" aria-hidden="true"><span lang="ca">amb</span><span lang="es">con</span> <span class="roda" data-roda><span class="roda__p ara"><span lang="ca">jardí.</span><span lang="es">jardín.</span></span></span></span>
+      </h1>
+      <p class="hero__entrada"><span lang="ca">Per a 25 avis, amb metge, infermeria i cuina pròpia.</span><span lang="es">Para 25 mayores, con médico, enfermería y cocina propia.</span></p>
+      <div class="hero__accions">
+        <a class="boton boton--ico boton--crida" href="tel:+34934170582" aria-label="Truqueu al 934 170 582" data-aria-es="Llame al 934 170 582"><span class="boton__ico gest-truca"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg></span><span class="boton__text"><strong lang="ca">Truqueu</strong><strong lang="es">Llame</strong> <span class="num">934&nbsp;170&nbsp;582</span></span></a>
+        <a class="boton boton--ico" href="#visita"><span class="boton__ico gest-salta"><svg class="icona" aria-hidden="true"><use href="#i-visita"/></svg></span><span class="boton__text"><span lang="ca">Demaneu una visita</span><span lang="es">Pida una visita</span></span></a>
       </div>
+      <p class="hero__qui"><span lang="ca">Us atendran la Sra. Ana o la Sra. Alba.</span><span lang="es">Le atenderán la Sra. Ana o la Sra. Alba.</span> <a class="enllac" href="#arribar"><span lang="ca">Com arribar</span><span lang="es">Cómo llegar</span><svg class="icona" aria-hidden="true"><use href="#i-fletxa"/></svg></a></p>
     </div>
 
-    <div class="hero__cos">
-      <div class="hero__text">
-        <p class="hero__lema">
-          <span class="sr" lang="ca">Una casa al Putxet amb jardí, metge, infermeria, cuina pròpia i fisioteràpia.</span><span class="sr" lang="es">Una casa en el Putxet con jardín, médico, enfermería, cocina propia y fisioterapia.</span>
-          <span class="lema__fix" aria-hidden="true"><span lang="ca">Una casa al Putxet</span><span lang="es">Una casa en el Putxet</span></span>
-          <span class="lema__roda" aria-hidden="true"><span lang="ca">amb</span><span lang="es">con</span> <span class="roda" data-roda><span class="roda__p ara"><span lang="ca">jardí.</span><span lang="es">jardín.</span></span></span></span>
-        </p>
-        <p class="hero__entrada"><span lang="ca">Per a 25 avis. 18 de les places són col·laboradores amb la Generalitat.</span><span lang="es">Para 25 mayores. 18 de las plazas son colaboradoras con la Generalitat.</span></p>
-        <div class="hero__accions">
-          <a class="boton boton--ico boton--crida" href="tel:+34934170582" aria-label="Truqueu al 934 170 582" data-aria-es="Llame al 934 170 582"><span class="boton__ico gest-truca"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg></span><span class="boton__text"><strong lang="ca">Truqueu</strong><strong lang="es">Llame</strong> <span class="num">934&nbsp;170&nbsp;582</span></span></a>
-          <a class="boton boton--ico" href="#visita"><span class="boton__ico gest-salta"><svg class="icona" aria-hidden="true"><use href="#i-visita"/></svg></span><span class="boton__text"><span lang="ca">Demaneu una visita</span><span lang="es">Pida una visita</span></span></a>
-        </div>
-        <p class="hero__qui"><span lang="ca">Us atendran la Sra. Ana o la Sra. Alba.</span><span lang="es">Le atenderán la Sra. Ana o la Sra. Alba.</span> <a class="enllac" href="#arribar"><span lang="ca">Com arribar</span><span lang="es">Cómo llegar</span><svg class="icona" aria-hidden="true"><use href="#i-fletxa"/></svg></a></p>
+    <div class="carrusel" data-carrusel data-carril data-bucle>
+      <div class="carrusel__escena" data-carrusel-escena>
+        <ul class="carrusel__cartes">
+          <li class="carta" data-carta="0"><figure class="carta__foto"><img data-foto src="assets/img/jardin-960.webp" srcset="assets/img/jardin-640.webp 640w, assets/img/jardin-960.webp 960w, assets/img/jardin-1280.webp 1280w, assets/img/jardin-1600.webp 1600w" sizes="(min-width: 600px) 46vw, 84vw" width="1280" height="960" alt="El jardí de la residència: una pèrgola blanca amb taules i butaques de fusta, una palmera i plantes, davant de la casa" data-alt-es="El jardín de la residencia: una pérgola blanca con mesas y butacas de madera, una palmera y plantas, delante de la casa" fetchpriority="high"></figure></li>
+          <li class="carta" data-carta="1"><figure class="carta__foto"><img data-foto src="assets/img/habitacion-individual-960.webp" srcset="assets/img/habitacion-individual-640.webp 640w, assets/img/habitacion-individual-960.webp 960w, assets/img/habitacion-individual-1280.webp 1280w" sizes="(min-width: 600px) 46vw, 84vw" width="1280" height="960" decoding="async" alt="Una habitació individual amb llit, prestatgeria i finestra amb cortines" data-alt-es="Una habitación individual con cama, estantería y ventana con cortinas"></figure></li>
+          <li class="carta" data-carta="2"><figure class="carta__foto"><img data-foto src="assets/img/pergola-960.webp" srcset="assets/img/pergola-640.webp 640w, assets/img/pergola-960.webp 960w, assets/img/pergola-1280.webp 1280w" sizes="(min-width: 600px) 46vw, 84vw" width="1280" height="960" decoding="async" alt="La pèrgola del jardí, amb butaques de fusta amb coixins, taules i plantes en testos" data-alt-es="La pérgola del jardín, con butacas de madera con cojines, mesas y plantas en macetas"></figure></li>
+          <li class="carta" data-carta="3"><figure class="carta__foto"><img data-foto src="assets/img/taller-rosas-800.webp" srcset="assets/img/taller-rosas-480.webp 480w, assets/img/taller-rosas-800.webp 800w" sizes="(min-width: 600px) 46vw, 84vw" width="800" height="600" decoding="async" alt="Unes mans sostenen dues roses de paper vermelles acabades de pintar" data-alt-es="Unas manos sostienen dos rosas de papel rojas recién pintadas"></figure></li>
+          <li class="carta" data-carta="4"><figure class="carta__foto"><img data-foto src="assets/img/navidad-baile-800.webp" srcset="assets/img/navidad-baile-480.webp 480w, assets/img/navidad-baile-800.webp 800w" sizes="(min-width: 600px) 46vw, 84vw" width="800" height="600" decoding="async" alt="Residents i treballadores ballen a la festa de Nadal, amb barrets de Pare Noel" data-alt-es="Residentes y trabajadoras bailan en la fiesta de Navidad, con gorros de Papá Noel"></figure></li>
+        </ul>
       </div>
-
-      <div class="hero__jardi">
-        <figure class="foto-punts" data-punts>
-          <span class="foto-punts__marc"><img data-foto src="assets/img/jardin-960.webp" srcset="assets/img/jardin-640.webp 640w, assets/img/jardin-960.webp 960w, assets/img/jardin-1280.webp 1280w, assets/img/jardin-1600.webp 1600w" sizes="(min-width: 900px) 46vw, 90vw" width="1280" height="960" alt="El jardí de la residència: una pèrgola blanca amb taules i butaques de fusta, una palmera i plantes, davant de la casa" data-alt-es="El jardín de la residencia: una pérgola blanca con mesas y butacas de madera, una palmera y plantas, delante de la casa" fetchpriority="high"></span>
-          <span class="ruta" aria-hidden="true"><i class="ruta__tram" data-tram></i><i class="ruta__tram" data-tram></i></span>
-          <button class="punt punt--dre" type="button" style="--x:15%;--y:30%;--n:0" data-punt aria-label="Plantes i una palmera" data-aria-es="Plantas y una palmera"><span class="punt__etiqueta"><span lang="ca">Plantes i una palmera</span><span lang="es">Plantas y una palmera</span></span></button>
-          <button class="punt" type="button" style="--x:52%;--y:34%;--n:1" data-punt aria-label="La pèrgola" data-aria-es="La pérgola"><span class="punt__etiqueta"><span lang="ca">La pèrgola, per estar a l'ombra</span><span lang="es">La pérgola, para estar a la sombra</span></span></button>
-          <button class="punt punt--esq" type="button" style="--x:66%;--y:76%;--n:2" data-punt aria-label="Taules i butaques" data-aria-es="Mesas y butacas"><span class="punt__etiqueta"><span lang="ca">Taules i butaques per seure a fora</span><span lang="es">Mesas y butacas para sentarse fuera</span></span></button>
-          <figcaption class="sr"><span lang="ca">El jardí</span><span lang="es">El jardín</span></figcaption>
-        </figure>
+      <div class="carrusel__peu">
+        <button type="button" class="rodo" data-carrusel-ant><svg class="icona" data-dir="esq" aria-hidden="true"><use href="#i-esq"/></svg><span class="sr"><span lang="ca">Foto anterior</span><span lang="es">Foto anterior</span></span></button>
+        <p class="carrusel__nom" data-carrusel-nom aria-live="polite"><span lang="ca">El jardí</span><span lang="es">El jardín</span> <small>1/5</small></p>
+        <button type="button" class="rodo" data-carrusel-seg><svg class="icona" data-dir="dre" aria-hidden="true"><use href="#i-dre"/></svg><span class="sr"><span lang="ca">Foto següent</span><span lang="es">Foto siguiente</span></span></button>
       </div>
     </div>
   </section>
@@ -297,71 +288,80 @@
     </div>
   </section>
 
-  <!-- 4 · LA CASA: la persiana gira sus lamas y pasa de una estancia a otra -->
+  <!-- 4 · LA CASA: sus ocho fotos de las instalaciones; para pasar de una estancia a otra, la sala gira como un cubo -->
   <section class="casa" id="casa" aria-labelledby="casa-titol">
     <div class="casa__dins">
       <div class="casa__text" data-revela>
         <h2 data-paraules id="casa-titol"><span lang="ca">La casa, per dins.</span><span lang="es">La casa, por dentro.</span></h2>
-        <p><span lang="ca">Una torre amb jardí, adaptada per als avis. Habitacions individuals, dobles i triples, totes exteriors.</span><span lang="es">Una torre con jardín, adaptada para los mayores. Habitaciones individuales, dobles y triples, todas exteriores.</span></p>
+        <p><span lang="ca">Una torre amb un jardí ampli, adaptada per als avis. Habitacions individuals, dobles i triples, totes àmplies i exteriors, i banys assistits.</span><span lang="es">Una torre con un jardín amplio, adaptada para los mayores. Habitaciones individuales, dobles y triples, todas amplias y exteriores, y baños asistidos.</span></p>
         <ul class="estances" data-estances aria-label="Estances" data-aria-es="Estancias">
           <li><button type="button" data-estanca="0"><span lang="ca">El jardí</span><span lang="es">El jardín</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
-          <li><button type="button" data-estanca="1"><span lang="ca">Habitació individual</span><span lang="es">Habitación individual</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
-          <li><button type="button" data-estanca="2"><span lang="ca">Habitació doble</span><span lang="es">Habitación doble</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
-          <li><button type="button" data-estanca="3"><span lang="ca">La sala</span><span lang="es">La sala</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
-          <li><button type="button" data-estanca="4"><span lang="ca">Els passadissos</span><span lang="es">Los pasillos</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
-          <li><button type="button" data-estanca="5"><span lang="ca">Els banys</span><span lang="es">Los baños</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="1"><span lang="ca">La pèrgola</span><span lang="es">La pérgola</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="2"><span lang="ca">Habitació individual</span><span lang="es">Habitación individual</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="3"><span lang="ca">Habitació doble</span><span lang="es">Habitación doble</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="4"><span lang="ca">La sala</span><span lang="es">La sala</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="5"><span lang="ca">Els passadissos</span><span lang="es">Los pasillos</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="6"><span lang="ca">El bany assistit</span><span lang="es">El baño asistido</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="7"><span lang="ca">El lavabo</span><span lang="es">El aseo</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
         </ul>
         <div class="accions">
           <a class="boton boton--ico" href="#visita"><span class="boton__ico gest-salta"><svg class="icona" aria-hidden="true"><use href="#i-visita"/></svg></span><span class="boton__text"><span lang="ca">Veniu a veure-la</span><span lang="es">Venga a verla</span></span></a>
-          <a class="enllac" href="https://www.residenciasantmiquel.net/instal-lacions-serveis/"><span lang="ca">Totes les fotos de la casa</span><span lang="es">Todas las fotos de la casa</span><svg class="icona" aria-hidden="true"><use href="#i-fletxa"/></svg></a>
         </div>
       </div>
 
-      <div class="persiana" data-persiana data-bucle>
-        <div class="persiana__escenari" data-escenari>
+      <div class="estancia" data-estancia data-bucle>
+        <div class="estancia__escenari" data-escenari>
           <figure class="escena actual" data-escena="0">
-            <img data-foto src="assets/img/pergola-960.webp" srcset="assets/img/pergola-640.webp 640w, assets/img/pergola-960.webp 960w, assets/img/pergola-1280.webp 1280w" sizes="(min-width: 960px) 44vw, 86vw" width="1280" height="960" decoding="async" alt="La pèrgola del jardí, amb butaques de fusta amb coixins, taules i plantes en testos" data-alt-es="La pérgola del jardín, con butacas de madera con cojines, mesas y plantas en macetas">
-            <figcaption><span lang="ca">El jardí</span><span lang="es">El jardín</span> <small>1/6</small></figcaption>
+            <img data-foto src="assets/img/jardin-960.webp" srcset="assets/img/jardin-640.webp 640w, assets/img/jardin-960.webp 960w, assets/img/jardin-1280.webp 1280w" sizes="(min-width: 960px) 44vw, 86vw" width="1280" height="960" loading="lazy" decoding="async" alt="El jardí de la residència, amb la pèrgola, la palmera i les plantes davant de la casa" data-alt-es="El jardín de la residencia, con la pérgola, la palmera y las plantas delante de la casa">
+            <figcaption><span lang="ca">El jardí</span><span lang="es">El jardín</span> <small>1/8</small></figcaption>
           </figure>
           <figure class="escena" data-escena="1">
-            <img data-foto src="assets/img/habitacion-individual-960.webp" srcset="assets/img/habitacion-individual-640.webp 640w, assets/img/habitacion-individual-960.webp 960w, assets/img/habitacion-individual-1280.webp 1280w" sizes="(min-width: 960px) 44vw, 86vw" width="1280" height="960" loading="lazy" decoding="async" alt="Una habitació individual amb llit, prestatgeria i finestra amb cortines" data-alt-es="Una habitación individual con cama, estantería y ventana con cortinas">
-            <figcaption><span lang="ca">Habitació individual</span><span lang="es">Habitación individual</span> <small>2/6</small></figcaption>
+            <img data-foto src="assets/img/pergola-960.webp" srcset="assets/img/pergola-640.webp 640w, assets/img/pergola-960.webp 960w, assets/img/pergola-1280.webp 1280w" sizes="(min-width: 960px) 44vw, 86vw" width="1280" height="960" loading="lazy" decoding="async" alt="La pèrgola del jardí, amb butaques de fusta amb coixins, taules i plantes en testos" data-alt-es="La pérgola del jardín, con butacas de madera con cojines, mesas y plantas en macetas">
+            <figcaption><span lang="ca">La pèrgola</span><span lang="es">La pérgola</span> <small>2/8</small></figcaption>
           </figure>
           <figure class="escena" data-escena="2">
-            <img data-foto src="assets/img/habitacion-doble-720.webp" srcset="assets/img/habitacion-doble-480.webp 480w, assets/img/habitacion-doble-720.webp 720w, assets/img/habitacion-doble-960.webp 960w" sizes="(min-width: 960px) 26vw, 52vw" width="960" height="1280" loading="lazy" decoding="async" alt="Una habitació doble amb dos llits i una finestra assolellada" data-alt-es="Una habitación doble con dos camas y una ventana soleada">
-            <figcaption><span lang="ca">Habitació doble</span><span lang="es">Habitación doble</span> <small>3/6</small></figcaption>
+            <img data-foto src="assets/img/habitacion-individual-960.webp" srcset="assets/img/habitacion-individual-640.webp 640w, assets/img/habitacion-individual-960.webp 960w, assets/img/habitacion-individual-1280.webp 1280w" sizes="(min-width: 960px) 44vw, 86vw" width="1280" height="960" loading="lazy" decoding="async" alt="Una habitació individual amb llit, prestatgeria i finestra amb cortines" data-alt-es="Una habitación individual con cama, estantería y ventana con cortinas">
+            <figcaption><span lang="ca">Habitació individual</span><span lang="es">Habitación individual</span> <small>3/8</small></figcaption>
           </figure>
           <figure class="escena" data-escena="3">
-            <img data-foto src="assets/img/sala-estar-720.webp" srcset="assets/img/sala-estar-480.webp 480w, assets/img/sala-estar-720.webp 720w, assets/img/sala-estar-960.webp 960w" sizes="(min-width: 960px) 26vw, 52vw" width="960" height="1280" loading="lazy" decoding="async" alt="Un racó de la sala amb dues butaques de vímet, una tauleta i un quadre d'un paó a la paret groga" data-alt-es="Un rincón de la sala con dos butacas de mimbre, una mesita y un cuadro de un pavo real en la pared amarilla">
-            <figcaption><span lang="ca">La sala</span><span lang="es">La sala</span> <small>4/6</small></figcaption>
+            <img data-foto src="assets/img/habitacion-doble-720.webp" srcset="assets/img/habitacion-doble-480.webp 480w, assets/img/habitacion-doble-720.webp 720w, assets/img/habitacion-doble-960.webp 960w" sizes="(min-width: 960px) 26vw, 52vw" width="960" height="1280" loading="lazy" decoding="async" alt="Una habitació doble amb dos llits i una finestra assolellada" data-alt-es="Una habitación doble con dos camas y una ventana soleada">
+            <figcaption><span lang="ca">Habitació doble</span><span lang="es">Habitación doble</span> <small>4/8</small></figcaption>
           </figure>
           <figure class="escena" data-escena="4">
-            <img data-foto src="assets/img/pasillo-720.webp" srcset="assets/img/pasillo-480.webp 480w, assets/img/pasillo-720.webp 720w, assets/img/pasillo-960.webp 960w" sizes="(min-width: 960px) 26vw, 52vw" width="960" height="1280" loading="lazy" decoding="async" alt="Un passadís llarg i lluminós amb passamans a les parets" data-alt-es="Un pasillo largo y luminoso con pasamanos en las paredes">
-            <figcaption><span lang="ca">Els passadissos</span><span lang="es">Los pasillos</span> <small>5/6</small></figcaption>
+            <img data-foto src="assets/img/sala-estar-720.webp" srcset="assets/img/sala-estar-480.webp 480w, assets/img/sala-estar-720.webp 720w, assets/img/sala-estar-960.webp 960w" sizes="(min-width: 960px) 26vw, 52vw" width="960" height="1280" loading="lazy" decoding="async" alt="Un racó de la sala amb dues butaques de vímet, una tauleta i un quadre d'un paó a la paret groga" data-alt-es="Un rincón de la sala con dos butacas de mimbre, una mesita y un cuadro de un pavo real en la pared amarilla">
+            <figcaption><span lang="ca">La sala</span><span lang="es">La sala</span> <small>5/8</small></figcaption>
           </figure>
           <figure class="escena" data-escena="5">
-            <img data-foto src="assets/img/bano-asistido-576.webp" srcset="assets/img/bano-asistido-480.webp 480w, assets/img/bano-asistido-576.webp 576w" sizes="(min-width: 960px) 26vw, 52vw" width="576" height="768" loading="lazy" decoding="async" alt="Un bany assistit amb plat de dutxa a terra, cadira de dutxa amb rodes i barres per agafar-se" data-alt-es="Un baño asistido con plato de ducha a ras de suelo, silla de ducha con ruedas y barras para agarrarse">
-            <figcaption><span lang="ca">Els banys</span><span lang="es">Los baños</span> <small>6/6</small></figcaption>
+            <img data-foto src="assets/img/pasillo-720.webp" srcset="assets/img/pasillo-480.webp 480w, assets/img/pasillo-720.webp 720w, assets/img/pasillo-960.webp 960w" sizes="(min-width: 960px) 26vw, 52vw" width="960" height="1280" loading="lazy" decoding="async" alt="Un passadís llarg i lluminós amb passamans a les parets" data-alt-es="Un pasillo largo y luminoso con pasamanos en las paredes">
+            <figcaption><span lang="ca">Els passadissos</span><span lang="es">Los pasillos</span> <small>6/8</small></figcaption>
           </figure>
-          <div class="lames" data-lames aria-hidden="true" hidden></div>
+          <figure class="escena" data-escena="6">
+            <img data-foto src="assets/img/bano-asistido-576.webp" srcset="assets/img/bano-asistido-480.webp 480w, assets/img/bano-asistido-576.webp 576w" sizes="(min-width: 960px) 26vw, 52vw" width="576" height="768" loading="lazy" decoding="async" alt="Un bany assistit amb plat de dutxa a terra, cadira de dutxa amb rodes i barres per agafar-se" data-alt-es="Un baño asistido con plato de ducha a ras de suelo, silla de ducha con ruedas y barras para agarrarse">
+            <figcaption><span lang="ca">El bany assistit</span><span lang="es">El baño asistido</span> <small>7/8</small></figcaption>
+          </figure>
+          <figure class="escena" data-escena="7">
+            <img data-foto src="assets/img/bano-lavabo-576.webp" srcset="assets/img/bano-lavabo-480.webp 480w, assets/img/bano-lavabo-576.webp 576w" sizes="(min-width: 960px) 26vw, 52vw" width="576" height="768" loading="lazy" decoding="async" alt="Un lavabo amb rentamans, vàter i finestra, amb les parets enrajolades de blanc" data-alt-es="Un aseo con lavabo, inodoro y ventana, con las paredes alicatadas en blanco">
+            <figcaption><span lang="ca">El lavabo</span><span lang="es">El aseo</span> <small>8/8</small></figcaption>
+          </figure>
+          <div class="cub" data-cub aria-hidden="true" hidden></div>
         </div>
-        <div class="persiana__peu">
-          <p class="persiana__text" data-persiana-text aria-live="polite"><span lang="ca">El jardí, amb pèrgola i ombra.</span><span lang="es">El jardín, con pérgola y sombra.</span></p>
-          <div class="persiana__botons">
-            <button type="button" class="rodo" data-persiana-ant><svg class="icona" data-dir="esq" aria-hidden="true"><use href="#i-esq"/></svg><span class="sr"><span lang="ca">Foto anterior</span><span lang="es">Foto anterior</span></span></button>
-            <button type="button" class="rodo" data-persiana-seg><svg class="icona" data-dir="dre" aria-hidden="true"><use href="#i-dre"/></svg><span class="sr"><span lang="ca">Foto següent</span><span lang="es">Foto siguiente</span></span></button>
+        <div class="estancia__peu">
+          <p class="estancia__text" data-estancia-text aria-live="polite"><span lang="ca">Un jardí ampli, davant de la casa.</span><span lang="es">Un jardín amplio, delante de la casa.</span></p>
+          <div class="estancia__botons">
+            <button type="button" class="rodo" data-estancia-ant><svg class="icona" data-dir="esq" aria-hidden="true"><use href="#i-esq"/></svg><span class="sr"><span lang="ca">Estança anterior</span><span lang="es">Estancia anterior</span></span></button>
+            <button type="button" class="rodo" data-estancia-seg><svg class="icona" data-dir="dre" aria-hidden="true"><use href="#i-dre"/></svg><span class="sr"><span lang="ca">Estança següent</span><span lang="es">Estancia siguiente</span></span></button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 5 · TALLERES: exposición «Fet a Sant Miquel» con luces de cuadro -->
+  <!-- 5 · TALLERES: exposición «Fet a Sant Miquel» con luces de cuadro y las fotos del taller -->
   <section class="tallers" id="tallers" aria-labelledby="tallers-titol">
     <div class="tallers__dins">
       <div class="tallers__cap" data-revela>
         <h2 data-paraules id="tallers-titol"><span lang="ca">Fet a Sant Miquel.</span><span lang="es">Hecho en Sant Miquel.</span></h2>
-        <p><span lang="ca">Obres dels tallers d'expressió plàstica, pintades i retallades a mà. Cada setmana hi ha tallers per moure el cos, la memòria i les mans.</span><span lang="es">Obras de los talleres de expresión plástica, pintadas y recortadas a mano. Cada semana hay talleres para mover el cuerpo, la memoria y las manos.</span></p>
+        <p><span lang="ca">Tallers adaptats a cada resident i dirigits per professionals, per treballar el cos, la memòria i les emocions. Aquestes obres, pintades i retallades a mà, són del taller d'expressió plàstica.</span><span lang="es">Talleres adaptados a cada residente y dirigidos por profesionales, para trabajar el cuerpo, la memoria y las emociones. Estas obras, pintadas y recortadas a mano, son del taller de expresión plástica.</span></p>
         <ul class="tallers__llista">
           <li><span lang="ca">Psicomotricitat</span><span lang="es">Psicomotricidad</span></li>
           <li><span lang="ca">Orientació a la realitat</span><span lang="es">Orientación a la realidad</span></li>
@@ -376,66 +376,63 @@
       <ul class="expo" data-expo data-bucle>
         <li class="obra obra--v" style="--i:0">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="0"><span class="obra__cuadre"><img data-foto src="assets/img/obra-miro-400.webp" srcset="assets/img/obra-miro-400.webp 400w, assets/img/obra-miro-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Pintura emmarcada a la manera de Miró: un ocell vermell i blau amb una vora de colors" data-alt-es="Pintura enmarcada a la manera de Miró: un pájaro rojo y azul con un borde de colores"></span></button>
+          <button type="button" class="obra__marc" data-obra="0" data-visor-grup="obres"><span class="obra__cuadre"><img data-foto src="assets/img/obra-miro-400.webp" srcset="assets/img/obra-miro-400.webp 400w, assets/img/obra-miro-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Pintura emmarcada a la manera de Miró: un ocell vermell i blau amb una vora de colors" data-alt-es="Pintura enmarcada a la manera de Miró: un pájaro rojo y azul con un borde de colores"></span></button>
           <p class="cartela"><strong><span lang="ca">A la manera de Miró</span><span lang="es">A la manera de Miró</span></strong><span lang="ca">Pintura</span><span lang="es">Pintura</span></p>
         </li>
         <li class="obra obra--h" style="--i:1">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="1"><span class="obra__cuadre"><img data-foto src="assets/img/obra-flores-colores-480.webp" srcset="assets/img/obra-flores-colores-480.webp 480w, assets/img/obra-flores-colores-800.webp 800w" sizes="(min-width: 1100px) 24vw, 56vw" width="800" height="600" loading="lazy" decoding="async" alt="Làmina de flors de molts colors pintades sobre fons verd" data-alt-es="Lámina de flores de muchos colores pintadas sobre fondo verde"></span></button>
+          <button type="button" class="obra__marc" data-obra="1" data-visor-grup="obres"><span class="obra__cuadre"><img data-foto src="assets/img/obra-flores-colores-480.webp" srcset="assets/img/obra-flores-colores-480.webp 480w, assets/img/obra-flores-colores-800.webp 800w" sizes="(min-width: 1100px) 24vw, 56vw" width="800" height="600" loading="lazy" decoding="async" alt="Làmina de flors de molts colors pintades sobre fons verd" data-alt-es="Lámina de flores de muchos colores pintadas sobre fondo verde"></span></button>
           <p class="cartela"><strong><span lang="ca">Flors de colors</span><span lang="es">Flores de colores</span></strong><span lang="ca">Dibuix i color</span><span lang="es">Dibujo y color</span></p>
         </li>
         <li class="obra obra--v" style="--i:2">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="2"><span class="obra__cuadre"><img data-foto src="assets/img/obra-jarron-claveles-400.webp" srcset="assets/img/obra-jarron-claveles-400.webp 400w, assets/img/obra-jarron-claveles-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Dibuix d'un gerro blau amb clavells vermells" data-alt-es="Dibujo de un jarrón azul con claveles rojos"></span></button>
+          <button type="button" class="obra__marc" data-obra="2" data-visor-grup="obres"><span class="obra__cuadre"><img data-foto src="assets/img/obra-jarron-claveles-400.webp" srcset="assets/img/obra-jarron-claveles-400.webp 400w, assets/img/obra-jarron-claveles-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Dibuix d'un gerro blau amb clavells vermells" data-alt-es="Dibujo de un jarrón azul con claveles rojos"></span></button>
           <p class="cartela"><strong><span lang="ca">Gerro amb clavells</span><span lang="es">Jarrón con claveles</span></strong><span lang="ca">Dibuix</span><span lang="es">Dibujo</span></p>
         </li>
         <li class="obra obra--h" style="--i:3">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="3"><span class="obra__cuadre"><img data-foto src="assets/img/obra-flores-papel-480.webp" srcset="assets/img/obra-flores-papel-480.webp 480w, assets/img/obra-flores-papel-800.webp 800w" sizes="(min-width: 1100px) 24vw, 56vw" width="800" height="600" loading="lazy" decoding="async" alt="Flors de paper de colors en gots decorats sobre una taula" data-alt-es="Flores de papel de colores en vasos decorados sobre una mesa"></span></button>
+          <button type="button" class="obra__marc" data-obra="3" data-visor-grup="obres"><span class="obra__cuadre"><img data-foto src="assets/img/obra-flores-papel-480.webp" srcset="assets/img/obra-flores-papel-480.webp 480w, assets/img/obra-flores-papel-800.webp 800w" sizes="(min-width: 1100px) 24vw, 56vw" width="800" height="600" loading="lazy" decoding="async" alt="Flors de paper de colors en gots decorats sobre una taula" data-alt-es="Flores de papel de colores en vasos decorados sobre una mesa"></span></button>
           <p class="cartela"><strong><span lang="ca">Flors de paper</span><span lang="es">Flores de papel</span></strong><span lang="ca">Paper i pintura</span><span lang="es">Papel y pintura</span></p>
         </li>
         <li class="obra obra--v" style="--i:4">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="4"><span class="obra__cuadre"><img data-foto src="assets/img/obra-postal-sant-jordi-400.webp" srcset="assets/img/obra-postal-sant-jordi-400.webp 400w, assets/img/obra-postal-sant-jordi-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Postal pintada a mà amb les paraules Sant Jordi en vermell i groc" data-alt-es="Postal pintada a mano con las palabras Sant Jordi en rojo y amarillo"></span></button>
+          <button type="button" class="obra__marc" data-obra="4" data-visor-grup="obres"><span class="obra__cuadre"><img data-foto src="assets/img/obra-postal-sant-jordi-400.webp" srcset="assets/img/obra-postal-sant-jordi-400.webp 400w, assets/img/obra-postal-sant-jordi-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Postal pintada a mà amb les paraules Sant Jordi en vermell i groc" data-alt-es="Postal pintada a mano con las palabras Sant Jordi en rojo y amarillo"></span></button>
           <p class="cartela"><strong><span lang="ca">Postal de Sant Jordi</span><span lang="es">Postal de Sant Jordi</span></strong><span lang="ca">Retall i color</span><span lang="es">Recorte y color</span></p>
         </li>
         <li class="obra obra--v" style="--i:5">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="5"><span class="obra__cuadre"><img data-foto src="assets/img/obra-jarron-flores-400.webp" srcset="assets/img/obra-jarron-flores-400.webp 400w, assets/img/obra-jarron-flores-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Dibuix d'un gerro blau clar amb flors vermelles sobre una base marró" data-alt-es="Dibujo de un jarrón azul claro con flores rojas sobre una base marrón"></span></button>
+          <button type="button" class="obra__marc" data-obra="5" data-visor-grup="obres"><span class="obra__cuadre"><img data-foto src="assets/img/obra-jarron-flores-400.webp" srcset="assets/img/obra-jarron-flores-400.webp 400w, assets/img/obra-jarron-flores-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Dibuix d'un gerro blau clar amb flors vermelles sobre una base marró" data-alt-es="Dibujo de un jarrón azul claro con flores rojas sobre una base marrón"></span></button>
           <p class="cartela"><strong><span lang="ca">Gerro de flors</span><span lang="es">Jarrón de flores</span></strong><span lang="ca">Dibuix</span><span lang="es">Dibujo</span></p>
         </li>
       </ul>
 
-      <div class="taller" data-revela>
-        <figure class="taller__foto">
-          <span class="taller__marc"><img data-foto src="assets/img/taller-rosas-480.webp" srcset="assets/img/taller-rosas-480.webp 480w, assets/img/taller-rosas-800.webp 800w" sizes="(min-width: 900px) 30vw, 90vw" width="800" height="600" loading="lazy" decoding="async" alt="Unes mans sostenen dues roses de paper vermelles acabades de pintar" data-alt-es="Unas manos sostienen dos rosas de papel rojas recién pintadas"></span>
-          <figcaption><span lang="ca">Roses de Sant Jordi, retallades i pintades a mà.</span><span lang="es">Rosas de Sant Jordi, recortadas y pintadas a mano.</span></figcaption>
-        </figure>
-        <figure class="taller__foto">
-          <span class="taller__marc"><img data-foto src="assets/img/taller-pintando-rosa-480.webp" srcset="assets/img/taller-pintando-rosa-480.webp 480w, assets/img/taller-pintando-rosa-800.webp 800w" sizes="(min-width: 900px) 30vw, 90vw" width="800" height="600" loading="lazy" decoding="async" alt="Una mà pinta de vermell una rosa de paper amb un retolador" data-alt-es="Una mano pinta de rojo una rosa de papel con un rotulador"></span>
-          <figcaption><span lang="ca">Al taller d'expressió plàstica.</span><span lang="es">En el taller de expresión plástica.</span></figcaption>
-        </figure>
-        <figure class="taller__foto taller__foto--v">
-          <span class="taller__marc"><img data-foto src="assets/img/taller-angel-400.webp" srcset="assets/img/taller-angel-400.webp 400w, assets/img/taller-angel-576.webp 576w" sizes="(min-width: 900px) 20vw, 60vw" width="576" height="768" loading="lazy" decoding="async" alt="Una resident pinta un àngel de guix amb un pinzell" data-alt-es="Una residente pinta un ángel de yeso con un pincel"></span>
-          <figcaption><span lang="ca">Àngels de guix, pintats al taller.</span><span lang="es">Ángeles de yeso, pintados en el taller.</span></figcaption>
-        </figure>
+      <div class="galeria" data-revela>
+        <h3 class="galeria__titol"><span lang="ca">Al taller, amb les mans</span><span lang="es">En el taller, con las manos</span></h3>
+        <ul class="galeria__fotos">
+          <li style="--r:1.333"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-rosas-480.webp" srcset="assets/img/taller-rosas-480.webp 480w, assets/img/taller-rosas-800.webp 800w" sizes="(min-width: 900px) 26vw, 92vw" width="800" height="600" loading="lazy" decoding="async" alt="Unes mans sostenen dues roses de paper vermelles acabades de pintar" data-alt-es="Unas manos sostienen dos rosas de papel rojas recién pintadas"></button></li>
+          <li style="--r:.75"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-angel-400.webp" srcset="assets/img/taller-angel-400.webp 400w, assets/img/taller-angel-576.webp 576w" sizes="(min-width: 900px) 15vw, 46vw" width="576" height="768" loading="lazy" decoding="async" alt="Una resident pinta un àngel de guix amb un pinzell" data-alt-es="Una residente pinta un ángel de yeso con un pincel"></button></li>
+          <li style="--r:1.333"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-pintando-rosa-480.webp" srcset="assets/img/taller-pintando-rosa-480.webp 480w, assets/img/taller-pintando-rosa-800.webp 800w" sizes="(min-width: 900px) 26vw, 92vw" width="800" height="600" loading="lazy" decoding="async" alt="Una mà pinta de vermell una rosa de paper amb un retolador" data-alt-es="Una mano pinta de rojo una rosa de papel con un rotulador"></button></li>
+          <li style="--r:.75"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-angel-groc-400.webp" srcset="assets/img/taller-angel-groc-400.webp 400w, assets/img/taller-angel-groc-576.webp 576w" sizes="(min-width: 900px) 15vw, 46vw" width="576" height="768" loading="lazy" decoding="async" alt="Pintant de groc els cabells d'un àngel de guix" data-alt-es="Pintando de amarillo el pelo de un ángel de yeso"></button></li>
+          <li style="--r:1.333"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-retallant-rosa-480.webp" srcset="assets/img/taller-retallant-rosa-480.webp 480w, assets/img/taller-retallant-rosa-800.webp 800w" sizes="(min-width: 900px) 26vw, 92vw" width="800" height="600" loading="lazy" decoding="async" alt="Unes mans retallen una rosa de paper pintada de colors" data-alt-es="Unas manos recortan una rosa de papel pintada de colores"></button></li>
+          <li style="--r:.75"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-angel-pinzell-400.webp" srcset="assets/img/taller-angel-pinzell-400.webp 400w, assets/img/taller-angel-pinzell-576.webp 576w" sizes="(min-width: 900px) 15vw, 46vw" width="576" height="768" loading="lazy" decoding="async" alt="Un àngel de guix amb els cabells grocs, a mig pintar" data-alt-es="Un ángel de yeso con el pelo amarillo, a medio pintar"></button></li>
+          <li style="--r:1.333"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-flors-gots-480.webp" srcset="assets/img/taller-flors-gots-480.webp 480w, assets/img/taller-flors-gots-800.webp 800w" sizes="(min-width: 900px) 26vw, 92vw" width="800" height="600" loading="lazy" decoding="async" alt="Flors de paper en gots pintats de colors, sobre una taula" data-alt-es="Flores de papel en vasos pintados de colores, sobre una mesa"></button></li>
+          <li style="--r:.75"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-angel-rosa-400.webp" srcset="assets/img/taller-angel-rosa-400.webp 400w, assets/img/taller-angel-rosa-576.webp 576w" sizes="(min-width: 900px) 15vw, 46vw" width="576" height="768" loading="lazy" decoding="async" alt="Una resident pinta de rosa un àngel de guix" data-alt-es="Una residente pinta de rosa un ángel de yeso"></button></li>
+          <li style="--r:1.333"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-retallant-60-480.webp" srcset="assets/img/taller-retallant-60-480.webp 480w, assets/img/taller-retallant-60-800.webp 800w" sizes="(min-width: 900px) 26vw, 92vw" width="800" height="600" loading="lazy" decoding="async" alt="Unes mans retallen un 60 vermell de cartolina" data-alt-es="Unas manos recortan un 60 rojo de cartulina"></button></li>
+          <li style="--r:.75"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-angel-colors-400.webp" srcset="assets/img/taller-angel-colors-400.webp 400w, assets/img/taller-angel-colors-576.webp 576w" sizes="(min-width: 900px) 15vw, 46vw" width="576" height="768" loading="lazy" decoding="async" alt="Un àngel de guix pintat de verd i rosa" data-alt-es="Un ángel de yeso pintado de verde y rosa"></button></li>
+          <li style="--r:1.333"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-retallant-20-480.webp" srcset="assets/img/taller-retallant-20-480.webp 480w, assets/img/taller-retallant-20-800.webp 800w" sizes="(min-width: 900px) 26vw, 92vw" width="800" height="600" loading="lazy" decoding="async" alt="Retallant un 20 vermell amb unes tisores" data-alt-es="Recortando un 20 rojo con unas tijeras"></button></li>
+          <li style="--r:1.333"><button type="button" class="galeria__boto" data-visor-grup="taller"><img data-foto src="assets/img/taller-enganxant-480.webp" srcset="assets/img/taller-enganxant-480.webp 480w, assets/img/taller-enganxant-800.webp 800w" sizes="(min-width: 900px) 26vw, 92vw" width="800" height="600" loading="lazy" decoding="async" alt="Unes mans enganxen paper amb una barra de cola, al costat d'un quadre pintat" data-alt-es="Unas manos pegan papel con una barra de pegamento, junto a un cuadro pintado"></button></li>
+        </ul>
       </div>
-      <p class="tallers__mes" data-revela><a class="enllac" href="https://www.residenciasantmiquel.net/tallers-i-activitats/"><span lang="ca">Veure els tallers i les activitats</span><span lang="es">Ver los talleres y las actividades</span><svg class="icona" aria-hidden="true"><use href="#i-fletxa"/></svg></a></p>
     </div>
   </section>
 
-  <!-- 6 · FIESTAS: el calendario que pasa las hojas -->
+  <!-- 6 · FIESTAS: el calendario que pasa las hojas y las fotos de Navidad en una tira que se desliza -->
   <section class="festes" id="festes" aria-labelledby="festes-titol">
     <div class="festes__dins">
       <div class="festes__text" data-revela>
         <h2 data-paraules id="festes-titol"><span lang="ca">Les festes, a casa.</span><span lang="es">Las fiestas, en casa.</span></h2>
         <p><span lang="ca">Celebrem les festes tradicionals i els aniversaris, i fem excursions.</span><span lang="es">Celebramos las fiestas tradicionales y los cumpleaños, y hacemos excursiones.</span></p>
         <p class="festes__ara" data-ara hidden></p>
-        <div class="nadal">
-          <figure class="nadal__foto"><img data-foto src="assets/img/navidad-baile-480.webp" srcset="assets/img/navidad-baile-480.webp 480w, assets/img/navidad-baile-800.webp 800w" sizes="(min-width: 960px) 20vw, 44vw" width="800" height="600" loading="lazy" decoding="async" alt="Residents i treballadores ballen a la festa de Nadal, amb barrets de Pare Noel" data-alt-es="Residentes y trabajadoras bailan en la fiesta de Navidad, con gorros de Papá Noel"></figure>
-          <figure class="nadal__foto"><img data-foto src="assets/img/navidad-concierto-480.webp" srcset="assets/img/navidad-concierto-480.webp 480w, assets/img/navidad-concierto-800.webp 800w" sizes="(min-width: 960px) 20vw, 44vw" width="800" height="600" loading="lazy" decoding="async" alt="Concert de Nadal a la sala: una cantant i un músic als teclats davant dels residents" data-alt-es="Concierto de Navidad en la sala: una cantante y un músico a los teclados frente a los residentes"></figure>
-        </div>
-        <a class="boton boton--ico" href="https://www.residenciasantmiquel.net/fotos-nadal/"><span class="boton__ico gest-salta"><svg class="icona" aria-hidden="true"><use href="#i-foto"/></svg></span><span class="boton__text"><span lang="ca">Veure les fotos de Nadal</span><span lang="es">Ver las fotos de Navidad</span></span></a>
       </div>
 
       <div class="calendari" data-calendari data-bucle>
@@ -447,6 +444,26 @@
         </div>
       </div>
     </div>
+
+    <div class="nadal" data-revela>
+      <h3 class="nadal__titol"><span lang="ca">Nadal a Sant Miquel</span><span lang="es">Navidad en Sant Miquel</span></h3>
+      <div class="tira" data-tira data-carril data-bucle>
+        <ul class="tira__pista" data-tira-pista>
+          <li style="--r:1.333"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/navidad-baile-480.webp" srcset="assets/img/navidad-baile-480.webp 480w, assets/img/navidad-baile-800.webp 800w" sizes="320px" width="800" height="600" loading="lazy" decoding="async" alt="Residents i treballadores ballen a la festa de Nadal, amb barrets de Pare Noel" data-alt-es="Residentes y trabajadoras bailan en la fiesta de Navidad, con gorros de Papá Noel"></button></li>
+          <li style="--r:1.333"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/nadal-cantants-480.webp" srcset="assets/img/nadal-cantants-480.webp 480w, assets/img/nadal-cantants-800.webp 800w" sizes="320px" width="800" height="600" loading="lazy" decoding="async" alt="Una cantant i un músic actuen a la sala per Nadal, davant dels residents" data-alt-es="Una cantante y un músico actúan en la sala por Navidad, delante de los residentes"></button></li>
+          <li style="--r:1.333"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/nadal-pare-noel-480.webp" srcset="assets/img/nadal-pare-noel-480.webp 480w, assets/img/nadal-pare-noel-800.webp 800w" sizes="320px" width="800" height="600" loading="lazy" decoding="async" alt="El Pare Noel arriba pel passadís amb el sac de regals" data-alt-es="Papá Noel llega por el pasillo con el saco de regalos"></button></li>
+          <li style="--r:1.333"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/nadal-ball-sala-480.webp" srcset="assets/img/nadal-ball-sala-480.webp 480w, assets/img/nadal-ball-sala-800.webp 800w" sizes="320px" width="800" height="600" loading="lazy" decoding="async" alt="Residents i famílies ballen a la sala per Nadal" data-alt-es="Residentes y familias bailan en la sala por Navidad"></button></li>
+          <li style="--r:1.333"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/nadal-dones-480.webp" srcset="assets/img/nadal-dones-480.webp 480w, assets/img/nadal-dones-800.webp 800w" sizes="320px" width="800" height="600" loading="lazy" decoding="async" alt="Tres dones somrients a la festa de Nadal, una amb barret de Pare Noel" data-alt-es="Tres mujeres sonrientes en la fiesta de Navidad, una con gorro de Papá Noel"></button></li>
+          <li style="--r:1.333"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/nadal-concert-sala-480.webp" srcset="assets/img/nadal-concert-sala-480.webp 480w, assets/img/nadal-concert-sala-800.webp 800w" sizes="320px" width="800" height="600" loading="lazy" decoding="async" alt="Els residents escolten el concert de Nadal a la sala" data-alt-es="Los residentes escuchan el concierto de Navidad en la sala"></button></li>
+          <li style="--r:1.333"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/nadal-regal-480.webp" srcset="assets/img/nadal-regal-480.webp 480w, assets/img/nadal-regal-800.webp 800w" sizes="320px" width="800" height="600" loading="lazy" decoding="async" alt="El Pare Noel dona un regal a una resident" data-alt-es="Papá Noel da un regalo a una residente"></button></li>
+          <li style="--r:.75"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/nadal-ball-parella-400.webp" srcset="assets/img/nadal-ball-parella-400.webp 400w, assets/img/nadal-ball-parella-576.webp 576w" sizes="180px" width="576" height="768" loading="lazy" decoding="async" alt="Una resident balla amb una noia a la festa de Nadal" data-alt-es="Una residente baila con una chica en la fiesta de Navidad"></button></li>
+          <li style="--r:1.333"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/nadal-teclats-480.webp" srcset="assets/img/nadal-teclats-480.webp 480w, assets/img/nadal-teclats-800.webp 800w" sizes="320px" width="800" height="600" loading="lazy" decoding="async" alt="La cantant i el músic als teclats, amb la decoració de Nadal al fons" data-alt-es="La cantante y el músico a los teclados, con la decoración de Navidad al fondo"></button></li>
+          <li style="--r:1.333"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/navidad-concierto-480.webp" srcset="assets/img/navidad-concierto-480.webp 480w, assets/img/navidad-concierto-800.webp 800w" sizes="320px" width="800" height="600" loading="lazy" decoding="async" alt="Concert de Nadal a la sala: una cantant i un músic als teclats davant dels residents" data-alt-es="Concierto de Navidad en la sala: una cantante y un músico a los teclados frente a los residentes"></button></li>
+          <li style="--r:.75"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/nadal-pares-noel-400.webp" srcset="assets/img/nadal-pares-noel-400.webp 400w, assets/img/nadal-pares-noel-576.webp 576w" sizes="180px" width="576" height="768" loading="lazy" decoding="async" alt="Dos Pares Noel amb els sacs de regals a la sala" data-alt-es="Dos Papás Noel con los sacos de regalos en la sala"></button></li>
+          <li style="--r:1.333"><button type="button" class="tira__boto" data-visor-grup="nadal"><img data-foto src="assets/img/nadal-ball-musica-480.webp" srcset="assets/img/nadal-ball-musica-480.webp 480w, assets/img/nadal-ball-musica-800.webp 800w" sizes="320px" width="800" height="600" loading="lazy" decoding="async" alt="Una noia amb barret de Pare Noel balla amb una resident" data-alt-es="Una chica con gorro de Papá Noel baila con una residente"></button></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <!-- 7 · CÓMO LLEGAR: la ruta a pie real desde Plaça Lesseps -->
@@ -456,7 +473,7 @@
         <h2 data-paraules id="arribar-titol"><span lang="ca">A sis minuts a peu del metro de Lesseps.</span><span lang="es">A seis minutos a pie del metro de Lesseps.</span></h2>
         <figure class="porta">
           <span class="porta__marc"><img data-foto src="assets/img/fachada-800.webp" srcset="assets/img/fachada-480.webp 480w, assets/img/fachada-800.webp 800w, assets/img/fachada-1200.webp 1200w" sizes="(min-width: 960px) 36vw, 92vw" width="800" height="279" loading="lazy" decoding="async" alt="La porta de la residència amb el tendal groc al carrer d'Escipió, 17" data-alt-es="La puerta de la residencia con el toldo amarillo en la calle Escipió, 17"></span>
-          <figcaption><span lang="ca">Busqueu el tendal groc al número 17.</span><span lang="es">Busque el toldo amarillo en el número 17.</span></figcaption>
+          <figcaption><svg class="icona" aria-hidden="true"><use href="#i-pin"/></svg><span lang="ca">Busqueu el tendal groc al número 17.</span><span lang="es">Busque el toldo amarillo en el número 17.</span></figcaption>
         </figure>
         <address class="adreca">Carrer d'Escipió, 17<br>08023 Barcelona <span lang="ca">(el Putxet)</span><span lang="es">(el Putxet)</span></address>
         <ul class="transport">
@@ -483,7 +500,7 @@
 <g class="m-ruta"><ellipse style="--i:0" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(564.1 328.5) rotate(136)"/><ellipse style="--i:1" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(558.4 330.0) rotate(146)"/><ellipse style="--i:2" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(544.7 333.8) rotate(135)"/><ellipse style="--i:3" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(535.1 341.0) rotate(-136)"/><ellipse style="--i:4" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(528.6 328.8) rotate(-140)"/><ellipse style="--i:5" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(516.2 323.0) rotate(-132)"/><ellipse style="--i:6" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(511.1 319.9) rotate(-132)"/><ellipse style="--i:7" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(498.6 313.6) rotate(-132)"/><ellipse style="--i:8" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(493.8 300.5) rotate(-132)"/><ellipse style="--i:9" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(481.3 294.3) rotate(-132)"/><ellipse style="--i:10" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(476.5 281.1) rotate(-132)"/><ellipse style="--i:11" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(463.9 275.1) rotate(-134)"/><ellipse style="--i:12" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(458.7 262.1) rotate(-134)"/><ellipse style="--i:13" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(445.9 256.2) rotate(-134)"/><ellipse style="--i:14" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(440.7 243.3) rotate(-133)"/><ellipse style="--i:15" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(428.1 237.3) rotate(-133)"/><ellipse style="--i:16" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(422.9 224.3) rotate(-133)"/><ellipse style="--i:17" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(410.1 218.7) rotate(-136)"/><ellipse style="--i:18" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(404.7 206.1) rotate(-129)"/><ellipse style="--i:19" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(392.5 199.2) rotate(-128)"/><ellipse style="--i:20" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(388.6 185.8) rotate(-128)"/><ellipse style="--i:21" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(376.5 178.7) rotate(-128)"/><ellipse style="--i:22" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(372.9 165.1) rotate(-126)"/><ellipse style="--i:23" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(361.1 157.6) rotate(-126)"/><ellipse style="--i:24" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(351.5 152.1) rotate(132)"/><ellipse style="--i:25" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(346.8 165.2) rotate(132)"/><ellipse style="--i:26" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(334.2 171.5) rotate(132)"/><ellipse style="--i:27" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(329.5 184.6) rotate(132)"/><ellipse style="--i:28" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(317.0 190.9) rotate(132)"/><ellipse style="--i:29" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(312.3 204.1) rotate(130)"/><ellipse style="--i:30" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(299.9 210.6) rotate(130)"/><ellipse style="--i:31" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(291.2 215.5) rotate(-133)"/><ellipse style="--i:32" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(286.2 204.5) rotate(-132)"/><ellipse style="--i:33" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(273.6 198.2) rotate(-132)"/><ellipse style="--i:34" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(264.9 187.4) rotate(128)"/><ellipse style="--i:35" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(259.4 197.7) rotate(130)"/><ellipse style="--i:36" cx="0" cy="0" rx="2.6" ry="1.5" transform="translate(248.5 206.3) rotate(109)"/></g>
 </svg>
 <!-- mapa:fin -->
-        <span class="mapa__marca mapa__marca--casa" style="--x:35.71%;--y:43.75%"><span class="mapa__tendal" aria-hidden="true"></span><span class="mapa__nom">Sant Miquel</span></span>
+        <span class="mapa__marca mapa__marca--casa" style="--x:35.71%;--y:43.75%"><span class="mapa__casa" aria-hidden="true"><svg class="icona"><use href="#i-casa"/></svg></span><span class="mapa__nom">Sant Miquel</span></span>
         <span class="mapa__marca mapa__marca--metro" style="--x:80.85%;--y:68.83%"><span class="mapa__m" aria-hidden="true"><span>M</span></span><span class="mapa__nom">L3 Lesseps</span></span>
         <span class="mapa__marca mapa__marca--bus" style="--x:40.87%;--y:44.08%"><span class="mapa__b" aria-hidden="true">131</span></span>
         <span class="mapa__marca mapa__marca--bus" style="--x:46.75%;--y:20.6%"><span class="mapa__b" aria-hidden="true">V17&#8194;22&#8194;87</span></span>
@@ -579,7 +596,7 @@
 <footer class="peu">
   <div class="peu__dins">
     <div>
-      <a class="marca" href="https://www.residenciasantmiquel.net/"><span class="marca__nom">Sant Miquel Arcàngel</span><span class="marca__sub"><span lang="ca">Residència d'avis al Putxet, Barcelona</span><span lang="es">Residencia de mayores en el Putxet, Barcelona</span></span></a>
+      <a class="marca" href="#inici"><span class="marca__nom">Sant Miquel Arcàngel</span><span class="marca__sub"><span lang="ca">Residència d'avis al Putxet, Barcelona</span><span lang="es">Residencia de mayores en el Putxet, Barcelona</span></span></a>
     </div>
     <div>
       <h2><span lang="ca">Contacte</span><span lang="es">Contacto</span></h2>
@@ -592,10 +609,12 @@
     <nav aria-label="Pàgines" data-aria-es="Páginas">
       <h2><span lang="ca">La residència</span><span lang="es">La residencia</span></h2>
       <ul>
-        <li><a href="https://www.residenciasantmiquel.net/tallers-i-activitats/"><span lang="ca">Tallers i activitats</span><span lang="es">Talleres y actividades</span></a></li>
-        <li><a href="https://www.residenciasantmiquel.net/instal-lacions-serveis/"><span lang="ca">Instal·lacions i serveis</span><span lang="es">Instalaciones y servicios</span></a></li>
-        <li><a href="https://www.residenciasantmiquel.net/fotos-nadal/"><span lang="ca">Fotos de Nadal</span><span lang="es">Fotos de Navidad</span></a></li>
-        <li><a href="https://www.residenciasantmiquel.net/contacte/"><span lang="ca">Contacte</span><span lang="es">Contacto</span></a></li>
+        <li><a href="#places"><span lang="ca">Places</span><span lang="es">Plazas</span></a></li>
+        <li><a href="#equip"><span lang="ca">L'equip</span><span lang="es">El equipo</span></a></li>
+        <li><a href="#casa"><span lang="ca">La casa</span><span lang="es">La casa</span></a></li>
+        <li><a href="#tallers"><span lang="ca">Tallers i activitats</span><span lang="es">Talleres y actividades</span></a></li>
+        <li><a href="#festes"><span lang="ca">Festes</span><span lang="es">Fiestas</span></a></li>
+        <li><a href="#arribar"><span lang="ca">Com arribar</span><span lang="es">Cómo llegar</span></a></li>
       </ul>
     </nav>
     <p class="peu__feina"><span lang="ca">Voleu treballar amb nosaltres? Envieu el currículum a</span><span lang="es">¿Quiere trabajar con nosotros? Envíe su currículum a</span> <a href="mailto:residencia_sant_miquel@hotmail.com?subject=Curr%C3%ADculum">residencia_sant_miquel@hotmail.com</a>.</p>

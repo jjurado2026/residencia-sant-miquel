@@ -1,5 +1,5 @@
-/* Sant Miquel Arcàngel — home: el toldo y la palabra que cambia, el recorrido del jardín, 25 ventanas,
-   equipo, la casa en una persiana que gira sus lamas, exposición con luces, calendario de fiestas,
+/* Sant Miquel Arcàngel — home (página única): el carrusel de la casa con la palabra que cambia, 25 ventanas,
+   equipo, la casa que gira como un cubo, exposición con luces, galería del taller, la tira de Navidad,
    mapa a pie y la visita que deja el correo escrito. */
 (function () {
   'use strict';
@@ -31,17 +31,17 @@
     io.observe(el);
   }
 
-  /* ================= 1 · Hero: la palabra que cambia, el recorrido del jardín y el aire en el volante ================= */
+  /* ================= 1 · Hero: el carrusel de la casa y la palabra del titular, que cambian juntos ================= */
   (function () {
-    var hero = $('[data-hero]'); if (!hero) return;
-
-    // La palabra que cambia, letra a letra, con el subrayado amarillo que se dibuja debajo
-    var roda = $('[data-roda]', hero);
+    var car = $('[data-carrusel]'); if (!car) return;
+    var escena = $('[data-carrusel-escena]', car), cartes = $$('[data-carta]', car), n = cartes.length, actual = 0;
+    var nom = $('[data-carrusel-nom]', car), roda = $('[data-roda]');
+    var NOMS = [['El jardí', 'El jardín'], ['Una habitació individual', 'Una habitación individual'], ['La pèrgola', 'La pérgola'], ['Al taller', 'En el taller'], ['La festa de Nadal', 'La fiesta de Navidad']];
     var PARAULES = {
-      ca: ['jardí.', 'metge.', 'infermeria.', 'cuina pròpia.', 'fisioteràpia.'],
-      es: ['jardín.', 'médico.', 'enfermería.', 'cocina propia.', 'fisioterapia.']
+      ca: ['jardí.', 'habitacions exteriors.', 'pèrgola.', 'tallers.', 'festes.'],
+      es: ['jardín.', 'habitaciones exteriores.', 'pérgola.', 'talleres.', 'fiestas.']
     };
-    var ip = 0;
+    // La palabra del titular, letra a letra, con el subrayado amarillo que se dibuja debajo
     function paraula(text, classe) {
       var s = d.createElement('span');
       s.className = 'roda__p ' + classe;
@@ -52,9 +52,10 @@
       });
       return s;
     }
-    function pinta(anima) {
+    function pintaParaula(anima) {
+      if (!roda) return;
       var vella = $('.roda__p.ara', roda);
-      var nova = paraula(PARAULES[SM.idioma === 'es' ? 'es' : 'ca'][ip], anima ? 'ara entra' : 'ara');
+      var nova = paraula(PARAULES[SM.idioma === 'es' ? 'es' : 'ca'][actual], anima ? 'ara entra' : 'ara');
       if (vella) {
         vella.classList.remove('ara');
         if (anima) { vella.classList.add('surt'); setTimeout(function () { if (vella.parentNode) vella.parentNode.removeChild(vella); }, 800); }
@@ -63,78 +64,56 @@
       roda.appendChild(nova);
       if (anima) reinicia(roda, 'canvi');
     }
-    if (roda) {
-      pinta(false);
-      SM.alCanviarIdioma.push(function () { $$('.roda__p', roda).forEach(function (p) { p.parentNode.removeChild(p); }); pinta(false); });
-      rellotge(roda, 2600, function () { ip = (ip + 1) % PARAULES.ca.length; pinta(true); });
+    function pintaNom(anima) {
+      nom.innerHTML = '';
+      ['ca', 'es'].forEach(function (l, j) { var s = d.createElement('span'); s.lang = l; s.textContent = NOMS[actual][j]; nom.appendChild(s); });
+      var c = d.createElement('small'); c.textContent = (actual + 1) + '/' + n;
+      nom.appendChild(d.createTextNode(' ')); nom.appendChild(c);
+      if (anima && !quieto) reinicia(nom, 'canvi');
     }
-
-    // El recorrido del jardín: un punto tras otro, unidos por una línea de luz
-    var fig = $('[data-punts]', hero);
-    if (fig) {
-      var punts = $$('[data-punt]', fig), trams = $$('[data-tram]', fig), pasRuta = -1;
-      var posa = function () {
-        var w = fig.clientWidth, h = fig.clientHeight;
-        trams.forEach(function (t, k) {
-          var a = punts[k], b = punts[k + 1]; if (!b) return;
-          var ax = parseFloat(a.style.getPropertyValue('--x')) / 100 * w, ay = parseFloat(a.style.getPropertyValue('--y')) / 100 * h;
-          var bx = parseFloat(b.style.getPropertyValue('--x')) / 100 * w, by = parseFloat(b.style.getPropertyValue('--y')) / 100 * h;
-          t.style.left = ax + 'px'; t.style.top = ay + 'px';
-          t.style.width = Math.hypot(bx - ax, by - ay) + 'px';
-          t.style.setProperty('--ang', Math.atan2(by - ay, bx - ax) + 'rad');
-        });
-      };
-      posa();
-      if ('ResizeObserver' in window) new ResizeObserver(posa).observe(fig);
-      var marca = function (k) {
-        punts.forEach(function (p, n) { p.classList.toggle('actiu', n === k); });
-        trams.forEach(function (t, n) { t.classList.toggle('fet', n < k); });
-      };
-      var r = rellotge(fig, 2700, function () {
-        pasRuta = (pasRuta + 1) % (punts.length + 1);
-        if (pasRuta === punts.length) { fig.classList.add('esvaeix'); punts.forEach(function (p) { p.classList.remove('actiu'); }); }
-        else { if (pasRuta === 0) { fig.classList.remove('esvaeix'); marca(-1); } marca(pasRuta); }
+    // Cada foto, a su sitio: la del centro de frente; las de los lados, giradas hacia ella y más atrás
+    function posa(anima) {
+      var mobil = innerWidth < 600, mig = Math.floor(n / 2);
+      cartes.forEach(function (c, i) {
+        var p = ((i - actual + n + mig) % n) - mig, ap = Math.abs(p);
+        var vell = c.dataset.p === undefined ? p : +c.dataset.p;
+        var salta = anima && Math.abs(p - vell) > 1;      // la que da la vuelta por detrás aparece en su sitio, sin cruzar
+        if (salta) c.classList.add('salta');
+        c.dataset.p = p;
+        c.style.setProperty('--p', p);
+        c.style.setProperty('--ap', ap);
+        c.style.setProperty('--gir', (p === 0 ? 0 : (p > 0 ? -1 : 1) * (ap === 1 ? 26 : 34)) + 'deg');
+        c.style.setProperty('--op', ap === 0 ? 1 : ap === 1 ? .94 : (mobil ? 0 : .5));
+        c.classList.toggle('centre', p === 0);
+        c.setAttribute('aria-hidden', String(p !== 0));
       });
-      fig.addEventListener('pointerenter', function () { r.atura(true); fig.classList.remove('esvaeix'); marca(-1); pasRuta = -1; });
-      fig.addEventListener('pointerleave', function () { r.atura(false); });
-      punts.forEach(function (p, k) {
-        p.addEventListener('click', function () { fig.classList.remove('esvaeix'); marca(k); pasRuta = k; r.atura(true); clearTimeout(fig._t); fig._t = setTimeout(function () { r.atura(false); }, 6000); });
-        p.addEventListener('focus', function () { marca(-1); });
-      });
+      if (anima) { void car.offsetWidth; cartes.forEach(function (c) { c.classList.remove('salta'); }); }
     }
-
-    // El volante: además de mecerse solo, se agita cuando el ratón pasa cerca, como si soplara aire
-    var volant = $('[data-volant]', hero);
-    if (volant && !quieto && window.matchMedia && matchMedia('(hover: hover)').matches) {
-      var fs = $$('i', volant), N = fs.length, vel = new Float32Array(N), ang = new Float32Array(N), px = null, bufant = false;
-      var bufa = function () {
-        var viu = false;
-        for (var i = 0; i < N; i++) {
-          vel[i] = (vel[i] - ang[i] * .06) * .9;
-          ang[i] = Math.max(-22, Math.min(22, ang[i] + vel[i]));
-          if (Math.abs(ang[i]) > .04 || Math.abs(vel[i]) > .04) viu = true;
-          fs[i].style.rotate = ang[i].toFixed(2) + 'deg';
-        }
-        if (viu) requestAnimationFrame(bufa);
-        else { bufant = false; for (var j = 0; j < N; j++) { ang[j] = 0; vel[j] = 0; fs[j].style.rotate = ''; } }
-      };
-      hero.addEventListener('pointermove', function (e) {
-        if (e.pointerType && e.pointerType !== 'mouse') return;
-        var dx = px === null ? 0 : e.clientX - px; px = e.clientX;
-        if (!dx) return;
-        // Las ondas miden 48 px y el volante sigue más allá del borde: se toma la posición real de la primera
-        var rc = fs[0].getBoundingClientRect();
-        var dy = Math.abs(e.clientY - (rc.top + rc.height / 2));
-        if (dy > 240) return;
-        var forca = Math.max(-1, Math.min(1, dx / 24)) * (1 - dy / 240), w = rc.width;
-        for (var i = 0; i < N; i++) {
-          var dd = Math.abs(rc.left + (i + .5) * w - e.clientX);
-          if (dd < 220) vel[i] -= forca * (1 - dd / 220) * 3;
-        }
-        if (!bufant) { bufant = true; requestAnimationFrame(bufa); }
-      });
-      hero.addEventListener('pointerleave', function () { px = null; });
+    function va(nou) {
+      nou = (nou + n) % n;
+      if (nou === actual) return;
+      actual = nou;
+      posa(!quieto); pintaParaula(!quieto); pintaNom(true);
     }
+    var r = rellotge(car, 4200, function () { va(actual + 1); });
+    $('[data-carrusel-seg]', car).addEventListener('click', function () { va(actual + 1); r.reinicia(); });
+    $('[data-carrusel-ant]', car).addEventListener('click', function () { va(actual - 1); r.reinicia(); });
+    cartes.forEach(function (c, i) {
+      c.addEventListener('click', function () { if (escena._llisca) return; va(i === actual ? actual + 1 : i); r.reinicia(); });
+    });
+    escena.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') r.atura(true); });
+    escena.addEventListener('pointerleave', function () { r.atura(false); });
+    // Deslizar con el dedo (o arrastrar con el ratón)
+    var x0 = null;
+    escena.addEventListener('pointerdown', function (e) { x0 = e.clientX; escena._llisca = false; });
+    escena.addEventListener('pointerup', function (e) {
+      if (x0 === null) return;
+      var dx = e.clientX - x0; x0 = null;
+      if (Math.abs(dx) > 40) { escena._llisca = true; va(dx < 0 ? actual + 1 : actual - 1); r.reinicia(); setTimeout(function () { escena._llisca = false; }, 50); }
+    });
+    addEventListener('resize', function () { posa(false); });
+    SM.alCanviarIdioma.push(function () { if (roda) { $$('.roda__p', roda).forEach(function (p) { p.parentNode.removeChild(p); }); } pintaParaula(false); pintaNom(false); });
+    posa(false); pintaParaula(false); pintaNom(false);
   })();
 
   /* ================= 2 · Plazas: ninguna elegida de inicio; la del cursor enciende sus ventanas ================= */
@@ -241,21 +220,23 @@
     }
   })();
 
-  /* ================= 4 · La casa: la persiana gira sus lamas y pasa a la estancia siguiente ================= */
+  /* ================= 4 · La casa: la sala gira como un cubo y pasa a la estancia siguiente ================= */
   (function () {
-    var pers = $('[data-persiana]'); if (!pers) return;
-    var esc = $('[data-escenari]', pers), lames = $('[data-lames]', pers), text = $('[data-persiana-text]', pers);
+    var est = $('[data-estancia]'); if (!est) return;
+    var esc = $('[data-escenari]', est), cub = $('[data-cub]', est), text = $('[data-estancia-text]', est);
     var escenes = $$('[data-escena]', esc), n = escenes.length, actual = 0, ocupat = false;
     var botons = $$('[data-estanca]');
     var TEXTOS = [
-      ['El jardí, amb pèrgola i ombra.', 'El jardín, con pérgola y sombra.'],
+      ['Un jardí ampli, davant de la casa.', 'Un jardín amplio, delante de la casa.'],
+      ["La pèrgola, amb ombra i butaques.", 'La pérgola, con sombra y butacas.'],
       ['Habitacions exteriors, que cadascú fa seva.', 'Habitaciones exteriores, que cada uno hace suya.'],
       ['Habitació doble, àmplia i exterior.', 'Habitación doble, amplia y exterior.'],
       ['Racons assolellats per seure i xerrar.', 'Rincones soleados para sentarse y charlar.'],
       ['Passadissos amplis, amb passamans.', 'Pasillos amplios, con pasamanos.'],
-      ['Banys assistits, amb cadira de dutxa.', 'Baños asistidos, con silla de ducha.']
+      ['Banys assistits, amb cadira de dutxa.', 'Baños asistidos, con silla de ducha.'],
+      ['Lavabos amb finestra, nets i lluminosos.', 'Aseos con ventana, limpios y luminosos.']
     ];
-    var LAMES = 9, PAS = 60, GIR = 1000;
+    var GIR = 1150;
     function escriu(anima) {
       text.innerHTML = '';
       ['ca', 'es'].forEach(function (l, j) { var s = d.createElement('span'); s.lang = l; s.textContent = TEXTOS[actual][j]; text.appendChild(s); });
@@ -264,7 +245,7 @@
     function marca(k) {
       escenes.forEach(function (e, i) { e.classList.toggle('actual', i === k); e.setAttribute('aria-hidden', String(i !== k)); });
     }
-    // Copia de una escena para la cara de una lama: la misma foto ya cargada, sin atributos que dupliquen
+    // Copia de una escena para una cara del cubo: la misma foto ya cargada, sin atributos que dupliquen
     function copia(e) {
       var c = e.cloneNode(true), img = $('img', c), orig = $('img', e);
       c.removeAttribute('data-escena'); c.removeAttribute('aria-hidden'); c.classList.add('actual');
@@ -272,30 +253,23 @@
       img.src = orig.currentSrc || orig.src; img.alt = ''; img.decoding = 'sync';
       return c;
     }
+    function cara(e, classe) { var f = d.createElement('div'); f.className = 'cub__cara ' + classe; f.appendChild(copia(e)); return f; }
     function gira(nou, enrere) {
-      var n2 = innerWidth < 600 ? 7 : LAMES, alt = esc.clientHeight, h = alt / n2;
-      esc.style.setProperty('--h', h + 'px');
-      esc.style.setProperty('--alt', alt + 'px');
-      lames.innerHTML = '';
-      var davant = escenes[actual], darrere = escenes[nou];
-      for (var i = 0; i < n2; i++) {
-        var l = d.createElement('div'); l.className = 'lama';
-        l.style.setProperty('--i', i); l.style.setProperty('--o', enrere ? n2 - 1 - i : i);
-        var c1 = d.createElement('div'); c1.className = 'lama__cara'; c1.appendChild(copia(davant));
-        var c2 = d.createElement('div'); c2.className = 'lama__cara lama__cara--dors'; c2.appendChild(copia(darrere));
-        l.appendChild(c1); l.appendChild(c2); lames.appendChild(l);
-      }
-      lames.classList.remove('gira', 'gira-enrere');
-      lames.hidden = false;
-      void lames.offsetWidth;
-      marca(-1);                       // detrás de las lamas, solo la persiana verde
+      esc.style.setProperty('--mig', (esc.clientWidth / 2) + 'px');
+      cub.innerHTML = '';
+      cub.appendChild(cara(escenes[actual], 'cub__cara--davant'));
+      cub.appendChild(cara(escenes[nou], enrere ? 'cub__cara--esq' : 'cub__cara--dre'));
+      cub.classList.remove('gira', 'gira-enrere');
+      cub.hidden = false;
+      void cub.offsetWidth;
+      marca(-1);                       // mientras gira, detrás solo la penumbra
       actual = nou; escriu(true);
-      requestAnimationFrame(function () { requestAnimationFrame(function () { lames.classList.add(enrere ? 'gira-enrere' : 'gira'); }); });
+      cub.classList.add(enrere ? 'gira-enrere' : 'gira');
       setTimeout(function () {
         marca(actual);
-        lames.hidden = true; lames.classList.remove('gira', 'gira-enrere'); lames.innerHTML = '';
+        cub.hidden = true; cub.classList.remove('gira', 'gira-enrere'); cub.innerHTML = '';
         ocupat = false;
-      }, GIR + (n2 - 1) * PAS + 120);
+      }, GIR + 60);
     }
     function va(nou, enrere) {
       nou = (nou + n) % n;
@@ -309,77 +283,104 @@
       });
       llesta.then(function () { return img.decode ? img.decode().catch(function () {}) : null; }).then(function () { gira(nou, enrere); });
     }
-    var r = rellotge(pers, 5200, function () { va(actual + 1); });
-    // Las fotos se piden antes de llegar, para que la persiana no espere
-    SM.enPantalla(pers, function (si) { if (si) escenes.forEach(function (e) { $('img', e).loading = 'eager'; }); });
-    $('[data-persiana-seg]', pers).addEventListener('click', function () { va(actual + 1); r.reinicia(); });
-    $('[data-persiana-ant]', pers).addEventListener('click', function () { va(actual - 1, true); r.reinicia(); });
-    esc.addEventListener('click', function () { va(actual + 1); r.reinicia(); });
+    var r = rellotge(est, 5200, function () { va(actual + 1); });
+    // Las fotos se piden antes de llegar, para que el cubo no espere
+    SM.enPantalla(est, function (si) { if (si) escenes.forEach(function (e) { $('img', e).loading = 'eager'; }); });
+    $('[data-estancia-seg]', est).addEventListener('click', function () { va(actual + 1); r.reinicia(); });
+    $('[data-estancia-ant]', est).addEventListener('click', function () { va(actual - 1, true); r.reinicia(); });
+    esc.addEventListener('click', function () { if (esc._llisca) return; va(actual + 1); r.reinicia(); });
     botons.forEach(function (b) {
       b.addEventListener('click', function () { var i = +b.getAttribute('data-estanca'); va(i, i < actual); r.reinicia(); });
     });
-    esc.addEventListener('pointerenter', function () { r.atura(true); });
+    esc.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') r.atura(true); });
     esc.addEventListener('pointerleave', function () { r.atura(false); });
     // Deslizar con el dedo
     var x0 = null;
-    esc.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
+    esc.addEventListener('pointerdown', function (e) { x0 = e.clientX; esc._llisca = false; });
     esc.addEventListener('pointerup', function (e) {
       if (x0 === null) return;
       var dx = e.clientX - x0; x0 = null;
-      if (Math.abs(dx) > 40) { e.stopPropagation(); esc._llisca = true; va(dx < 0 ? actual + 1 : actual - 1, dx > 0); r.reinicia(); }
+      if (Math.abs(dx) > 40) { esc._llisca = true; va(dx < 0 ? actual + 1 : actual - 1, dx > 0); r.reinicia(); setTimeout(function () { esc._llisca = false; }, 50); }
     });
-    esc.addEventListener('click', function (e) { if (esc._llisca) { esc._llisca = false; e.stopImmediatePropagation(); } }, true);
-    SM.observa(pers);
+    SM.observa(est);
     marca(0);
   })();
 
-  /* ================= 5 · Exposición: luces de cuadro y visor ================= */
+  /* ================= 5 · Talleres y Navidad: luces de cuadro, la tira que se desliza y un visor para todas las fotos ================= */
   (function () {
-    var expo = $('[data-expo]'); if (!expo) return;
-    var obres = $$('.obra', expo), i = 0;
-    if (quieto) { expo.classList.add('visto', 'encesa'); }
-    else {
-      var io = new IntersectionObserver(function (es) {
-        if (!es[0].isIntersecting) return;
-        io.disconnect(); expo.classList.add('visto');
-        setTimeout(function () { expo.classList.add('encesa'); }, 700);
-      }, { threshold: 0.2 });
-      io.observe(expo);
-      rellotge(expo, 2600, function () {
-        if (!expo.classList.contains('encesa')) return;
-        obres.forEach(function (o, k) { o.classList.toggle('destacada', k === i); });
-        i = (i + 1) % obres.length;
+    // Exposición: las lámparas se encienden al llegar y destacan una obra cada vez
+    var expo = $('[data-expo]');
+    if (expo) {
+      var obres = $$('.obra', expo), io = 0;
+      if (quieto) expo.classList.add('visto', 'encesa');
+      else {
+        quanEsVegi(expo, function () { expo.classList.add('visto'); setTimeout(function () { expo.classList.add('encesa'); }, 700); }, 0.2);
+        rellotge(expo, 2600, function () {
+          if (!expo.classList.contains('encesa')) return;
+          obres.forEach(function (o, k) { o.classList.toggle('destacada', k === io); });
+          io = (io + 1) % obres.length;
+        });
+        expo.addEventListener('pointerover', function () { obres.forEach(function (o) { o.classList.remove('destacada'); }); });
+      }
+    }
+    // Galería del taller: las fotos entran en cascada
+    $$('.galeria__fotos li').forEach(function (li, k) { li.style.setProperty('--n', k); });
+
+    // Visor común: cada grupo (obras, taller, Navidad) se recorre con las flechas
+    var GRUPS = {};
+    $$('[data-visor-grup]').forEach(function (b) {
+      var g = b.getAttribute('data-visor-grup');
+      (GRUPS[g] = GRUPS[g] || []).push(b);
+      b.setAttribute('data-visor-i', GRUPS[g].length - 1);
+    });
+
+    // La tira de Navidad: se duplica para dar la vuelta sin saltos (las copias, fuera del lector y del tabulador)
+    var tira = $('[data-tira]'), pista = $('[data-tira-pista]');
+    if (tira && pista && !quieto) {
+      $$('li', pista).forEach(function (li) {
+        var c = li.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true'); c.classList.add('clon');
+        $$('button', c).forEach(function (b) { b.tabIndex = -1; });
+        $$('img', c).forEach(function (im) { im.removeAttribute('data-foto'); im.alt = ''; im.removeAttribute('data-alt-es'); });
+        pista.appendChild(c);
       });
-      expo.addEventListener('pointerover', function () { obres.forEach(function (o) { o.classList.remove('destacada'); }); });
+      pista.classList.add('roda-sola');
     }
 
-    // Visor sin rebote: precarga la siguiente y funde corto
     var visor = $('[data-visor]'), vImg = $('[data-visor-img]'), vPeu = $('[data-visor-peu]');
     if (!visor || !visor.showModal) return;
-    var botons = $$('[data-obra]'), iv = 0;
+    var grup = [], iv = 0;
     function gran(img) {
       var s = (img.getAttribute('srcset') || '').split(',').map(function (x) { return x.trim().split(/\s+/); });
       s.sort(function (a, b) { return parseInt(b[1], 10) - parseInt(a[1], 10); });
-      return s.length ? s[0][0] : img.src;
+      return s.length && s[0][0] ? s[0][0] : img.src;
     }
     function peu(b) {
-      var c = b.closest('.obra').querySelector('.cartela'), l = SM.idioma;
-      var t = c.querySelector('strong [lang="' + l + '"]'), m = c.querySelector(':scope > [lang="' + l + '"]');
-      return (t ? t.textContent : '') + (m ? '. ' + m.textContent : '');
+      var o = b.closest('.obra');
+      if (o) {
+        var c = o.querySelector('.cartela'), l = SM.idioma;
+        var t = c.querySelector('strong [lang="' + l + '"]'), m = c.querySelector(':scope > [lang="' + l + '"]');
+        return (t ? t.textContent : '') + (m ? '. ' + m.textContent : '');
+      }
+      return $('img', b).alt;
     }
     function mostra(k) {
-      iv = (k + botons.length) % botons.length;
-      var b = botons[iv], img = $('img', b), src = gran(img);
+      iv = (k + grup.length) % grup.length;
+      var b = grup[iv], img = $('img', b), src = gran(img);
       var nova = new Image(); nova.src = src;
       vImg.classList.add('carrega');
       (nova.decode ? nova.decode() : Promise.resolve()).catch(function () {}).then(function () {
         vImg.src = src; vImg.alt = img.alt; vImg.classList.remove('carrega');
-        var seg = new Image(); seg.src = gran($('img', botons[(iv + 1) % botons.length]));
+        var seg = new Image(); seg.src = gran($('img', grup[(iv + 1) % grup.length]));
       });
-      vPeu.textContent = peu(b);
+      vPeu.textContent = peu(b) + ' (' + (iv + 1) + '/' + grup.length + ')';
       if (!visor.open) visor.showModal();
     }
-    botons.forEach(function (b, k) { b.addEventListener('click', function () { mostra(k); }); });
+    d.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-visor-grup]'); if (!b) return;
+      grup = GRUPS[b.getAttribute('data-visor-grup')];
+      mostra(+b.getAttribute('data-visor-i'));
+    });
     $('[data-visor-tanca]').addEventListener('click', function () { visor.close(); });
     $('[data-visor-ant]').addEventListener('click', function () { mostra(iv - 1); });
     $('[data-visor-seg]').addEventListener('click', function () { mostra(iv + 1); });
