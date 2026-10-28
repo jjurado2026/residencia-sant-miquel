@@ -7,12 +7,12 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#F2C12E">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="assets/fonts/besley.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/zodiak.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/commissioner.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   /* Aviso de propuesta caducada: el texto del taller y la home entera en miniatura, que se recorre despacio */
-  @font-face { font-family: 'Besley'; src: url('assets/fonts/besley.woff2') format('woff2'); font-weight: 400 900; font-display: swap; }
-  @font-face { font-family: 'Atkinson Hyperlegible Next'; src: url('assets/fonts/atkinson-hyperlegible-next.woff2') format('woff2'); font-weight: 200 800; font-display: swap; }
+  @font-face { font-family: 'Zodiak'; src: url('assets/fonts/zodiak.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: 'Commissioner'; src: url('assets/fonts/commissioner.woff2') format('woff2'); font-weight: 300 800; font-display: swap; }
   :root {
     --groc: #F2C12E; --verd: #1D3B31; --text: #2B4038; --blanc: #FFFEFA;
     --canal: clamp(16px, 5vw, 72px);
@@ -24,7 +24,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   body { min-height: 100svh; display: grid; grid-template-rows: auto 1fr; background: var(--blanc); color: var(--text);
-    font-family: 'Atkinson Hyperlegible Next', 'Segoe UI', system-ui, sans-serif; font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); line-height: 1.7;
+    font-family: 'Commissioner', 'Segoe UI', system-ui, sans-serif; font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); line-height: 1.7;
     -webkit-font-smoothing: antialiased; overflow-x: clip; }
   img { display: block; max-width: 100%; height: auto; }
   :focus-visible { outline: 3px solid #2E5A4A; outline-offset: 3px; border-radius: 3px; }
@@ -32,13 +32,13 @@
   /* El toldo, en pequeño */
   .cab { position: relative; background: var(--groc); padding: clamp(14px, 2.6svh, 24px) var(--canal) clamp(16px, 2.8svh, 26px); color: var(--verd); }
   .cab::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 20px; background: radial-gradient(circle at 50% 0, var(--groc) 19.5px, transparent 20px) 0 0 / 40px 20px repeat-x; }
-  .cab p { font-family: 'Besley', Georgia, serif; font-weight: 600; font-size: clamp(.95rem, .85rem + .4vw, 1.2rem); line-height: 1.1; }
-  .cab strong { display: block; font-family: 'Besley', Georgia, serif; font-weight: 800; font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.8rem); line-height: 1.05; }
+  .cab p { font-family: 'Zodiak', Georgia, serif; font-weight: 500; font-size: clamp(.95rem, .85rem + .4vw, 1.2rem); line-height: 1.1; }
+  .cab strong { display: block; font-family: 'Zodiak', Georgia, serif; font-weight: 500; font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.8rem); line-height: 1.05; }
 
   .aviso { width: 100%; max-width: calc(1180px + 2 * var(--canal)); margin-inline: auto; padding: clamp(48px, 9svh, 96px) var(--canal) clamp(36px, 7svh, 80px);
     display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(40px, 7svh, 72px); align-items: center; }
   .aviso__texto { display: grid; gap: clamp(18px, 3svh, 28px); }
-  h1 { font-family: 'Besley', Georgia, serif; font-weight: 700; color: var(--verd); font-size: clamp(1.75rem, 1.1rem + 2.4vw, 3.1rem); line-height: 1.14; text-wrap: balance; max-width: 19ch; }
+  h1 { font-family: 'Zodiak', Georgia, serif; font-weight: 500; color: var(--verd); font-size: clamp(1.75rem, 1.1rem + 2.4vw, 3.1rem); line-height: 1.14; text-wrap: balance; max-width: 19ch; }
   .mas { max-width: 34em; }
   .mas a { color: var(--verd); font-weight: 700; text-decoration: underline; text-decoration-color: var(--groc); text-decoration-thickness: 3px; text-underline-offset: 6px; overflow-wrap: anywhere; display: inline-block; transition: transform .45s var(--muelle); }
   .mas a:hover { transform: translateY(-2px); }

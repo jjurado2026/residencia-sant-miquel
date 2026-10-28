@@ -23,15 +23,15 @@
         el.setAttribute(par[1], l === 'es' ? el.getAttribute(par[0]) : el.getAttribute('data-ca-' + par[1]));
       });
     });
-    d.querySelectorAll('[data-idioma]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-idioma') === l)); });
     if (desa) guarda('sm-idioma', l);
     SM.idioma = l;
     SM.alCanviarIdioma.forEach(function (f) { f(l); });
   }
   SM.t = function (ca, es) { return SM.idioma === 'es' ? es : ca; };
   SM.idioma = html.lang === 'es' ? 'es' : 'ca';
-  d.querySelectorAll('[data-idioma]').forEach(function (b) {
-    b.addEventListener('click', function () { aplicaIdioma(b.getAttribute('data-idioma'), true); });
+  // Un solo botón que lleva al otro idioma: nada se queda marcado
+  d.querySelectorAll('[data-idioma-canvi]').forEach(function (b) {
+    b.addEventListener('click', function () { aplicaIdioma(SM.idioma === 'es' ? 'ca' : 'es', true); });
   });
   aplicaIdioma(SM.idioma, false);
 

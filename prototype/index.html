@@ -55,13 +55,13 @@
     setTimeout(function () { if (!window.SM) { d.classList.remove('anima'); d.classList.add('quieto'); } }, 4000);
   })(document.documentElement);
 </script>
-<link rel="preload" href="assets/fonts/besley.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/zodiak.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/commissioner.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="assets/img/jardin-960.webp" imagesrcset="assets/img/jardin-640.webp 640w, assets/img/jardin-960.webp 960w, assets/img/jardin-1280.webp 1280w, assets/img/jardin-1600.webp 1600w" imagesizes="(min-width: 900px) 46vw, 90vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/base.css?v=1">
-<link rel="stylesheet" href="assets/css/home.css?v=1">
-<script src="assets/js/base.js?v=1" defer></script>
-<script src="assets/js/home.js?v=1" defer></script>
+<link rel="stylesheet" href="assets/css/base.css?v=2">
+<link rel="stylesheet" href="assets/css/home.css?v=2">
+<script src="assets/js/base.js?v=2" defer></script>
+<script src="assets/js/home.js?v=2" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -104,6 +104,10 @@
   <symbol id="i-esq" viewBox="0 0 24 24"><path d="M15 5.5 8.5 12l6.5 6.5"/></symbol>
   <symbol id="i-dre" viewBox="0 0 24 24"><path d="M9 5.5l6.5 6.5L9 18.5"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-visita" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M9 15.2l2.1 2.1 4-4.1"/></symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 15.5l-5-5-8.8 9"/></symbol>
+  <symbol id="i-baixa" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+  <symbol id="i-puja" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
   <symbol id="i-metro" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="14.5" rx="3.5"/><path d="M5 11.5h14M8.5 21l1.6-3.5M15.5 21l-1.6-3.5"/><circle cx="9" cy="14.5" r=".6"/><circle cx="15" cy="14.5" r=".6"/></symbol>
   <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="15" rx="2.5"/><path d="M4 11h16M4 6.5h16M7.5 21v-3M16.5 21v-3"/><circle cx="8" cy="14.5" r=".6"/><circle cx="16" cy="14.5" r=".6"/></symbol>
   <symbol id="i-tren" viewBox="0 0 24 24"><path d="M7 3h10a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3zM4 10h16M12 3v7M8 21l2-4M16 21l-2-4"/></symbol>
@@ -140,11 +144,8 @@
     </nav>
     <div class="cab__eines">
       <button class="eina eina--text" type="button" data-text-gran aria-pressed="false" aria-label="Text gran" data-aria-es="Texto grande"><span class="eina__aa" aria-hidden="true"><small>A</small>A</span><span lang="ca">Text gran</span><span lang="es">Texto grande</span></button>
-      <div class="idioma" role="group" aria-label="Idioma">
-        <button type="button" data-idioma="ca" aria-pressed="true" title="Català">CA</button>
-        <button type="button" data-idioma="es" aria-pressed="false" title="Castellano">ES</button>
-      </div>
-      <a class="boton boton--groc cab__tel" href="tel:+34934170582" aria-label="Truqueu al 934 170 582" data-aria-es="Llame al 934 170 582"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg><span>934 170 582</span></a>
+      <button class="eina eina--idioma" type="button" data-idioma-canvi aria-label="ES, en castellano" data-aria-es="CA, en català"><span lang="ca">ES</span><span lang="es">CA</span></button>
+      <a class="boton boton--ico cab__tel" href="tel:+34934170582" aria-label="Truqueu al 934 170 582" data-aria-es="Llame al 934 170 582"><span class="boton__ico gest-truca"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg></span><span class="cab__num">934 170 582</span></a>
       <button class="cab__obre" type="button" data-obre-menu aria-expanded="false" aria-controls="menu-mobil"><svg class="icona" aria-hidden="true"><use href="#i-menu"/></svg><span class="sr"><span lang="ca">Menú</span><span lang="es">Menú</span></span></button>
     </div>
   </div>
@@ -160,41 +161,44 @@
   </ul>
   <div class="menu-mobil__eines">
     <button class="eina eina--text" type="button" data-text-gran aria-pressed="false" aria-label="Text gran" data-aria-es="Texto grande"><span class="eina__aa" aria-hidden="true"><small>A</small>A</span><span lang="ca">Text gran</span><span lang="es">Texto grande</span></button>
-    <div class="idioma" role="group" aria-label="Idioma">
-      <button type="button" data-idioma="ca" aria-pressed="true" title="Català">CA</button>
-      <button type="button" data-idioma="es" aria-pressed="false" title="Castellano">ES</button>
-    </div>
+    <button class="eina eina--idioma" type="button" data-idioma-canvi><span lang="ca">Castellano</span><span lang="es">Català</span></button>
   </div>
-  <a class="boton boton--groc menu-mobil__trucar" href="tel:+34934170582"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg><span lang="ca">Truqueu al 934 170 582</span><span lang="es">Llame al 934 170 582</span></a>
+  <a class="boton boton--ico boton--crida menu-mobil__trucar" href="tel:+34934170582"><span class="boton__ico gest-truca"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg></span><span class="boton__text"><span lang="ca">Truqueu al 934 170 582</span><span lang="es">Llame al 934 170 582</span></span></a>
 </div>
 
 <main id="contingut">
 
-  <!-- 1 · HERO «Tendal»: su toldo amarillo se despliega con el nombre -->
+  <!-- 1 · HERO «Tendal»: su toldo amarillo se abre con el nombre -->
   <section class="hero" data-hero aria-labelledby="hero-titol">
     <div class="tendal" data-tendal>
       <div class="tendal__roda">
+        <div class="tendal__pendent" aria-hidden="true"></div>
+        <div class="tendal__barra" aria-hidden="true"></div>
         <div class="tendal__tela">
           <h1 class="tendal__nom" id="hero-titol">
             <span class="tendal__pre"><span lang="ca">Residència d'avis</span><span lang="es">Residencia de mayores</span></span>
-            <span class="tendal__gran">Sant Miquel Arcàngel</span>
+            <span class="tendal__gran"><span class="nom-p" style="--w:0">Sant</span> <span class="nom-p" style="--w:1">Miquel</span> <span class="nom-p" style="--w:2">Arcàngel</span></span>
           </h1>
           <figure class="tendal__facana">
             <span class="tendal__foto"><img data-foto src="assets/img/fachada-800.webp" srcset="assets/img/fachada-480.webp 480w, assets/img/fachada-800.webp 800w, assets/img/fachada-1200.webp 1200w" sizes="(min-width: 900px) 26vw, 1px" width="800" height="279" alt="La façana de la residència al carrer d'Escipió, 17, amb el tendal groc sobre la porta" data-alt-es="La fachada de la residencia en la calle Escipió, 17, con el toldo amarillo sobre la puerta" fetchpriority="high"></span>
             <figcaption><svg class="icona" aria-hidden="true"><use href="#i-pin"/></svg><span lang="ca">C/ d'Escipió, 17</span><span lang="es">C/ Escipió, 17</span></figcaption>
           </figure>
         </div>
-        <div class="tendal__volant" aria-hidden="true" data-bucle><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i><i style="--i:30"></i><i style="--i:31"></i><i style="--i:32"></i><i style="--i:33"></i><i style="--i:34"></i><i style="--i:35"></i><i style="--i:36"></i><i style="--i:37"></i><i style="--i:38"></i><i style="--i:39"></i><i style="--i:40"></i><i style="--i:41"></i><i style="--i:42"></i><i style="--i:43"></i><i style="--i:44"></i><i style="--i:45"></i><i style="--i:46"></i><i style="--i:47"></i><i style="--i:48"></i><i style="--i:49"></i><i style="--i:50"></i><i style="--i:51"></i><i style="--i:52"></i><i style="--i:53"></i><i style="--i:54"></i><i style="--i:55"></i><i style="--i:56"></i><i style="--i:57"></i></div>
+        <div class="tendal__volant" aria-hidden="true" data-bucle data-volant><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i><i style="--i:30"></i><i style="--i:31"></i><i style="--i:32"></i><i style="--i:33"></i><i style="--i:34"></i><i style="--i:35"></i><i style="--i:36"></i><i style="--i:37"></i><i style="--i:38"></i><i style="--i:39"></i><i style="--i:40"></i><i style="--i:41"></i><i style="--i:42"></i><i style="--i:43"></i><i style="--i:44"></i><i style="--i:45"></i><i style="--i:46"></i><i style="--i:47"></i><i style="--i:48"></i><i style="--i:49"></i><i style="--i:50"></i><i style="--i:51"></i><i style="--i:52"></i><i style="--i:53"></i><i style="--i:54"></i><i style="--i:55"></i><i style="--i:56"></i><i style="--i:57"></i></div>
       </div>
     </div>
 
     <div class="hero__cos">
       <div class="hero__text">
-        <p class="hero__lema"><span lang="ca">Una casa amb jardí al Putxet, per a 25&nbsp;avis.</span><span lang="es">Una casa con jardín en el Putxet, para 25&nbsp;mayores.</span></p>
-        <p class="hero__entrada"><span lang="ca">Com a casa, i amb metge, infermeria i cuina pròpia. 18 de les places són col·laboradores amb la Generalitat.</span><span lang="es">Como en casa, y con médico, enfermería y cocina propia. 18 de las plazas son colaboradoras con la Generalitat.</span></p>
+        <p class="hero__lema">
+          <span class="sr" lang="ca">Una casa al Putxet amb jardí, metge, infermeria, cuina pròpia i fisioteràpia.</span><span class="sr" lang="es">Una casa en el Putxet con jardín, médico, enfermería, cocina propia y fisioterapia.</span>
+          <span class="lema__fix" aria-hidden="true"><span lang="ca">Una casa al Putxet</span><span lang="es">Una casa en el Putxet</span></span>
+          <span class="lema__roda" aria-hidden="true"><span lang="ca">amb</span><span lang="es">con</span> <span class="roda" data-roda><span class="roda__p ara"><span lang="ca">jardí.</span><span lang="es">jardín.</span></span></span></span>
+        </p>
+        <p class="hero__entrada"><span lang="ca">Per a 25 avis. 18 de les places són col·laboradores amb la Generalitat.</span><span lang="es">Para 25 mayores. 18 de las plazas son colaboradoras con la Generalitat.</span></p>
         <div class="hero__accions">
-          <a class="boton boton--groc boton--trucada" href="tel:+34934170582"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg><span><strong lang="ca">Truqueu</strong><strong lang="es">Llame</strong> <span class="num">934&nbsp;170&nbsp;582</span></span></a>
-          <a class="boton hero__visita" href="#visita"><span lang="ca">Demaneu una visita</span><span lang="es">Pida una visita</span></a>
+          <a class="boton boton--ico boton--crida" href="tel:+34934170582" aria-label="Truqueu al 934 170 582" data-aria-es="Llame al 934 170 582"><span class="boton__ico gest-truca"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg></span><span class="boton__text"><strong lang="ca">Truqueu</strong><strong lang="es">Llame</strong> <span class="num">934&nbsp;170&nbsp;582</span></span></a>
+          <a class="boton boton--ico" href="#visita"><span class="boton__ico gest-salta"><svg class="icona" aria-hidden="true"><use href="#i-visita"/></svg></span><span class="boton__text"><span lang="ca">Demaneu una visita</span><span lang="es">Pida una visita</span></span></a>
         </div>
         <p class="hero__qui"><span lang="ca">Us atendran la Sra. Ana o la Sra. Alba.</span><span lang="es">Le atenderán la Sra. Ana o la Sra. Alba.</span> <a class="enllac" href="#arribar"><span lang="ca">Com arribar</span><span lang="es">Cómo llegar</span><svg class="icona" aria-hidden="true"><use href="#i-fletxa"/></svg></a></p>
       </div>
@@ -202,9 +206,10 @@
       <div class="hero__jardi">
         <figure class="foto-punts" data-punts>
           <span class="foto-punts__marc"><img data-foto src="assets/img/jardin-960.webp" srcset="assets/img/jardin-640.webp 640w, assets/img/jardin-960.webp 960w, assets/img/jardin-1280.webp 1280w, assets/img/jardin-1600.webp 1600w" sizes="(min-width: 900px) 46vw, 90vw" width="1280" height="960" alt="El jardí de la residència: una pèrgola blanca amb taules i butaques de fusta, una palmera i plantes, davant de la casa" data-alt-es="El jardín de la residencia: una pérgola blanca con mesas y butacas de madera, una palmera y plantas, delante de la casa" fetchpriority="high"></span>
-          <button class="punt" type="button" style="--x:52%;--y:34%;--n:0" data-punt aria-label="La pèrgola" data-aria-es="La pérgola"><span class="punt__etiqueta"><span lang="ca">La pèrgola, per estar a l'ombra</span><span lang="es">La pérgola, para estar a la sombra</span></span></button>
-          <button class="punt punt--esq" type="button" style="--x:66%;--y:76%;--n:1" data-punt aria-label="Taules i butaques" data-aria-es="Mesas y butacas"><span class="punt__etiqueta"><span lang="ca">Taules i butaques per seure a fora</span><span lang="es">Mesas y butacas para sentarse fuera</span></span></button>
-          <button class="punt punt--dre" type="button" style="--x:15%;--y:30%;--n:2" data-punt aria-label="Plantes i una palmera" data-aria-es="Plantas y una palmera"><span class="punt__etiqueta"><span lang="ca">Plantes i una palmera</span><span lang="es">Plantas y una palmera</span></span></button>
+          <span class="ruta" aria-hidden="true"><i class="ruta__tram" data-tram></i><i class="ruta__tram" data-tram></i></span>
+          <button class="punt punt--dre" type="button" style="--x:15%;--y:30%;--n:0" data-punt aria-label="Plantes i una palmera" data-aria-es="Plantas y una palmera"><span class="punt__etiqueta"><span lang="ca">Plantes i una palmera</span><span lang="es">Plantas y una palmera</span></span></button>
+          <button class="punt" type="button" style="--x:52%;--y:34%;--n:1" data-punt aria-label="La pèrgola" data-aria-es="La pérgola"><span class="punt__etiqueta"><span lang="ca">La pèrgola, per estar a l'ombra</span><span lang="es">La pérgola, para estar a la sombra</span></span></button>
+          <button class="punt punt--esq" type="button" style="--x:66%;--y:76%;--n:2" data-punt aria-label="Taules i butaques" data-aria-es="Mesas y butacas"><span class="punt__etiqueta"><span lang="ca">Taules i butaques per seure a fora</span><span lang="es">Mesas y butacas para sentarse fuera</span></span></button>
           <figcaption class="sr"><span lang="ca">El jardí</span><span lang="es">El jardín</span></figcaption>
         </figure>
       </div>
@@ -214,35 +219,38 @@
   <!-- 2 · PLAZAS: 25 ventanas -->
   <section class="places" id="places" aria-labelledby="places-titol">
     <div class="places__dins">
-      <div class="places__text" data-revela>
-        <h2 data-paraules id="places-titol"><span lang="ca">Una casa petita: 25&nbsp;places.</span><span lang="es">Una casa pequeña: 25&nbsp;plazas.</span></h2>
+      <div class="places__cap" data-revela>
+        <h2 class="places__titol" data-paraules id="places-titol"><span lang="ca"><span class="places__l1">Una casa petita:</span> <span class="places__l2">25&nbsp;places.</span></span><span lang="es"><span class="places__l1">Una casa pequeña:</span> <span class="places__l2">25&nbsp;plazas.</span></span></h2>
         <p class="places__entrada"><span lang="ca">En una casa de 25, tothom es coneix pel nom. Hi ha dos tipus de plaça:</span><span lang="es">En una casa de 25, todo el mundo se conoce por su nombre. Hay dos tipos de plaza:</span></p>
+      </div>
 
-        <div class="tipus" role="tablist" aria-label="Tipus de plaça" data-tipus>
-          <button class="tipus__boto" type="button" role="tab" id="tab-col" aria-controls="panell-col" aria-selected="true" data-grup="col">
-            <span class="tipus__xifra">18</span><span class="tipus__nom"><span lang="ca">col·laboradores amb la Generalitat</span><span lang="es">colaboradoras con la Generalitat</span></span>
+      <div class="places__text" data-revela>
+        <div class="tipus" data-tipus>
+          <button class="tipus__boto" type="button" id="tab-col" aria-expanded="false" aria-controls="panell-col" data-grup="col">
+            <span class="tipus__xifra">18</span><span class="tipus__nom"><span lang="ca">col·laboradores amb la Generalitat</span><span lang="es">colaboradoras con la Generalitat</span></span><svg class="tipus__senyal icona" aria-hidden="true"><use href="#i-baixa"/></svg>
           </button>
-          <button class="tipus__boto" type="button" role="tab" id="tab-priv" aria-controls="panell-priv" aria-selected="false" tabindex="-1" data-grup="priv">
-            <span class="tipus__xifra">7</span><span class="tipus__nom"><span lang="ca">privades</span><span lang="es">privadas</span></span>
+          <button class="tipus__boto" type="button" id="tab-priv" aria-expanded="false" aria-controls="panell-priv" data-grup="priv">
+            <span class="tipus__xifra">7</span><span class="tipus__nom"><span lang="ca">privades</span><span lang="es">privadas</span></span><svg class="tipus__senyal icona" aria-hidden="true"><use href="#i-baixa"/></svg>
           </button>
         </div>
+        <p class="tipus__pista" data-tipus-pista><svg class="icona" aria-hidden="true"><use href="#i-puja"/></svg><span lang="ca">Premeu-ne una per veure com s'hi accedeix.</span><span lang="es">Pulse una para ver cómo se accede.</span></p>
 
-        <div class="panell" role="tabpanel" id="panell-col" aria-labelledby="tab-col">
+        <div class="panell" role="region" id="panell-col" aria-labelledby="tab-col" hidden>
           <p><span lang="ca">La Generalitat en paga una part i la persona hi aporta segons els seus ingressos. S'hi accedeix amb el grau de dependència reconegut:</span><span lang="es">La Generalitat paga una parte y la persona aporta según sus ingresos. Se accede con el grado de dependencia reconocido:</span></p>
           <ol class="passos">
             <li><span lang="ca">Demaneu la valoració de la dependència als serveis socials.</span><span lang="es">Solicite la valoración de la dependencia en servicios sociales.</span></li>
             <li><span lang="ca">Amb el grau reconegut, el pla d'atenció (PIA) pot incloure una plaça de residència.</span><span lang="es">Con el grado reconocido, el plan de atención (PIA) puede incluir una plaza de residencia.</span></li>
             <li><span lang="ca">La Generalitat assigna la plaça. Truqueu-nos i us orientem.</span><span lang="es">La Generalitat asigna la plaza. Llámenos y le orientamos.</span></li>
           </ol>
-          <a class="boton" href="tel:+34934170582"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg><span lang="ca">Pregunteu-nos com fer-ho</span><span lang="es">Pregúntenos cómo hacerlo</span></a>
+          <a class="boton boton--ico" href="tel:+34934170582"><span class="boton__ico gest-truca"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg></span><span class="boton__text"><span lang="ca">Pregunteu-nos com fer-ho</span><span lang="es">Pregúntenos cómo hacerlo</span></span></a>
         </div>
-        <div class="panell" role="tabpanel" id="panell-priv" aria-labelledby="tab-priv" hidden>
+        <div class="panell" role="region" id="panell-priv" aria-labelledby="tab-priv" hidden>
           <p><span lang="ca">Ingrés directe quan hi ha plaça lliure, sense passar per la llista de la Generalitat. Si teniu el grau de dependència reconegut, potser podeu demanar una ajuda per pagar-la.</span><span lang="es">Ingreso directo cuando hay plaza libre, sin pasar por la lista de la Generalitat. Si tiene el grado de dependencia reconocido, quizá pueda pedir una ayuda para pagarla.</span></p>
           <ul class="fets">
             <li><svg class="icona" aria-hidden="true"><use href="#i-check"/></svg><span lang="ca">Habitació individual, doble o triple</span><span lang="es">Habitación individual, doble o triple</span></li>
             <li><svg class="icona" aria-hidden="true"><use href="#i-check"/></svg><span lang="ca">El mateix equip i la mateixa casa</span><span lang="es">El mismo equipo y la misma casa</span></li>
           </ul>
-          <a class="boton" href="tel:+34934170582"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg><span lang="ca">Pregunteu preu i disponibilitat</span><span lang="es">Pregunte precio y disponibilidad</span></a>
+          <a class="boton boton--ico" href="tel:+34934170582"><span class="boton__ico gest-truca"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg></span><span class="boton__text"><span lang="ca">Pregunteu preu i disponibilitat</span><span lang="es">Pregunte precio y disponibilidad</span></span></a>
         </div>
       </div>
 
@@ -265,8 +273,8 @@
       <h2 data-paraules id="equip-titol" data-revela><span lang="ca">Atenció sanitària i social, aquí mateix.</span><span lang="es">Atención sanitaria y social, aquí mismo.</span></h2>
       <div class="equip__cos" data-equip>
         <p class="equip__frase" data-revela>
-          <span lang="ca">Els cuida un equip amb <button type="button" class="ofici" data-ofici="metge">metge</button>, <button type="button" class="ofici" data-ofici="infermeria">infermeria</button>, <button type="button" class="ofici" data-ofici="gerocultores">gerocultores</button>, <button type="button" class="ofici" data-ofici="fisio">fisioterapeuta</button>, <button type="button" class="ofici" data-ofici="psico">psicòleg</button>, <button type="button" class="ofici" data-ofici="to">terapeuta ocupacional</button>, <button type="button" class="ofici" data-ofici="social">treballador social</button> i <button type="button" class="ofici" data-ofici="animador">animador sociocultural</button>.</span>
-          <span lang="es">Los cuida un equipo con <button type="button" class="ofici" data-ofici="metge">médico</button>, <button type="button" class="ofici" data-ofici="infermeria">enfermería</button>, <button type="button" class="ofici" data-ofici="gerocultores">gerocultoras</button>, <button type="button" class="ofici" data-ofici="fisio">fisioterapeuta</button>, <button type="button" class="ofici" data-ofici="psico">psicólogo</button>, <button type="button" class="ofici" data-ofici="to">terapeuta ocupacional</button>, <button type="button" class="ofici" data-ofici="social">trabajador social</button> y <button type="button" class="ofici" data-ofici="animador">animador sociocultural</button>.</span>
+          <span lang="ca">L'equip de la casa: <button type="button" class="ofici" data-ofici="metge">metge</button>, <button type="button" class="ofici" data-ofici="infermeria">infermeria</button>, <button type="button" class="ofici" data-ofici="gerocultores">gerocultores</button>, <button type="button" class="ofici" data-ofici="fisio">fisioterapeuta</button>, <button type="button" class="ofici" data-ofici="psico">psicòleg</button>, <button type="button" class="ofici" data-ofici="to">terapeuta ocupacional</button>, <button type="button" class="ofici" data-ofici="social">treballador social</button> i <button type="button" class="ofici" data-ofici="animador">animador sociocultural</button>.</span>
+          <span lang="es">El equipo de la casa: <button type="button" class="ofici" data-ofici="metge">médico</button>, <button type="button" class="ofici" data-ofici="infermeria">enfermería</button>, <button type="button" class="ofici" data-ofici="gerocultores">gerocultoras</button>, <button type="button" class="ofici" data-ofici="fisio">fisioterapeuta</button>, <button type="button" class="ofici" data-ofici="psico">psicólogo</button>, <button type="button" class="ofici" data-ofici="to">terapeuta ocupacional</button>, <button type="button" class="ofici" data-ofici="social">trabajador social</button> y <button type="button" class="ofici" data-ofici="animador">animador sociocultural</button>.</span>
         </p>
         <div class="fitxa" data-fitxa aria-live="polite">
           <div class="fitxa__dins" data-fitxa-dins>
@@ -278,63 +286,70 @@
         </div>
       </div>
       <div class="equip__peu" data-revela>
-        <ul class="serveis">
-          <li><svg class="icona" aria-hidden="true"><use href="#i-peu"/></svg><span lang="ca">Podologia</span><span lang="es">Podología</span></li>
-          <li><svg class="icona" aria-hidden="true"><use href="#i-tisores"/></svg><span lang="ca">Perruqueria</span><span lang="es">Peluquería</span></li>
-          <li><svg class="icona" aria-hidden="true"><use href="#i-acompanya"/></svg><span lang="ca">Servei d'acompanyament</span><span lang="es">Servicio de acompañamiento</span></li>
-          <li><svg class="icona" aria-hidden="true"><use href="#i-cuina"/></svg><span lang="ca">Cuina pròpia</span><span lang="es">Cocina propia</span></li>
+        <ul class="serveis" data-serveis>
+          <li class="servei servei--peu"><span class="servei__ico" aria-hidden="true"><svg class="icona" viewBox="0 0 24 24"><path class="s-planta" d="M9.2 21c-2.6 0-3.7-2.2-3.1-4.7l1-5.1c.4-1.9 1.9-2.9 3.4-2.4 1.6.5 2.4 2.2 2 4.3l-1 5c-.4 1.9-1 2.9-2.3 2.9z"/><circle class="s-dit" style="--d:0" cx="12.2" cy="5" r="1.2"/><circle class="s-dit" style="--d:1" cx="14.2" cy="7.2" r="1.1"/><circle class="s-dit" style="--d:2" cx="16.6" cy="8.6" r=".95"/><circle class="s-dit" style="--d:3" cx="18.3" cy="10.6" r=".8"/></svg></span><span class="servei__nom"><span lang="ca">Podologia</span><span lang="es">Podología</span></span></li>
+          <li class="servei servei--tisores"><span class="servei__ico" aria-hidden="true"><svg class="icona" viewBox="0 0 24 24"><g class="s-fulla s-fulla--a"><circle cx="6" cy="6.5" r="2.6"/><path d="M8.2 7.9 20 16.5"/></g><g class="s-fulla s-fulla--b"><circle cx="6" cy="17.5" r="2.6"/><path d="M8.2 16.1 20 7.5"/></g></svg></span><span class="servei__nom"><span lang="ca">Perruqueria</span><span lang="es">Peluquería</span></span></li>
+          <li class="servei servei--acompanya"><span class="servei__ico" aria-hidden="true"><svg class="icona" viewBox="0 0 24 24"><g class="s-persona s-persona--a"><circle cx="8" cy="6.8" r="2.6"/><path d="M2.8 20v-1.8a4.4 4.4 0 0 1 4.4-4.4h1.6a4.4 4.4 0 0 1 4.4 4.4V20"/></g><g class="s-persona s-persona--b"><circle cx="16.4" cy="6.8" r="2.6"/><path d="M14.6 13.8h1.6a4.4 4.4 0 0 1 4.4 4.4V20"/></g></svg></span><span class="servei__nom"><span lang="ca">Servei d'acompanyament</span><span lang="es">Servicio de acompañamiento</span></span></li>
+          <li class="servei servei--cuina"><span class="servei__ico" aria-hidden="true"><svg class="icona" viewBox="0 0 24 24"><path class="s-olla" d="M4.5 11h15v3.5a5.5 5.5 0 0 1-5.5 5.5h-4a5.5 5.5 0 0 1-5.5-5.5z"/><path class="s-olla" d="M2.5 11h19"/><path class="s-vapor" style="--d:0" d="M9.3 7.6c0-1.5 1.4-1.5 1.4-3"/><path class="s-vapor" style="--d:1" d="M13.6 7.6c0-1.5 1.4-1.5 1.4-3"/></svg></span><span class="servei__nom"><span lang="ca">Cuina pròpia</span><span lang="es">Cocina propia</span></span></li>
         </ul>
-        <a class="boton boton--groc" href="tel:+34934170582"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg><span lang="ca">Truqueu i us ho expliquem</span><span lang="es">Llame y se lo explicamos</span></a>
+        <a class="boton boton--ico" href="tel:+34934170582"><span class="boton__ico gest-truca"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg></span><span class="boton__text"><span lang="ca">Truqueu i us ho expliquem</span><span lang="es">Llame y se lo explicamos</span></span></a>
       </div>
     </div>
   </section>
 
-  <!-- 4 · LA CASA: pila de fotos sobre la pared de dos tonos de sus salas -->
+  <!-- 4 · LA CASA: la persiana gira sus lamas y pasa de una estancia a otra -->
   <section class="casa" id="casa" aria-labelledby="casa-titol">
     <div class="casa__dins">
       <div class="casa__text" data-revela>
         <h2 data-paraules id="casa-titol"><span lang="ca">La casa, per dins.</span><span lang="es">La casa, por dentro.</span></h2>
         <p><span lang="ca">Una torre amb jardí, adaptada per als avis. Habitacions individuals, dobles i triples, totes exteriors.</span><span lang="es">Una torre con jardín, adaptada para los mayores. Habitaciones individuales, dobles y triples, todas exteriores.</span></p>
-        <ol class="estances" data-estances aria-label="Estances" data-aria-es="Estancias">
-          <li><button type="button" data-estanca="0" aria-pressed="true"><span lang="ca">El jardí</span><span lang="es">El jardín</span></button></li>
-          <li><button type="button" data-estanca="1" aria-pressed="false"><span lang="ca">Habitació individual</span><span lang="es">Habitación individual</span></button></li>
-          <li><button type="button" data-estanca="2" aria-pressed="false"><span lang="ca">Habitació doble</span><span lang="es">Habitación doble</span></button></li>
-          <li><button type="button" data-estanca="3" aria-pressed="false"><span lang="ca">La sala</span><span lang="es">La sala</span></button></li>
-          <li><button type="button" data-estanca="4" aria-pressed="false"><span lang="ca">Els passadissos</span><span lang="es">Los pasillos</span></button></li>
-          <li><button type="button" data-estanca="5" aria-pressed="false"><span lang="ca">Els banys</span><span lang="es">Los baños</span></button></li>
-        </ol>
+        <ul class="estances" data-estances aria-label="Estances" data-aria-es="Estancias">
+          <li><button type="button" data-estanca="0"><span lang="ca">El jardí</span><span lang="es">El jardín</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="1"><span lang="ca">Habitació individual</span><span lang="es">Habitación individual</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="2"><span lang="ca">Habitació doble</span><span lang="es">Habitación doble</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="3"><span lang="ca">La sala</span><span lang="es">La sala</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="4"><span lang="ca">Els passadissos</span><span lang="es">Los pasillos</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+          <li><button type="button" data-estanca="5"><span lang="ca">Els banys</span><span lang="es">Los baños</span><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg></button></li>
+        </ul>
         <div class="accions">
-          <a class="boton boton--groc" href="#visita"><span lang="ca">Veniu a veure-la</span><span lang="es">Venga a verla</span></a>
+          <a class="boton boton--ico" href="#visita"><span class="boton__ico gest-salta"><svg class="icona" aria-hidden="true"><use href="#i-visita"/></svg></span><span class="boton__text"><span lang="ca">Veniu a veure-la</span><span lang="es">Venga a verla</span></span></a>
           <a class="enllac" href="https://www.residenciasantmiquel.net/instal-lacions-serveis/"><span lang="ca">Totes les fotos de la casa</span><span lang="es">Todas las fotos de la casa</span><svg class="icona" aria-hidden="true"><use href="#i-fletxa"/></svg></a>
         </div>
       </div>
 
-      <div class="pila" data-pila data-bucle>
-        <div class="pila__cartes" data-pila-cartes>
-          <figure class="carta carta--h" data-carta="0">
-            <img data-foto src="assets/img/pergola-960.webp" srcset="assets/img/pergola-640.webp 640w, assets/img/pergola-960.webp 960w, assets/img/pergola-1280.webp 1280w" sizes="(min-width: 960px) 44vw, 88vw" width="1280" height="960" loading="lazy" decoding="async" alt="La pèrgola del jardí, amb butaques de fusta amb coixins, taules i plantes en testos" data-alt-es="La pérgola del jardín, con butacas de madera con cojines, mesas y plantas en macetas">
+      <div class="persiana" data-persiana data-bucle>
+        <div class="persiana__escenari" data-escenari>
+          <figure class="escena actual" data-escena="0">
+            <img data-foto src="assets/img/pergola-960.webp" srcset="assets/img/pergola-640.webp 640w, assets/img/pergola-960.webp 960w, assets/img/pergola-1280.webp 1280w" sizes="(min-width: 960px) 44vw, 86vw" width="1280" height="960" decoding="async" alt="La pèrgola del jardí, amb butaques de fusta amb coixins, taules i plantes en testos" data-alt-es="La pérgola del jardín, con butacas de madera con cojines, mesas y plantas en macetas">
+            <figcaption><span lang="ca">El jardí</span><span lang="es">El jardín</span> <small>1/6</small></figcaption>
           </figure>
-          <figure class="carta carta--h" data-carta="1">
-            <img data-foto src="assets/img/habitacion-individual-960.webp" srcset="assets/img/habitacion-individual-640.webp 640w, assets/img/habitacion-individual-960.webp 960w, assets/img/habitacion-individual-1280.webp 1280w" sizes="(min-width: 960px) 44vw, 88vw" width="1280" height="960" loading="lazy" decoding="async" alt="Una habitació individual amb llit, prestatgeria i finestra amb cortines" data-alt-es="Una habitación individual con cama, estantería y ventana con cortinas">
+          <figure class="escena" data-escena="1">
+            <img data-foto src="assets/img/habitacion-individual-960.webp" srcset="assets/img/habitacion-individual-640.webp 640w, assets/img/habitacion-individual-960.webp 960w, assets/img/habitacion-individual-1280.webp 1280w" sizes="(min-width: 960px) 44vw, 86vw" width="1280" height="960" loading="lazy" decoding="async" alt="Una habitació individual amb llit, prestatgeria i finestra amb cortines" data-alt-es="Una habitación individual con cama, estantería y ventana con cortinas">
+            <figcaption><span lang="ca">Habitació individual</span><span lang="es">Habitación individual</span> <small>2/6</small></figcaption>
           </figure>
-          <figure class="carta carta--v" data-carta="2">
-            <img data-foto src="assets/img/habitacion-doble-720.webp" srcset="assets/img/habitacion-doble-480.webp 480w, assets/img/habitacion-doble-720.webp 720w, assets/img/habitacion-doble-960.webp 960w" sizes="(min-width: 960px) 33vw, 66vw" width="960" height="1280" loading="lazy" decoding="async" alt="Una habitació doble amb dos llits i una finestra assolellada" data-alt-es="Una habitación doble con dos camas y una ventana soleada">
+          <figure class="escena" data-escena="2">
+            <img data-foto src="assets/img/habitacion-doble-720.webp" srcset="assets/img/habitacion-doble-480.webp 480w, assets/img/habitacion-doble-720.webp 720w, assets/img/habitacion-doble-960.webp 960w" sizes="(min-width: 960px) 26vw, 52vw" width="960" height="1280" loading="lazy" decoding="async" alt="Una habitació doble amb dos llits i una finestra assolellada" data-alt-es="Una habitación doble con dos camas y una ventana soleada">
+            <figcaption><span lang="ca">Habitació doble</span><span lang="es">Habitación doble</span> <small>3/6</small></figcaption>
           </figure>
-          <figure class="carta carta--v" data-carta="3">
-            <img data-foto src="assets/img/sala-estar-720.webp" srcset="assets/img/sala-estar-480.webp 480w, assets/img/sala-estar-720.webp 720w, assets/img/sala-estar-960.webp 960w" sizes="(min-width: 960px) 33vw, 66vw" width="960" height="1280" loading="lazy" decoding="async" alt="Un racó de la sala amb dues butaques de vímet, una tauleta i un quadre d'un paó a la paret groga" data-alt-es="Un rincón de la sala con dos butacas de mimbre, una mesita y un cuadro de un pavo real en la pared amarilla">
+          <figure class="escena" data-escena="3">
+            <img data-foto src="assets/img/sala-estar-720.webp" srcset="assets/img/sala-estar-480.webp 480w, assets/img/sala-estar-720.webp 720w, assets/img/sala-estar-960.webp 960w" sizes="(min-width: 960px) 26vw, 52vw" width="960" height="1280" loading="lazy" decoding="async" alt="Un racó de la sala amb dues butaques de vímet, una tauleta i un quadre d'un paó a la paret groga" data-alt-es="Un rincón de la sala con dos butacas de mimbre, una mesita y un cuadro de un pavo real en la pared amarilla">
+            <figcaption><span lang="ca">La sala</span><span lang="es">La sala</span> <small>4/6</small></figcaption>
           </figure>
-          <figure class="carta carta--v" data-carta="4">
-            <img data-foto src="assets/img/pasillo-720.webp" srcset="assets/img/pasillo-480.webp 480w, assets/img/pasillo-720.webp 720w, assets/img/pasillo-960.webp 960w" sizes="(min-width: 960px) 33vw, 66vw" width="960" height="1280" loading="lazy" decoding="async" alt="Un passadís llarg i lluminós amb passamans a les parets" data-alt-es="Un pasillo largo y luminoso con pasamanos en las paredes">
+          <figure class="escena" data-escena="4">
+            <img data-foto src="assets/img/pasillo-720.webp" srcset="assets/img/pasillo-480.webp 480w, assets/img/pasillo-720.webp 720w, assets/img/pasillo-960.webp 960w" sizes="(min-width: 960px) 26vw, 52vw" width="960" height="1280" loading="lazy" decoding="async" alt="Un passadís llarg i lluminós amb passamans a les parets" data-alt-es="Un pasillo largo y luminoso con pasamanos en las paredes">
+            <figcaption><span lang="ca">Els passadissos</span><span lang="es">Los pasillos</span> <small>5/6</small></figcaption>
           </figure>
-          <figure class="carta carta--v" data-carta="5">
-            <img data-foto src="assets/img/bano-asistido-576.webp" srcset="assets/img/bano-asistido-480.webp 480w, assets/img/bano-asistido-576.webp 576w" sizes="(min-width: 960px) 33vw, 66vw" width="576" height="768" loading="lazy" decoding="async" alt="Un bany assistit amb plat de dutxa a terra, cadira de dutxa amb rodes i barres per agafar-se" data-alt-es="Un baño asistido con plato de ducha a ras de suelo, silla de ducha con ruedas y barras para agarrarse">
+          <figure class="escena" data-escena="5">
+            <img data-foto src="assets/img/bano-asistido-576.webp" srcset="assets/img/bano-asistido-480.webp 480w, assets/img/bano-asistido-576.webp 576w" sizes="(min-width: 960px) 26vw, 52vw" width="576" height="768" loading="lazy" decoding="async" alt="Un bany assistit amb plat de dutxa a terra, cadira de dutxa amb rodes i barres per agafar-se" data-alt-es="Un baño asistido con plato de ducha a ras de suelo, silla de ducha con ruedas y barras para agarrarse">
+            <figcaption><span lang="ca">Els banys</span><span lang="es">Los baños</span> <small>6/6</small></figcaption>
           </figure>
+          <div class="lames" data-lames aria-hidden="true" hidden></div>
         </div>
-        <div class="pila__peu">
-          <p class="pila__text" data-pila-text aria-live="polite"><span lang="ca">El jardí, amb pèrgola i ombra.</span><span lang="es">El jardín, con pérgola y sombra.</span></p>
-          <div class="pila__botons">
-            <button type="button" class="rodo" data-pila-ant><svg class="icona" aria-hidden="true"><use href="#i-esq"/></svg><span class="sr"><span lang="ca">Foto anterior</span><span lang="es">Foto anterior</span></span></button>
-            <button type="button" class="rodo" data-pila-seg><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg><span class="sr"><span lang="ca">Foto següent</span><span lang="es">Foto siguiente</span></span></button>
+        <div class="persiana__peu">
+          <p class="persiana__text" data-persiana-text aria-live="polite"><span lang="ca">El jardí, amb pèrgola i ombra.</span><span lang="es">El jardín, con pérgola y sombra.</span></p>
+          <div class="persiana__botons">
+            <button type="button" class="rodo" data-persiana-ant><svg class="icona" data-dir="esq" aria-hidden="true"><use href="#i-esq"/></svg><span class="sr"><span lang="ca">Foto anterior</span><span lang="es">Foto anterior</span></span></button>
+            <button type="button" class="rodo" data-persiana-seg><svg class="icona" data-dir="dre" aria-hidden="true"><use href="#i-dre"/></svg><span class="sr"><span lang="ca">Foto següent</span><span lang="es">Foto siguiente</span></span></button>
           </div>
         </div>
       </div>
@@ -361,32 +376,32 @@
       <ul class="expo" data-expo data-bucle>
         <li class="obra obra--v" style="--i:0">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="0"><img data-foto src="assets/img/obra-miro-400.webp" srcset="assets/img/obra-miro-400.webp 400w, assets/img/obra-miro-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Pintura emmarcada a la manera de Miró: un ocell vermell i blau amb una vora de colors" data-alt-es="Pintura enmarcada a la manera de Miró: un pájaro rojo y azul con un borde de colores"></button>
+          <button type="button" class="obra__marc" data-obra="0"><span class="obra__cuadre"><img data-foto src="assets/img/obra-miro-400.webp" srcset="assets/img/obra-miro-400.webp 400w, assets/img/obra-miro-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Pintura emmarcada a la manera de Miró: un ocell vermell i blau amb una vora de colors" data-alt-es="Pintura enmarcada a la manera de Miró: un pájaro rojo y azul con un borde de colores"></span></button>
           <p class="cartela"><strong><span lang="ca">A la manera de Miró</span><span lang="es">A la manera de Miró</span></strong><span lang="ca">Pintura</span><span lang="es">Pintura</span></p>
         </li>
         <li class="obra obra--h" style="--i:1">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="1"><img data-foto src="assets/img/obra-flores-colores-480.webp" srcset="assets/img/obra-flores-colores-480.webp 480w, assets/img/obra-flores-colores-800.webp 800w" sizes="(min-width: 1100px) 24vw, 56vw" width="800" height="600" loading="lazy" decoding="async" alt="Làmina de flors de molts colors pintades sobre fons verd" data-alt-es="Lámina de flores de muchos colores pintadas sobre fondo verde"></button>
+          <button type="button" class="obra__marc" data-obra="1"><span class="obra__cuadre"><img data-foto src="assets/img/obra-flores-colores-480.webp" srcset="assets/img/obra-flores-colores-480.webp 480w, assets/img/obra-flores-colores-800.webp 800w" sizes="(min-width: 1100px) 24vw, 56vw" width="800" height="600" loading="lazy" decoding="async" alt="Làmina de flors de molts colors pintades sobre fons verd" data-alt-es="Lámina de flores de muchos colores pintadas sobre fondo verde"></span></button>
           <p class="cartela"><strong><span lang="ca">Flors de colors</span><span lang="es">Flores de colores</span></strong><span lang="ca">Dibuix i color</span><span lang="es">Dibujo y color</span></p>
         </li>
         <li class="obra obra--v" style="--i:2">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="2"><img data-foto src="assets/img/obra-jarron-claveles-400.webp" srcset="assets/img/obra-jarron-claveles-400.webp 400w, assets/img/obra-jarron-claveles-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Dibuix d'un gerro blau amb clavells vermells" data-alt-es="Dibujo de un jarrón azul con claveles rojos"></button>
+          <button type="button" class="obra__marc" data-obra="2"><span class="obra__cuadre"><img data-foto src="assets/img/obra-jarron-claveles-400.webp" srcset="assets/img/obra-jarron-claveles-400.webp 400w, assets/img/obra-jarron-claveles-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Dibuix d'un gerro blau amb clavells vermells" data-alt-es="Dibujo de un jarrón azul con claveles rojos"></span></button>
           <p class="cartela"><strong><span lang="ca">Gerro amb clavells</span><span lang="es">Jarrón con claveles</span></strong><span lang="ca">Dibuix</span><span lang="es">Dibujo</span></p>
         </li>
         <li class="obra obra--h" style="--i:3">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="3"><img data-foto src="assets/img/obra-flores-papel-480.webp" srcset="assets/img/obra-flores-papel-480.webp 480w, assets/img/obra-flores-papel-800.webp 800w" sizes="(min-width: 1100px) 24vw, 56vw" width="800" height="600" loading="lazy" decoding="async" alt="Flors de paper de colors en gots decorats sobre una taula" data-alt-es="Flores de papel de colores en vasos decorados sobre una mesa"></button>
+          <button type="button" class="obra__marc" data-obra="3"><span class="obra__cuadre"><img data-foto src="assets/img/obra-flores-papel-480.webp" srcset="assets/img/obra-flores-papel-480.webp 480w, assets/img/obra-flores-papel-800.webp 800w" sizes="(min-width: 1100px) 24vw, 56vw" width="800" height="600" loading="lazy" decoding="async" alt="Flors de paper de colors en gots decorats sobre una taula" data-alt-es="Flores de papel de colores en vasos decorados sobre una mesa"></span></button>
           <p class="cartela"><strong><span lang="ca">Flors de paper</span><span lang="es">Flores de papel</span></strong><span lang="ca">Paper i pintura</span><span lang="es">Papel y pintura</span></p>
         </li>
         <li class="obra obra--v" style="--i:4">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="4"><img data-foto src="assets/img/obra-postal-sant-jordi-400.webp" srcset="assets/img/obra-postal-sant-jordi-400.webp 400w, assets/img/obra-postal-sant-jordi-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Postal pintada a mà amb les paraules Sant Jordi en vermell i groc" data-alt-es="Postal pintada a mano con las palabras Sant Jordi en rojo y amarillo"></button>
+          <button type="button" class="obra__marc" data-obra="4"><span class="obra__cuadre"><img data-foto src="assets/img/obra-postal-sant-jordi-400.webp" srcset="assets/img/obra-postal-sant-jordi-400.webp 400w, assets/img/obra-postal-sant-jordi-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Postal pintada a mà amb les paraules Sant Jordi en vermell i groc" data-alt-es="Postal pintada a mano con las palabras Sant Jordi en rojo y amarillo"></span></button>
           <p class="cartela"><strong><span lang="ca">Postal de Sant Jordi</span><span lang="es">Postal de Sant Jordi</span></strong><span lang="ca">Retall i color</span><span lang="es">Recorte y color</span></p>
         </li>
         <li class="obra obra--v" style="--i:5">
           <span class="obra__llum" aria-hidden="true"></span>
-          <button type="button" class="obra__marc" data-obra="5"><img data-foto src="assets/img/obra-jarron-flores-400.webp" srcset="assets/img/obra-jarron-flores-400.webp 400w, assets/img/obra-jarron-flores-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Dibuix d'un gerro blau clar amb flors vermelles sobre una base marró" data-alt-es="Dibujo de un jarrón azul claro con flores rojas sobre una base marrón"></button>
+          <button type="button" class="obra__marc" data-obra="5"><span class="obra__cuadre"><img data-foto src="assets/img/obra-jarron-flores-400.webp" srcset="assets/img/obra-jarron-flores-400.webp 400w, assets/img/obra-jarron-flores-576.webp 576w" sizes="(min-width: 1100px) 17vw, 40vw" width="576" height="768" loading="lazy" decoding="async" alt="Dibuix d'un gerro blau clar amb flors vermelles sobre una base marró" data-alt-es="Dibujo de un jarrón azul claro con flores rojas sobre una base marrón"></span></button>
           <p class="cartela"><strong><span lang="ca">Gerro de flors</span><span lang="es">Jarrón de flores</span></strong><span lang="ca">Dibuix</span><span lang="es">Dibujo</span></p>
         </li>
       </ul>
@@ -420,15 +435,15 @@
           <figure class="nadal__foto"><img data-foto src="assets/img/navidad-baile-480.webp" srcset="assets/img/navidad-baile-480.webp 480w, assets/img/navidad-baile-800.webp 800w" sizes="(min-width: 960px) 20vw, 44vw" width="800" height="600" loading="lazy" decoding="async" alt="Residents i treballadores ballen a la festa de Nadal, amb barrets de Pare Noel" data-alt-es="Residentes y trabajadoras bailan en la fiesta de Navidad, con gorros de Papá Noel"></figure>
           <figure class="nadal__foto"><img data-foto src="assets/img/navidad-concierto-480.webp" srcset="assets/img/navidad-concierto-480.webp 480w, assets/img/navidad-concierto-800.webp 800w" sizes="(min-width: 960px) 20vw, 44vw" width="800" height="600" loading="lazy" decoding="async" alt="Concert de Nadal a la sala: una cantant i un músic als teclats davant dels residents" data-alt-es="Concierto de Navidad en la sala: una cantante y un músico a los teclados frente a los residentes"></figure>
         </div>
-        <a class="boton boton--clar" href="https://www.residenciasantmiquel.net/fotos-nadal/"><span lang="ca">Veure les fotos de Nadal</span><span lang="es">Ver las fotos de Navidad</span></a>
+        <a class="boton boton--ico" href="https://www.residenciasantmiquel.net/fotos-nadal/"><span class="boton__ico gest-salta"><svg class="icona" aria-hidden="true"><use href="#i-foto"/></svg></span><span class="boton__text"><span lang="ca">Veure les fotos de Nadal</span><span lang="es">Ver las fotos de Navidad</span></span></a>
       </div>
 
       <div class="calendari" data-calendari data-bucle>
         <div class="calendari__suport" aria-hidden="true"><i></i><i></i></div>
         <div class="calendari__fulls" data-fulls aria-live="polite"></div>
         <div class="calendari__botons">
-          <button type="button" class="rodo rodo--clar" data-full-ant><svg class="icona" aria-hidden="true"><use href="#i-esq"/></svg><span class="sr"><span lang="ca">Festa anterior</span><span lang="es">Fiesta anterior</span></span></button>
-          <button type="button" class="rodo rodo--clar" data-full-seg><svg class="icona" aria-hidden="true"><use href="#i-dre"/></svg><span class="sr"><span lang="ca">Festa següent</span><span lang="es">Fiesta siguiente</span></span></button>
+          <button type="button" class="rodo rodo--clar" data-full-ant><svg class="icona" data-dir="esq" aria-hidden="true"><use href="#i-esq"/></svg><span class="sr"><span lang="ca">Festa anterior</span><span lang="es">Fiesta anterior</span></span></button>
+          <button type="button" class="rodo rodo--clar" data-full-seg><svg class="icona" data-dir="dre" aria-hidden="true"><use href="#i-dre"/></svg><span class="sr"><span lang="ca">Festa següent</span><span lang="es">Fiesta siguiente</span></span></button>
         </div>
       </div>
     </div>
@@ -452,8 +467,8 @@
         </ul>
         <p class="arribar__nota"><span lang="ca">Truqueu abans de venir i us ensenyem la casa.</span><span lang="es">Llame antes de venir y le enseñamos la casa.</span></p>
         <div class="accions">
-          <a class="boton boton--groc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Carrer+d%27Escipi%C3%B3+17%2C+08023+Barcelona" target="_blank" rel="noopener"><svg class="icona" aria-hidden="true"><use href="#i-pin"/></svg><span lang="ca">Obrir a Google Maps</span><span lang="es">Abrir en Google Maps</span></a>
-          <a class="boton" href="tel:+34934170582"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg><span lang="ca">Truqueu</span><span lang="es">Llame</span></a>
+          <a class="boton boton--ico" href="https://www.google.com/maps/dir/?api=1&amp;destination=Carrer+d%27Escipi%C3%B3+17%2C+08023+Barcelona" target="_blank" rel="noopener"><span class="boton__ico gest-salta"><svg class="icona" aria-hidden="true"><use href="#i-pin"/></svg></span><span class="boton__text"><span lang="ca">Obrir a Google Maps</span><span lang="es">Abrir en Google Maps</span></span></a>
+          <a class="boton boton--ico" href="tel:+34934170582"><span class="boton__ico gest-truca"><svg class="icona" aria-hidden="true"><use href="#i-tel"/></svg></span><span class="boton__text"><span lang="ca">Truqueu</span><span lang="es">Llame</span></span></a>
         </div>
       </div>
 
@@ -486,7 +501,7 @@
         <form class="form" data-form novalidate>
           <fieldset class="tria">
             <legend><span lang="ca">Per a qui és?</span><span lang="es">¿Para quién es?</span></legend>
-            <label><input type="radio" name="qui" value="mare" checked><span><span lang="ca">Mare</span><span lang="es">Madre</span></span></label>
+            <label><input type="radio" name="qui" value="mare"><span><span lang="ca">Mare</span><span lang="es">Madre</span></span></label>
             <label><input type="radio" name="qui" value="pare"><span><span lang="ca">Pare</span><span lang="es">Padre</span></span></label>
             <label><input type="radio" name="qui" value="parella"><span><span lang="ca">Parella</span><span lang="es">Pareja</span></span></label>
             <label><input type="radio" name="qui" value="altra"><span><span lang="ca">Una altra persona</span><span lang="es">Otra persona</span></span></label>
@@ -495,11 +510,11 @@
             <legend><span lang="ca">Quina plaça us interessa?</span><span lang="es">¿Qué plaza le interesa?</span></legend>
             <label><input type="radio" name="placa" value="col"><span><span lang="ca">Col·laboradora</span><span lang="es">Colaboradora</span></span></label>
             <label><input type="radio" name="placa" value="priv"><span><span lang="ca">Privada</span><span lang="es">Privada</span></span></label>
-            <label><input type="radio" name="placa" value="nose" checked><span><span lang="ca">Encara no ho sé</span><span lang="es">Aún no lo sé</span></span></label>
+            <label><input type="radio" name="placa" value="nose"><span><span lang="ca">Encara no ho sé</span><span lang="es">Aún no lo sé</span></span></label>
           </fieldset>
           <fieldset class="tria">
             <legend><span lang="ca">Quan us va bé venir?</span><span lang="es">¿Cuándo le va bien venir?</span></legend>
-            <label><input type="radio" name="quan" value="mati" checked><span><span lang="ca">Matí</span><span lang="es">Mañana</span></span></label>
+            <label><input type="radio" name="quan" value="mati"><span><span lang="ca">Matí</span><span lang="es">Mañana</span></span></label>
             <label><input type="radio" name="quan" value="tarda"><span><span lang="ca">Tarda</span><span lang="es">Tarde</span></span></label>
           </fieldset>
           <div class="camps">
@@ -508,7 +523,7 @@
           </div>
           <p class="form__error" data-form-error hidden></p>
           <div class="form__accions">
-            <button class="boton boton--groc" type="submit"><svg class="icona" aria-hidden="true"><use href="#i-correu"/></svg><span lang="ca">Preparar el correu</span><span lang="es">Preparar el correo</span></button>
+            <button class="boton boton--ico" type="submit"><span class="boton__ico gest-carta"><svg class="icona" aria-hidden="true"><use href="#i-correu"/></svg></span><span class="boton__text"><span lang="ca">Preparar el correu</span><span lang="es">Preparar el correo</span></span></button>
             <a class="enllac" href="tel:+34934170582"><span lang="ca">O truqueu al 934 170 582</span><span lang="es">O llame al 934 170 582</span></a>
           </div>
         </form>
