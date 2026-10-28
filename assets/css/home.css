@@ -11,76 +11,70 @@
 .anima [data-revela].visto:not(h2) { opacity: 1; transform: none; }
 
 /* =====================================================================
-   1 · HERO: titular con la palabra que cambia; debajo, la casa en un carrusel
-   de fotos colgadas en la pared de dos tonos de sus salas (zócalo amarillo)
+   1 · HERO: el «25» de la casa, escrito con 22 fotos de su vida.
+   Al cargar, las fotos aterrizan en el orden del trazo, como si alguien
+   escribiera el número; luego, de vez en cuando, una se da la vuelta y
+   enseña uno de sus cuidados. Bajo el cursor, la foto crece como con lupa.
    ===================================================================== */
-.hero { position: relative; display: flex; flex-direction: column; min-height: 100svh; padding-top: var(--cab-alt); overflow: hidden; background: var(--blanc); }
+.hero { position: relative; display: flex; flex-direction: column; min-height: 100svh; overflow: hidden;
+  padding: calc(var(--cab-alt) + clamp(10px, 2.4svh, 34px)) var(--canal) clamp(14px, 2.6svh, 34px);
+  background: radial-gradient(58% 46% at 50% 46%, rgba(242, 193, 46, .22), rgba(242, 193, 46, 0) 72%), var(--blanc); }
 @media (max-width: 899px) { .hero { min-height: calc(100svh - 60px - env(safe-area-inset-bottom)); } }
 
-.hero__text { flex: none; display: grid; justify-items: center; text-align: center; padding: clamp(14px, 3.4svh, 46px) var(--canal) 0; }
-.hero__titol { font-weight: 450; font-size: clamp(1.7rem, min(7.2vw, 1.15rem + 3vw, 6.8svh), 4.8rem); line-height: 1.06; text-wrap: balance; }
-.titol__fix, .titol__roda { display: block; }
-.titol__roda { white-space: nowrap; }
-.roda { position: relative; display: inline-block; }
-.roda__p { display: inline-block; white-space: pre; }
-.roda__p.surt { position: absolute; left: 0; top: 0; }
-.roda__l { display: inline-block; }
-.roda::after { content: ""; position: absolute; left: .02em; right: .3em; bottom: .02em; height: .1em; border-radius: .05em; background: var(--groc); transform-origin: 0 50%; }
-.anima .roda__p.entra .roda__l { animation: lletra-entra .8s var(--muelle) both; animation-delay: calc(var(--k) * 30ms); }
-.anima .roda__p.surt .roda__l { animation: lletra-surt .45s var(--sale) both; animation-delay: calc(var(--k) * 15ms); }
-@keyframes lletra-entra { from { opacity: 0; transform: translateY(.55em) rotate(5deg); } }
-@keyframes lletra-surt { to { opacity: 0; transform: translateY(-.45em); } }
-.anima .roda.canvi::after { animation: subratlla .9s var(--calma) .25s both; }
-@keyframes subratlla { from { transform: scaleX(0); } }
+.hero__titol { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(6px, 1.5svh, 20px);
+  font-weight: 450; font-size: clamp(1.65rem, min(6vw, 1.05rem + 2.7vw, 6.2svh), 4.3rem); line-height: 1.06; }
+.titol__a, .titol__b { display: block; flex: none; text-wrap: balance; }
 
-.hero__entrada { margin-top: clamp(6px, 1.2svh, 14px); max-width: 36em; }
-.hero__accions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 14px; margin-top: clamp(12px, 2.2svh, 26px); }
+/* El número: dos cifras de 3×5 casillas apaisadas (4:3), como las fotos */
+.vint-i-cinc { flex: 1 1 0; min-height: 110px; width: 100%; container-type: size; display: grid; place-items: center; }
+.vint-i-cinc__xifra { --g: clamp(3px, .42cqw, 6px); --cel: min((100cqw - 6 * var(--g)) / 6.6, (100cqh - 4 * var(--g)) / 3.75, 200px);
+  display: grid; grid-template-columns: repeat(3, var(--cel)) calc(var(--cel) * .6) repeat(3, var(--cel)); grid-template-rows: repeat(5, calc(var(--cel) * .75)); gap: var(--g); }
+.tessela { grid-column: var(--c); grid-row: var(--f); position: relative; perspective: 700px; cursor: zoom-in; }
+.tessela:hover { z-index: 5; }
+/* Lupa: crece el envoltorio de dentro; la casilla que recibe el cursor no se mueve */
+.tessela__zoom { position: absolute; inset: 0; transition: transform .5s var(--muelle); }
+.tessela:hover .tessela__zoom { transform: scale(1.85); }
+.tessela__gir { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .9s var(--calma); }
+.tessela.girada .tessela__gir { transform: rotateY(180deg); }
+.tessela:hover .tessela__gir { transform: none; }
+.tessela img, .tessela__dors { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 3px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.tessela img { box-shadow: 0 1px 2px rgba(29, 59, 49, .18), 0 10px 18px -12px rgba(20, 42, 35, .55); }
+.tessela:hover img { box-shadow: 0 0 0 3px var(--groc), 0 22px 40px -16px rgba(20, 42, 35, .7); }
+/* El reverso: uno de sus cuidados, en amarillo */
+.tessela__dors { transform: rotateY(180deg); display: grid; place-content: center; justify-items: center; gap: .4em; padding: 4px; background: var(--groc); color: var(--verd);
+  font: 700 clamp(.58rem, 1.25cqw, .95rem) / 1.15 var(--f-text); text-align: center; box-shadow: 0 10px 18px -12px rgba(20, 42, 35, .55); }
+.tessela__dors .icona { width: 2.4em; height: 2.4em; stroke-width: 1.6; }
+@media (max-width: 599px) { .tessela__dors > span { display: none; } .tessela__dors .icona { width: 1.7em; height: 1.7em; } }
+
+.hero__peu { flex: none; display: grid; justify-items: center; text-align: center; gap: clamp(8px, 1.5svh, 16px); margin-top: clamp(10px, 2.2svh, 26px); }
+.hero__entrada { max-width: 36em; }
+.hero__accions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 14px; }
 .hero__accions .boton { min-height: 58px; font-size: clamp(1.05rem, 1rem + .25vw, 1.18rem); }
 .hero__accions .boton--ico { padding-right: 1.5em; }
 .boton .num { font-weight: 500; }
-.hero__qui { margin-top: clamp(6px, 1.2svh, 14px); display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 18px; font-size: var(--t-petit); color: var(--text-suau); }
+.hero__qui { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 18px; font-size: var(--t-petit); color: var(--text-suau); }
 
-.anima .hero__text > * { animation: rotul .9s var(--sale) both; }
-.anima .hero__titol { animation-delay: .15s; }
-.anima .hero__entrada { animation-delay: .3s; }
-.anima .hero__accions { animation-delay: .42s; }
-.anima .hero__qui { animation-delay: .54s; }
+/* Al abrir: la primera línea, luego el número se escribe foto a foto, y la segunda línea */
+.anima .titol__a { animation: rotul .9s var(--sale) .1s both; }
+.anima .tessela { animation: aterra 1s var(--muelle) both; animation-delay: calc(.35s + var(--o) * 48ms); }
+@keyframes aterra { from { opacity: 0; transform: translate(calc(var(--dx) * var(--cel)), calc(var(--dy) * var(--cel))) rotate(var(--rot)) scale(.35); } }
+.anima .titol__b { animation: rotul .9s var(--sale) 1.15s both; }
+.anima .hero__peu > * { animation: rotul .9s var(--sale) both; }
+.anima .hero__entrada { animation-delay: .6s; }
+.anima .hero__accions { animation-delay: .7s; }
+.anima .hero__qui { animation-delay: .8s; }
 @keyframes rotul { from { opacity: 0; transform: translateY(16px); } }
 
-/* El carrusel: las fotos, enteras y a su proporción, como cuadros en la pared; la del centro, de frente */
-.carrusel { flex: 1 1 0; min-height: 150px; display: flex; flex-direction: column; margin-top: clamp(10px, 2.2svh, 30px); }
-.carrusel__escena { position: relative; flex: 1 1 0; min-height: 0; container-type: size; perspective: 1500px; cursor: grab;
-  background: linear-gradient(to bottom, rgba(255, 254, 250, 0) 0 66%, #E4D184 66% calc(66% + 4px), var(--groc-paret) calc(66% + 4px)); }
-/* La capa del grupo no recibe el cursor: en 3D quedaría delante de las fotos de los lados */
-.carrusel__cartes { position: absolute; inset: 0; transform-style: preserve-3d; pointer-events: none; }
-.carta { pointer-events: auto; }
-.carta { --wc: min(46cqw, 97cqh * 4 / 3, 940px); --pas: .8;
-  position: absolute; left: 50%; top: 50%; width: var(--wc); margin: calc(var(--wc) * -.375) 0 0 calc(var(--wc) / -2);
-  transform: translateX(calc(var(--p, 0) * var(--wc) * var(--pas))) translateZ(calc(var(--ap, 0) * var(--wc) * -.42)) rotateY(var(--gir, 0deg));
-  opacity: var(--op, 1); z-index: calc(10 - var(--ap, 0)); transition: transform 1.05s var(--calma), opacity .6s ease; }
-.carta.salta { transition: none; opacity: 0; }
-.carta:not(.centre) { cursor: pointer; }
-.carta__foto { margin: 0; padding: clamp(5px, .55cqw, 9px); background: #fff; border-radius: 4px; overflow: hidden;
-  box-shadow: 0 2px 4px rgba(29, 59, 49, .12), 0 30px 50px -26px rgba(20, 42, 35, .6); }
-.carta__foto img { width: 100%; border-radius: 2px; transition: transform 1.1s var(--sale); }
-.carta:hover .carta__foto img { transform: scale(1.05); }
-.anima .carta__foto { animation: penja 1.1s var(--calma) both; animation-delay: calc(.35s + var(--ap, 0) * .12s); }
-@keyframes penja { from { opacity: 0; transform: translateY(40px) scale(.94); } }
-.carrusel__peu { flex: none; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 2vw, 26px); padding: clamp(6px, 1.4svh, 16px) var(--canal) clamp(10px, 2svh, 22px); background: var(--groc-paret); }
-.carrusel__nom { min-width: min(15em, 52vw); text-align: center; font-family: var(--f-rotul); font-weight: 500; color: var(--verd); font-size: clamp(1.05rem, .95rem + .45vw, 1.4rem); line-height: 1.2; }
-.carrusel__nom small { font-family: var(--f-text); font-size: .72em; font-weight: 600; color: var(--text-suau); margin-left: .4em; }
-.carrusel__nom.canvi > * { animation: rotul .5s var(--sale); }
-.carrusel__peu .rodo { width: 48px; height: 48px; }
-
-@media (max-width: 899px) { .carta { --wc: min(64cqw, 97cqh * 4 / 3); --pas: .86; } }
 @media (max-width: 599px) {
-  .carta { --wc: min(90cqw, 97cqh * 4 / 3); --pas: .97; }
-  .hero__accions { flex-wrap: nowrap; gap: 10px; }
+  .hero__accions { flex-wrap: nowrap; gap: 10px; width: 100%; }
   .hero__accions .boton { flex: 1 1 auto; min-height: 54px; padding-inline: .35em .9em; font-size: 1rem; gap: .45em; }
   .hero__accions .boton__ico { width: 2em; height: 2em; }
   .boton--crida .num { display: none; }
   .hero__entrada { font-size: 1.0625rem; line-height: 1.55; }
   .hero__qui .enllac { display: none; }
+  .hero { justify-content: center; }
+  .hero__titol { flex: none; font-size: clamp(1.65rem, 8.8vw, 2.3rem); gap: 12px; }
+  .vint-i-cinc { flex: none; height: calc((100vw - 2 * var(--canal)) / 1.8); }
 }
 @media (max-width: 380px) {
   .hero__accions .boton--crida { flex: none; width: 54px; padding: 0; }
@@ -91,19 +85,15 @@
 @media (max-width: 599px) and (max-height: 640px) { .hero__qui { display: none; } }
 @media (min-width: 600px) and (max-height: 760px) { .hero__qui { display: none; } }
 @media (min-width: 600px) and (max-height: 640px) { .hero__entrada { display: none; } }
-/* Móvil apaisado: el texto a un lado y el carrusel al otro */
+/* Móvil apaisado: solo lo esencial */
 @media (max-height: 500px) and (orientation: landscape) {
-  .hero { flex-direction: row; align-items: stretch; }
-  .hero__text { flex: 1 1 0; align-content: center; padding: 8px 0 8px var(--canal); }
-  .hero__titol { font-size: clamp(1.1rem, 6.6svh, 1.7rem); }
+  .hero__titol { font-size: clamp(1rem, 6.4svh, 1.5rem); gap: 4px; }
   .hero__entrada, .hero__qui { display: none; }
-  .hero__accions { flex-wrap: nowrap; gap: 8px; margin-top: 10px; }
+  .hero__peu { margin-top: 8px; }
+  .hero__accions { flex-wrap: nowrap; gap: 8px; }
   .hero__accions .boton { min-height: 46px; padding-inline: .3em .8em; font-size: .95rem; }
   .hero__accions .boton__ico { width: 1.9em; height: 1.9em; }
   .boton--crida .num { display: none; }
-  .carrusel { flex: 1.1 1 0; margin-top: 0; }
-  .carta { --wc: min(70cqw, 97cqh * 4 / 3); --pas: .9; }
-  .carrusel__peu { padding-block: 4px 8px; }
 }
 
 /* =====================================================================

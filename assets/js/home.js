@@ -1,4 +1,4 @@
-/* Sant Miquel Arcàngel — home (página única): el carrusel de la casa con la palabra que cambia, 25 ventanas,
+/* Sant Miquel Arcàngel — home (página única): el «25» escrito con fotos, 25 ventanas,
    equipo, la casa que gira como un cubo, exposición con luces, galería del taller, la tira de Navidad,
    mapa a pie y la visita que deja el correo escrito. */
 (function () {
@@ -31,89 +31,20 @@
     io.observe(el);
   }
 
-  /* ================= 1 · Hero: el carrusel de la casa y la palabra del titular, que cambian juntos ================= */
+  /* ================= 1 · Hero: el «25» se escribe con fotos y, de vez en cuando, una se da la vuelta ================= */
   (function () {
-    var car = $('[data-carrusel]'); if (!car) return;
-    var escena = $('[data-carrusel-escena]', car), cartes = $$('[data-carta]', car), n = cartes.length, actual = 0;
-    var nom = $('[data-carrusel-nom]', car), roda = $('[data-roda]');
-    var NOMS = [['El jardí', 'El jardín'], ['Una habitació individual', 'Una habitación individual'], ['La pèrgola', 'La pérgola'], ['Al taller', 'En el taller'], ['La festa de Nadal', 'La fiesta de Navidad']];
-    var PARAULES = {
-      ca: ['jardí.', 'habitacions exteriors.', 'pèrgola.', 'tallers.', 'festes.'],
-      es: ['jardín.', 'habitaciones exteriores.', 'pérgola.', 'talleres.', 'fiestas.']
-    };
-    // La palabra del titular, letra a letra, con el subrayado amarillo que se dibuja debajo
-    function paraula(text, classe) {
-      var s = d.createElement('span');
-      s.className = 'roda__p ' + classe;
-      Array.from(text).forEach(function (c, k) {
-        var l = d.createElement('span');
-        l.className = 'roda__l'; l.style.setProperty('--k', k); l.textContent = c;
-        s.appendChild(l);
-      });
-      return s;
-    }
-    function pintaParaula(anima) {
-      if (!roda) return;
-      var vella = $('.roda__p.ara', roda);
-      var nova = paraula(PARAULES[SM.idioma === 'es' ? 'es' : 'ca'][actual], anima ? 'ara entra' : 'ara');
-      if (vella) {
-        vella.classList.remove('ara');
-        if (anima) { vella.classList.add('surt'); setTimeout(function () { if (vella.parentNode) vella.parentNode.removeChild(vella); }, 800); }
-        else vella.parentNode.removeChild(vella);
-      }
-      roda.appendChild(nova);
-      if (anima) reinicia(roda, 'canvi');
-    }
-    function pintaNom(anima) {
-      nom.innerHTML = '';
-      ['ca', 'es'].forEach(function (l, j) { var s = d.createElement('span'); s.lang = l; s.textContent = NOMS[actual][j]; nom.appendChild(s); });
-      var c = d.createElement('small'); c.textContent = (actual + 1) + '/' + n;
-      nom.appendChild(d.createTextNode(' ')); nom.appendChild(c);
-      if (anima && !quieto) reinicia(nom, 'canvi');
-    }
-    // Cada foto, a su sitio: la del centro de frente; las de los lados, giradas hacia ella y más atrás
-    function posa(anima) {
-      var mobil = innerWidth < 600, mig = Math.floor(n / 2);
-      cartes.forEach(function (c, i) {
-        var p = ((i - actual + n + mig) % n) - mig, ap = Math.abs(p);
-        var vell = c.dataset.p === undefined ? p : +c.dataset.p;
-        var salta = anima && Math.abs(p - vell) > 1;      // la que da la vuelta por detrás aparece en su sitio, sin cruzar
-        if (salta) c.classList.add('salta');
-        c.dataset.p = p;
-        c.style.setProperty('--p', p);
-        c.style.setProperty('--ap', ap);
-        c.style.setProperty('--gir', (p === 0 ? 0 : (p > 0 ? -1 : 1) * (ap === 1 ? 26 : 34)) + 'deg');
-        c.style.setProperty('--op', ap === 0 ? 1 : ap === 1 ? .94 : (mobil ? 0 : .5));
-        c.classList.toggle('centre', p === 0);
-        c.setAttribute('aria-hidden', String(p !== 0));
-      });
-      if (anima) { void car.offsetWidth; cartes.forEach(function (c) { c.classList.remove('salta'); }); }
-    }
-    function va(nou) {
-      nou = (nou + n) % n;
-      if (nou === actual) return;
-      actual = nou;
-      posa(!quieto); pintaParaula(!quieto); pintaNom(true);
-    }
-    var r = rellotge(car, 4200, function () { va(actual + 1); });
-    $('[data-carrusel-seg]', car).addEventListener('click', function () { va(actual + 1); r.reinicia(); });
-    $('[data-carrusel-ant]', car).addEventListener('click', function () { va(actual - 1); r.reinicia(); });
-    cartes.forEach(function (c, i) {
-      c.addEventListener('click', function () { if (escena._llisca) return; va(i === actual ? actual + 1 : i); r.reinicia(); });
+    var xifra = $('[data-vint-i-cinc]'); if (!xifra || quieto) return;
+    var tes = $$('.tessela', xifra), girades = [], llest = false;
+    // Hasta que el número no está escrito, ninguna se da la vuelta
+    setTimeout(function () { llest = true; }, 2600);
+    rellotge(xifra, 1400, function () {
+      if (!llest || girades.length >= 3) return;
+      var lliures = tes.filter(function (t) { return !t.classList.contains('girada') && !t.matches(':hover'); });
+      if (!lliures.length) return;
+      var t = lliures[Math.floor(Math.random() * lliures.length)];
+      t.classList.add('girada'); girades.push(t);
+      setTimeout(function () { t.classList.remove('girada'); girades.splice(girades.indexOf(t), 1); }, 2600);
     });
-    escena.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') r.atura(true); });
-    escena.addEventListener('pointerleave', function () { r.atura(false); });
-    // Deslizar con el dedo (o arrastrar con el ratón)
-    var x0 = null;
-    escena.addEventListener('pointerdown', function (e) { x0 = e.clientX; escena._llisca = false; });
-    escena.addEventListener('pointerup', function (e) {
-      if (x0 === null) return;
-      var dx = e.clientX - x0; x0 = null;
-      if (Math.abs(dx) > 40) { escena._llisca = true; va(dx < 0 ? actual + 1 : actual - 1); r.reinicia(); setTimeout(function () { escena._llisca = false; }, 50); }
-    });
-    addEventListener('resize', function () { posa(false); });
-    SM.alCanviarIdioma.push(function () { if (roda) { $$('.roda__p', roda).forEach(function (p) { p.parentNode.removeChild(p); }); } pintaParaula(false); pintaNom(false); });
-    posa(false); pintaParaula(false); pintaNom(false);
   })();
 
   /* ================= 2 · Plazas: ninguna elegida de inicio; la del cursor enciende sus ventanas ================= */
