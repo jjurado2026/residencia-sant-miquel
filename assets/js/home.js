@@ -1,8 +1,9 @@
-/* Sant Miquel Arcàngel — home: recorrido del jardín, 25 ventanas, equipo, la casa en una pila de fotos,
-   exposición con luces, calendario de fiestas, mapa a pie y la visita que deja el correo escrito. */
+/* Sant Miquel Arcàngel — home: el toldo y la palabra que cambia, el recorrido del jardín, 25 ventanas,
+   equipo, la casa en una persiana que gira sus lamas, exposición con luces, calendario de fiestas,
+   mapa a pie y la visita que deja el correo escrito. */
 (function () {
   'use strict';
-  var d = document, SM = window.SM || { quieto: true, t: function (c) { return c; }, alCanviarIdioma: [], observa: function (e) { e.classList.add('visto'); }, enPantalla: function (e, f) { f(true); } };
+  var d = document, SM = window.SM || { quieto: true, t: function (c) { return c; }, idioma: 'ca', alCanviarIdioma: [], observa: function (e) { e.classList.add('visto'); }, enPantalla: function (e, f) { f(true); } };
   var quieto = SM.quieto;
   function $(s, c) { return (c || d).querySelector(s); }
   function $$(s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); }
@@ -20,76 +21,173 @@
       reinicia: arrenca
     };
   }
+  /* Una sola vez, cuando el bloque se ve de verdad */
+  function quanEsVegi(el, f, llindar) {
+    if (!('IntersectionObserver' in window)) { f(); return; }
+    var io = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return;
+      io.disconnect(); f();
+    }, { threshold: llindar || 0.5 });
+    io.observe(el);
+  }
 
-  /* ================= 1 · Hero: los puntos recorren el jardín ================= */
+  /* ================= 1 · Hero: la palabra que cambia, el recorrido del jardín y el aire en el volante ================= */
   (function () {
-    var fig = $('[data-punts]'); if (!fig) return;
-    var punts = $$('[data-punt]', fig), i = 0;
-    function marca(k) { punts.forEach(function (p, n) { p.classList.toggle('actiu', n === k); }); }
-    var r = rellotge(fig, 2800, function () { marca(i); i = (i + 1) % punts.length; });
-    if (!quieto) setTimeout(function () { marca(0); i = 1; }, 2600);
-    fig.addEventListener('pointerenter', function () { marca(-1); r.atura(true); });
-    fig.addEventListener('pointerleave', function () { r.atura(false); });
-    punts.forEach(function (p) {
-      p.addEventListener('click', function () { marca(punts.indexOf(p)); r.atura(true); setTimeout(function () { r.atura(false); }, 6000); });
-      p.addEventListener('focus', function () { marca(-1); });
-    });
+    var hero = $('[data-hero]'); if (!hero) return;
+
+    // La palabra que cambia, letra a letra, con el subrayado amarillo que se dibuja debajo
+    var roda = $('[data-roda]', hero);
+    var PARAULES = {
+      ca: ['jardí.', 'metge.', 'infermeria.', 'cuina pròpia.', 'fisioteràpia.'],
+      es: ['jardín.', 'médico.', 'enfermería.', 'cocina propia.', 'fisioterapia.']
+    };
+    var ip = 0;
+    function paraula(text, classe) {
+      var s = d.createElement('span');
+      s.className = 'roda__p ' + classe;
+      Array.from(text).forEach(function (c, k) {
+        var l = d.createElement('span');
+        l.className = 'roda__l'; l.style.setProperty('--k', k); l.textContent = c;
+        s.appendChild(l);
+      });
+      return s;
+    }
+    function pinta(anima) {
+      var vella = $('.roda__p.ara', roda);
+      var nova = paraula(PARAULES[SM.idioma === 'es' ? 'es' : 'ca'][ip], anima ? 'ara entra' : 'ara');
+      if (vella) {
+        vella.classList.remove('ara');
+        if (anima) { vella.classList.add('surt'); setTimeout(function () { if (vella.parentNode) vella.parentNode.removeChild(vella); }, 800); }
+        else vella.parentNode.removeChild(vella);
+      }
+      roda.appendChild(nova);
+      if (anima) reinicia(roda, 'canvi');
+    }
+    if (roda) {
+      pinta(false);
+      SM.alCanviarIdioma.push(function () { $$('.roda__p', roda).forEach(function (p) { p.parentNode.removeChild(p); }); pinta(false); });
+      rellotge(roda, 2600, function () { ip = (ip + 1) % PARAULES.ca.length; pinta(true); });
+    }
+
+    // El recorrido del jardín: un punto tras otro, unidos por una línea de luz
+    var fig = $('[data-punts]', hero);
+    if (fig) {
+      var punts = $$('[data-punt]', fig), trams = $$('[data-tram]', fig), pasRuta = -1;
+      var posa = function () {
+        var w = fig.clientWidth, h = fig.clientHeight;
+        trams.forEach(function (t, k) {
+          var a = punts[k], b = punts[k + 1]; if (!b) return;
+          var ax = parseFloat(a.style.getPropertyValue('--x')) / 100 * w, ay = parseFloat(a.style.getPropertyValue('--y')) / 100 * h;
+          var bx = parseFloat(b.style.getPropertyValue('--x')) / 100 * w, by = parseFloat(b.style.getPropertyValue('--y')) / 100 * h;
+          t.style.left = ax + 'px'; t.style.top = ay + 'px';
+          t.style.width = Math.hypot(bx - ax, by - ay) + 'px';
+          t.style.setProperty('--ang', Math.atan2(by - ay, bx - ax) + 'rad');
+        });
+      };
+      posa();
+      if ('ResizeObserver' in window) new ResizeObserver(posa).observe(fig);
+      var marca = function (k) {
+        punts.forEach(function (p, n) { p.classList.toggle('actiu', n === k); });
+        trams.forEach(function (t, n) { t.classList.toggle('fet', n < k); });
+      };
+      var r = rellotge(fig, 2700, function () {
+        pasRuta = (pasRuta + 1) % (punts.length + 1);
+        if (pasRuta === punts.length) { fig.classList.add('esvaeix'); punts.forEach(function (p) { p.classList.remove('actiu'); }); }
+        else { if (pasRuta === 0) { fig.classList.remove('esvaeix'); marca(-1); } marca(pasRuta); }
+      });
+      fig.addEventListener('pointerenter', function () { r.atura(true); fig.classList.remove('esvaeix'); marca(-1); pasRuta = -1; });
+      fig.addEventListener('pointerleave', function () { r.atura(false); });
+      punts.forEach(function (p, k) {
+        p.addEventListener('click', function () { fig.classList.remove('esvaeix'); marca(k); pasRuta = k; r.atura(true); clearTimeout(fig._t); fig._t = setTimeout(function () { r.atura(false); }, 6000); });
+        p.addEventListener('focus', function () { marca(-1); });
+      });
+    }
+
+    // El volante: además de mecerse solo, se agita cuando el ratón pasa cerca, como si soplara aire
+    var volant = $('[data-volant]', hero);
+    if (volant && !quieto && window.matchMedia && matchMedia('(hover: hover)').matches) {
+      var fs = $$('i', volant), N = fs.length, vel = new Float32Array(N), ang = new Float32Array(N), px = null, bufant = false;
+      var bufa = function () {
+        var viu = false;
+        for (var i = 0; i < N; i++) {
+          vel[i] = (vel[i] - ang[i] * .06) * .9;
+          ang[i] = Math.max(-22, Math.min(22, ang[i] + vel[i]));
+          if (Math.abs(ang[i]) > .04 || Math.abs(vel[i]) > .04) viu = true;
+          fs[i].style.rotate = ang[i].toFixed(2) + 'deg';
+        }
+        if (viu) requestAnimationFrame(bufa);
+        else { bufant = false; for (var j = 0; j < N; j++) { ang[j] = 0; vel[j] = 0; fs[j].style.rotate = ''; } }
+      };
+      hero.addEventListener('pointermove', function (e) {
+        if (e.pointerType && e.pointerType !== 'mouse') return;
+        var dx = px === null ? 0 : e.clientX - px; px = e.clientX;
+        if (!dx) return;
+        // Las ondas miden 48 px y el volante sigue más allá del borde: se toma la posición real de la primera
+        var rc = fs[0].getBoundingClientRect();
+        var dy = Math.abs(e.clientY - (rc.top + rc.height / 2));
+        if (dy > 240) return;
+        var forca = Math.max(-1, Math.min(1, dx / 24)) * (1 - dy / 240), w = rc.width;
+        for (var i = 0; i < N; i++) {
+          var dd = Math.abs(rc.left + (i + .5) * w - e.clientX);
+          if (dd < 220) vel[i] -= forca * (1 - dd / 220) * 3;
+        }
+        if (!bufant) { bufant = true; requestAnimationFrame(bufa); }
+      });
+      hero.addEventListener('pointerleave', function () { px = null; });
+    }
   })();
 
-  /* ================= 2 · Plazas: pestañas y ventanas ================= */
+  /* ================= 2 · Plazas: ninguna elegida de inicio; la del cursor enciende sus ventanas ================= */
   (function () {
     var facana = $('[data-finestres]'); if (!facana) return;
-    var tabs = $$('[data-tipus] [role="tab"]');
-    var triada = tabs[0], tocada = false;   // hasta que alguien elige, las 25 encendidas
-    function tria(tab, focus) {
-      triada = tab; tocada = true;
-      tabs.forEach(function (t) {
-        var si = t === tab;
-        t.setAttribute('aria-selected', String(si));
-        t.tabIndex = si ? 0 : -1;
-        var p = d.getElementById(t.getAttribute('aria-controls'));
+    var botons = $$('[data-tipus] .tipus__boto'), pista = $('[data-tipus-pista]');
+    var triat = null;
+    function grup() { return triat ? triat.getAttribute('data-grup') : 'tots'; }
+    function tria(b, obre) {
+      if (obre === undefined) obre = b.getAttribute('aria-expanded') !== 'true';
+      botons.forEach(function (x) {
+        var si = x === b && obre;
+        x.setAttribute('aria-expanded', String(si));
+        var p = d.getElementById(x.getAttribute('aria-controls'));
         p.hidden = !si;
         if (si) reinicia(p, 'entra');
       });
-      facana.setAttribute('data-grup-actiu', tab.getAttribute('data-grup'));
-      if (focus) tab.focus();
+      triat = obre ? b : null;
+      if (pista) pista.hidden = !!triat;
+      facana.setAttribute('data-grup-actiu', grup());
     }
-    tabs.forEach(function (t, n) {
-      t.addEventListener('click', function () { tria(t); });
-      t.addEventListener('pointerenter', function () { facana.setAttribute('data-grup-actiu', t.getAttribute('data-grup')); });
-      t.addEventListener('pointerleave', function () { facana.setAttribute('data-grup-actiu', tocada ? triada.getAttribute('data-grup') : 'tots'); });
-      t.addEventListener('keydown', function (e) {
-        var k = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
-        if (k) { e.preventDefault(); tria(tabs[(n + k + tabs.length) % tabs.length], true); }
-      });
+    botons.forEach(function (b) {
+      b.addEventListener('click', function () { tria(b); });
+      b.addEventListener('pointerenter', function () { facana.setAttribute('data-grup-actiu', b.getAttribute('data-grup')); });
+      b.addEventListener('pointerleave', function () { facana.setAttribute('data-grup-actiu', grup()); });
     });
-    // Pulsar una ventana elige su tipo de plaza
+    // Pulsar una ventana abre su tipo de plaza
     $$('.finestra', facana).forEach(function (f) {
-      f.addEventListener('click', function () { tria(tabs.filter(function (t) { return t.getAttribute('data-grup') === f.getAttribute('data-g'); })[0]); });
+      f.addEventListener('click', function () {
+        var b = botons.filter(function (x) { return x.getAttribute('data-grup') === f.getAttribute('data-g'); })[0];
+        if (b) tria(b, true);
+      });
     });
 
     // Se encienden al llegar; luego, de vez en cuando, alguien apaga y vuelve a encender una luz
     if (quieto) { facana.classList.add('visto', 'encesa', 'llesta'); return; }
     var finestres = $$('.finestra', facana);
-    var io = new IntersectionObserver(function (es) {
-      if (!es[0].isIntersecting) return;
-      io.disconnect();
+    quanEsVegi(facana, function () {
       facana.classList.add('visto');
       setTimeout(function () { facana.classList.add('encesa'); }, 900);
       setTimeout(function () { facana.classList.add('llesta'); }, 900 + 25 * 55 + 600);
-    }, { threshold: 0.25 });
-    io.observe(facana);
+    }, 0.25);
     rellotge(facana, 1700, function () {
       if (!facana.classList.contains('llesta')) return;
-      var grup = facana.getAttribute('data-grup-actiu');
-      var del = finestres.filter(function (f) { return grup === 'tots' || f.getAttribute('data-g') === grup; });
+      var g = facana.getAttribute('data-grup-actiu');
+      var del = finestres.filter(function (f) { return g === 'tots' || f.getAttribute('data-g') === g; });
       var f = del[Math.floor(Math.random() * del.length)];
       f.classList.add('apagada');
       setTimeout(function () { f.classList.remove('apagada'); }, 650);
     });
   })();
 
-  /* ================= 3 · Equipo: la frase nombra cada oficio ================= */
+  /* ================= 3 · Equipo: la frase nombra cada oficio; los servicios hacen su gesto ================= */
   (function () {
     var bloc = $('[data-equip]'); if (!bloc) return;
     var OFICIS = {
@@ -104,14 +202,15 @@
     };
     var ORDRE = Object.keys(OFICIS);
     var dins = $('[data-fitxa-dins]'), icona = $('use', dins), rol = $('[data-fitxa-rol]'), que = $('[data-fitxa-que]'), barra = $('[data-fitxa-barra]');
-    var actual = 'metge', MS = 3600;
+    // Un oficio cada 5,2 s: el marcador se dibuja despacio, sin saltos
+    var actual = null, MS = 5200;
     function mostra(clau, anima) {
       actual = clau;
       var o = OFICIS[clau], es = SM.idioma === 'es';
       icona.setAttribute('href', '#' + o[0]);
       rol.textContent = es ? o[3] : o[1];
       que.textContent = es ? o[4] : o[2];
-      $$('.ofici', bloc).forEach(function (b) { b.classList.toggle('actiu', b.getAttribute('data-ofici') === clau); b.setAttribute('aria-pressed', String(b.getAttribute('data-ofici') === clau)); });
+      $$('.ofici', bloc).forEach(function (b) { var si = b.getAttribute('data-ofici') === clau; b.classList.toggle('actiu', si); b.setAttribute('aria-pressed', String(si)); });
       if (anima && !quieto) reinicia(dins, 'canvi');
       if (!quieto) { barra.style.setProperty('--durada', MS + 'ms'); reinicia(barra, 'corre'); }
     }
@@ -126,18 +225,28 @@
       var b = e.target.closest('.ofici'); if (!b || b.getAttribute('data-ofici') === actual) return;
       mostra(b.getAttribute('data-ofici'), true); r.atura(true); barra.classList.remove('corre');
     });
-    bloc.addEventListener('pointerleave', function () { r.atura(false); if (!quieto) reinicia(barra, 'corre'); });
-    SM.alCanviarIdioma.push(function () { mostra(actual, false); });
-    mostra('metge', false);
+    bloc.addEventListener('pointerleave', function () { r.atura(false); if (!quieto && actual) reinicia(barra, 'corre'); });
+    SM.alCanviarIdioma.push(function () { if (actual) mostra(actual, false); });
+    if (quieto) mostra('metge', false);
+    else quanEsVegi(bloc, function () { if (!actual) setTimeout(function () { mostra('metge', true); }, 500); }, 0.3);
+
+    // Servicios: al llegar, cada uno hace su gesto una vez (en el móvil no hay cursor que los despierte)
+    var serveis = $('[data-serveis]');
+    if (serveis && !quieto) {
+      quanEsVegi(serveis, function () {
+        $$('.servei', serveis).forEach(function (li, k) {
+          setTimeout(function () { li.classList.add('mostra'); setTimeout(function () { li.classList.remove('mostra'); }, 1600); }, 500 + k * 700);
+        });
+      }, 0.8);
+    }
   })();
 
-  /* ================= 4 · La casa: la pila de fotos ================= */
+  /* ================= 4 · La casa: la persiana gira sus lamas y pasa a la estancia siguiente ================= */
   (function () {
-    var pila = $('[data-pila]'); if (!pila) return;
-    var casa = pila.closest('.casa');
-    var cartes = $$('[data-carta]', pila), n = cartes.length, actual = 0, ocupat = false;
+    var pers = $('[data-persiana]'); if (!pers) return;
+    var esc = $('[data-escenari]', pers), lames = $('[data-lames]', pers), text = $('[data-persiana-text]', pers);
+    var escenes = $$('[data-escena]', esc), n = escenes.length, actual = 0, ocupat = false;
     var botons = $$('[data-estanca]');
-    var text = $('[data-pila-text]');
     var TEXTOS = [
       ['El jardí, amb pèrgola i ombra.', 'El jardín, con pérgola y sombra.'],
       ['Habitacions exteriors, que cadascú fa seva.', 'Habitaciones exteriores, que cada uno hace suya.'],
@@ -146,73 +255,82 @@
       ['Passadissos amplis, amb passamans.', 'Pasillos amplios, con pasamanos.'],
       ['Banys assistits, amb cadira de dutxa.', 'Baños asistidos, con silla de ducha.']
     ];
-    function colloca() {
-      cartes.forEach(function (c, i) {
-        var k = (i - actual + n) % n;
-        c.style.setProperty('--k', k);
-        c.setAttribute('data-k', k);
-        c.setAttribute('aria-hidden', String(k !== 0));
-      });
-      botons.forEach(function (b) { b.setAttribute('aria-pressed', String(+b.getAttribute('data-estanca') === actual)); });
-      escriu(true);
-      if (!quieto && casa.classList.contains('en-marxa')) reinicia(casa, 'en-marxa');
-    }
+    var LAMES = 9, PAS = 60, GIR = 1000;
     function escriu(anima) {
       text.innerHTML = '';
-      ['ca', 'es'].forEach(function (l, j) {
-        var s = d.createElement('span'); s.lang = l; s.textContent = TEXTOS[actual][j]; text.appendChild(s);
-      });
+      ['ca', 'es'].forEach(function (l, j) { var s = d.createElement('span'); s.lang = l; s.textContent = TEXTOS[actual][j]; text.appendChild(s); });
       if (anima && !quieto) reinicia(text, 'canvi');
     }
-    function va(nou, enrere) {
-      if (ocupat || nou === actual) return;
-      nou = (nou + n) % n;
-      if (quieto) { actual = nou; colloca(); return; }
-      ocupat = true;
-      if (!enrere) {
-        var surt = cartes[actual];
-        surt.classList.add('surt');
-        actual = nou;
-        setTimeout(function () {
-          surt.classList.add('torna'); surt.classList.remove('surt');
-          colloca();
-          void surt.offsetWidth; surt.classList.remove('torna');
-          ocupat = false;
-        }, 520);
-        // las de detrás avanzan ya
-        cartes.forEach(function (c, i) { if (c !== surt) { var k = (i - nou + n) % n; c.style.setProperty('--k', k); c.setAttribute('data-k', k); } });
-        botons.forEach(function (b) { b.setAttribute('aria-pressed', String(+b.getAttribute('data-estanca') === nou)); });
-        escriu(true);
-      } else {
-        var entra = cartes[nou];
-        entra.classList.add('torna', 'surt');
-        void entra.offsetWidth;
-        entra.classList.remove('torna');
-        actual = nou;
-        requestAnimationFrame(function () { entra.classList.remove('surt'); colloca(); setTimeout(function () { ocupat = false; }, 500); });
-      }
+    function marca(k) {
+      escenes.forEach(function (e, i) { e.classList.toggle('actual', i === k); e.setAttribute('aria-hidden', String(i !== k)); });
     }
-    var r = rellotge(pila, 4600, function () { va(actual + 1); });
-    SM.enPantalla(pila, function (si) { if (si && !quieto) casa.classList.add('en-marxa'); });
-    $('[data-pila-seg]', pila).addEventListener('click', function () { va(actual + 1); r.reinicia(); });
-    $('[data-pila-ant]', pila).addEventListener('click', function () { va(actual - 1, true); r.reinicia(); });
-    $('[data-pila-cartes]', pila).addEventListener('click', function () { va(actual + 1); r.reinicia(); });
+    // Copia de una escena para la cara de una lama: la misma foto ya cargada, sin atributos que dupliquen
+    function copia(e) {
+      var c = e.cloneNode(true), img = $('img', c), orig = $('img', e);
+      c.removeAttribute('data-escena'); c.removeAttribute('aria-hidden'); c.classList.add('actual');
+      ['data-foto', 'srcset', 'sizes', 'loading', 'data-alt-es', 'data-ca-alt'].forEach(function (a) { img.removeAttribute(a); });
+      img.src = orig.currentSrc || orig.src; img.alt = ''; img.decoding = 'sync';
+      return c;
+    }
+    function gira(nou, enrere) {
+      var n2 = innerWidth < 600 ? 7 : LAMES, alt = esc.clientHeight, h = alt / n2;
+      esc.style.setProperty('--h', h + 'px');
+      esc.style.setProperty('--alt', alt + 'px');
+      lames.innerHTML = '';
+      var davant = escenes[actual], darrere = escenes[nou];
+      for (var i = 0; i < n2; i++) {
+        var l = d.createElement('div'); l.className = 'lama';
+        l.style.setProperty('--i', i); l.style.setProperty('--o', enrere ? n2 - 1 - i : i);
+        var c1 = d.createElement('div'); c1.className = 'lama__cara'; c1.appendChild(copia(davant));
+        var c2 = d.createElement('div'); c2.className = 'lama__cara lama__cara--dors'; c2.appendChild(copia(darrere));
+        l.appendChild(c1); l.appendChild(c2); lames.appendChild(l);
+      }
+      lames.classList.remove('gira', 'gira-enrere');
+      lames.hidden = false;
+      void lames.offsetWidth;
+      marca(-1);                       // detrás de las lamas, solo la persiana verde
+      actual = nou; escriu(true);
+      requestAnimationFrame(function () { requestAnimationFrame(function () { lames.classList.add(enrere ? 'gira-enrere' : 'gira'); }); });
+      setTimeout(function () {
+        marca(actual);
+        lames.hidden = true; lames.classList.remove('gira', 'gira-enrere'); lames.innerHTML = '';
+        ocupat = false;
+      }, GIR + (n2 - 1) * PAS + 120);
+    }
+    function va(nou, enrere) {
+      nou = (nou + n) % n;
+      if (ocupat || nou === actual) return;
+      if (quieto) { actual = nou; marca(actual); escriu(false); return; }
+      ocupat = true;
+      var img = $('img', escenes[nou]);
+      img.loading = 'eager';
+      var llesta = img.complete && img.naturalWidth ? Promise.resolve() : new Promise(function (ok) {
+        img.addEventListener('load', ok, { once: true }); img.addEventListener('error', ok, { once: true }); setTimeout(ok, 2500);
+      });
+      llesta.then(function () { return img.decode ? img.decode().catch(function () {}) : null; }).then(function () { gira(nou, enrere); });
+    }
+    var r = rellotge(pers, 5200, function () { va(actual + 1); });
+    // Las fotos se piden antes de llegar, para que la persiana no espere
+    SM.enPantalla(pers, function (si) { if (si) escenes.forEach(function (e) { $('img', e).loading = 'eager'; }); });
+    $('[data-persiana-seg]', pers).addEventListener('click', function () { va(actual + 1); r.reinicia(); });
+    $('[data-persiana-ant]', pers).addEventListener('click', function () { va(actual - 1, true); r.reinicia(); });
+    esc.addEventListener('click', function () { va(actual + 1); r.reinicia(); });
     botons.forEach(function (b) {
       b.addEventListener('click', function () { var i = +b.getAttribute('data-estanca'); va(i, i < actual); r.reinicia(); });
     });
-    var zona = $('[data-pila-cartes]', pila);
-    zona.addEventListener('pointerenter', function () { r.atura(true); casa.classList.remove('en-marxa'); });
-    zona.addEventListener('pointerleave', function () { r.atura(false); if (!quieto) reinicia(casa, 'en-marxa'); });
+    esc.addEventListener('pointerenter', function () { r.atura(true); });
+    esc.addEventListener('pointerleave', function () { r.atura(false); });
     // Deslizar con el dedo
     var x0 = null;
-    zona.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
-    zona.addEventListener('pointerup', function (e) {
+    esc.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
+    esc.addEventListener('pointerup', function (e) {
       if (x0 === null) return;
       var dx = e.clientX - x0; x0 = null;
-      if (Math.abs(dx) > 40) { e.stopPropagation(); va(dx < 0 ? actual + 1 : actual - 1, dx > 0); r.reinicia(); }
+      if (Math.abs(dx) > 40) { e.stopPropagation(); esc._llisca = true; va(dx < 0 ? actual + 1 : actual - 1, dx > 0); r.reinicia(); }
     });
-    SM.observa(pila);
-    colloca();
+    esc.addEventListener('click', function (e) { if (esc._llisca) { esc._llisca = false; e.stopImmediatePropagation(); } }, true);
+    SM.observa(pers);
+    marca(0);
   })();
 
   /* ================= 5 · Exposición: luces de cuadro y visor ================= */
@@ -366,6 +484,7 @@
   /* ================= 7 · Mapa: los pasos empiezan a andar al verlo ================= */
   (function () { var m = $('[data-mapa]'); if (m) SM.observa(m); })();
 
+
   /* ================= 8 · Visita: el correo se escribe mientras se elige ================= */
   (function () {
     var form = $('[data-form]'); if (!form) return;
@@ -383,13 +502,16 @@
       var f = new FormData(form);
       return { qui: f.get('qui'), placa: f.get('placa'), quan: f.get('quan'), nom: String(f.get('nom') || '').trim(), tel: String(f.get('tel') || '').trim() };
     }
+    // Nada marcado de inicio: la carta se lee completa igualmente y cada elección se subraya al llegar
     function trossos(v, l) {
-      var t = T[l], buit = '…';
-      return l === 'es'
-        ? [['Hola, Sra. Ana y Sra. Alba: me gustaría visitar la residencia ' + t.qui[v.qui][0]], [t.qui[v.qui][1], 'qui'], ['. '], [t.placa[v.placa], 'placa'], [' Me va bien ir '], [t.quan[v.quan], 'quan'], ['. Me llamo '], [v.nom || buit, 'nom'], [' y mi teléfono es '], [v.tel || buit, 'tel'], ['. Gracias.']]
-        : [['Hola, Sra. Ana i Sra. Alba: voldria visitar la residència ' + t.qui[v.qui][0]], [t.qui[v.qui][1], 'qui'], ['. '], [t.placa[v.placa], 'placa'], [' Em va bé venir '], [t.quan[v.quan], 'quan'], ['. Em dic '], [v.nom || buit, 'nom'], [' i el meu telèfon és '], [v.tel || buit, 'tel'], ['. Gràcies.']];
+      var t = T[l], buit = '…', qui = t.qui[v.qui || 'altra'], es = l === 'es';
+      var out = [[(es ? 'Hola, Sra. Ana y Sra. Alba: me gustaría visitar la residencia ' : 'Hola, Sra. Ana i Sra. Alba: voldria visitar la residència ') + qui[0]], [qui[1], 'qui'], ['.']];
+      if (v.placa) out.push([' '], [t.placa[v.placa], 'placa']);
+      if (v.quan) out.push([es ? ' Me va bien ir ' : ' Em va bé venir '], [t.quan[v.quan], 'quan'], ['.']);
+      out.push([es ? ' Me llamo ' : ' Em dic '], [v.nom || buit, 'nom'], [es ? ' y mi teléfono es ' : ' i el meu telèfon és '], [v.tel || buit, 'tel'], [es ? '. Gracias.' : '. Gràcies.']);
+      return out;
     }
-    var anterior = {};
+    var anterior = {}, iniciat = false;
     function pinta() {
       var v = valors(), l = SM.idioma;
       cos.textContent = '';
@@ -397,7 +519,7 @@
         if (!tr[1]) { cos.appendChild(d.createTextNode(tr[0])); return; }
         var m = d.createElement('mark');
         m.textContent = tr[0];
-        if (anterior[tr[1]] !== undefined && anterior[tr[1]] !== tr[0]) m.className = 'nou';
+        if (iniciat && anterior[tr[1]] !== tr[0]) m.className = 'nou';
         anterior[tr[1]] = tr[0];
         cos.appendChild(m);
       });
@@ -405,7 +527,7 @@
     form.addEventListener('input', function () { pinta(); if (!err.hidden && err.dataset.tipus === 'error') valida(); });
     form.addEventListener('change', pinta);
     SM.alCanviarIdioma.push(function () {
-      anterior = {}; pinta();
+      anterior = {}; iniciat = false; pinta(); iniciat = true;
       if (err.dataset.tipus === 'error') valida();
       else if (err.dataset.tipus === 'enviat') err.textContent = SM.t("S'obre el vostre correu amb el missatge. Si no s'obre, truqueu al 934 170 582.", 'Se abre su correo con el mensaje. Si no se abre, llame al 934 170 582.');
     });
@@ -433,7 +555,7 @@
       err.style.color = 'var(--verd)';
       location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(assumpte) + '&body=' + encodeURIComponent(text);
     });
-    pinta();
+    pinta(); iniciat = true;
   })();
 
   window.SM = SM;
