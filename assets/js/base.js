@@ -9,10 +9,8 @@
   function guarda(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
   /* ---------- Idioma: el HTML trae los dos; aquí se cambian el título y los atributos ---------- */
-  var TITOL = {
-    ca: "Residència d'avis al Putxet, Barcelona | Sant Miquel Arcàngel",
-    es: 'Residencia de mayores en el Putxet, Barcelona | Sant Miquel Arcàngel'
-  };
+  // Su title, literal, en los dos idiomas (no perjudicar su SEO)
+  var TITOL = { ca: 'Inici - Residencia sant miquel árcangel', es: 'Inici - Residencia sant miquel árcangel' };
   var ATRIBUTS = [['data-alt-es', 'alt'], ['data-aria-es', 'aria-label']];
   function aplicaIdioma(l, desa) {
     html.lang = l;
