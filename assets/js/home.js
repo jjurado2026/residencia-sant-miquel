@@ -3,7 +3,7 @@
    el menú que marca dónde se está y el formulario que abre el correo. */
 (function () {
   'use strict';
-  var d = document, SM = window.SM || { quieto: true, t: function (c) { return c; }, idioma: 'ca', alCanviarIdioma: [], observa: function (e) { e.classList.add('visto'); }, enPantalla: function (e, f) { f(true); } };
+  var d = document, SM = window.SM || { quieto: true, observa: function (e) { e.classList.add('visto'); }, enPantalla: function (e, f) { f(true); } };
   var quieto = SM.quieto;
   function $(s, c) { return (c || d).querySelector(s); }
   function $$(s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); }
@@ -52,7 +52,7 @@
     function copia(e) {
       var c = e.cloneNode(true), img = $('img', c), orig = $('img', e);
       c.removeAttribute('data-escena'); c.removeAttribute('aria-hidden'); c.classList.add('actual');
-      ['data-foto', 'srcset', 'sizes', 'loading', 'data-alt-es', 'data-ca-alt'].forEach(function (a) { img.removeAttribute(a); });
+      ['data-foto', 'srcset', 'sizes', 'loading'].forEach(function (a) { img.removeAttribute(a); });
       img.src = orig.currentSrc || orig.src; img.alt = ''; img.decoding = 'sync';
       return c;
     }
@@ -119,13 +119,9 @@
       (GRUPS[g] = GRUPS[g] || []).push(b);
       b.setAttribute('data-visor-i', GRUPS[g].length - 1);
     });
-    function etiqueta() {
-      $$('[data-visor-grup]').forEach(function (b) {
-        var img = $('img', b);
-        b.setAttribute('aria-label', SM.t('Amplia la foto: ', 'Ampliar la foto: ') + img.alt);
-      });
-    }
-    etiqueta(); SM.alCanviarIdioma.push(etiqueta);
+    $$('[data-visor-grup]').forEach(function (b) {
+      b.setAttribute('aria-label', 'Amplia la foto: ' + $('img', b).alt);
+    });
 
     var visor = $('[data-visor]'), vImg = $('[data-visor-img]'), vPeu = $('[data-visor-peu]');
     if (!visor || !visor.showModal) return;
@@ -204,8 +200,8 @@
       err.dataset.tipus = tipus;
       err.hidden = !tipus;
       err.classList.toggle('form__error--ok', tipus === 'enviat');
-      if (tipus === 'error') err.textContent = SM.t('Escriviu el vostre nom i un telèfon de 9 xifres per poder trucar-vos.', 'Escriba su nombre y un teléfono de 9 cifras para poder llamarle.');
-      if (tipus === 'enviat') err.textContent = SM.t("S'obre el vostre correu amb el missatge. Si no s'obre, truqueu al 934 170 582.", 'Se abre su correo con el mensaje. Si no se abre, llame al 934 170 582.');
+      if (tipus === 'error') err.textContent = 'Escriviu el vostre nom i un telèfon de 9 xifres per poder trucar-vos.';
+      if (tipus === 'enviat') err.textContent = "S'obre el vostre correu amb el missatge. Si no s'obre, truqueu al 934 170 582.";
     }
     function valida() {
       var v = valors(), mal = [];
@@ -217,7 +213,6 @@
       return mal;
     }
     form.addEventListener('input', function () { if (err.dataset.tipus === 'error') valida(); });
-    SM.alCanviarIdioma.push(function () { if (err.dataset.tipus) avisa(err.dataset.tipus); });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var mal = valida();
