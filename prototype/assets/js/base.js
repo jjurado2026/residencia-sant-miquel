@@ -1,37 +1,12 @@
-/* Sant Miquel Arcàngel — base: idioma (CA/ES), texto grande, cabecera, menú del móvil,
+/* Sant Miquel Arcàngel — base: texto grande, cabecera, menú del móvil,
    entradas al llegar y bucles en pausa fuera de pantalla. */
 (function () {
   'use strict';
   var d = document, html = d.documentElement;
   var quieto = html.classList.contains('quieto');
-  var SM = window.SM = { quieto: quieto, alCanviarIdioma: [] };
+  var SM = window.SM = { quieto: quieto };
 
   function guarda(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
-
-  /* ---------- Idioma: el HTML trae los dos; aquí se cambian el título y los atributos ---------- */
-  // Su title, literal, en los dos idiomas (no perjudicar su SEO)
-  var TITOL = { ca: 'Inici - Residencia sant miquel árcangel', es: 'Inici - Residencia sant miquel árcangel' };
-  var ATRIBUTS = [['data-alt-es', 'alt'], ['data-aria-es', 'aria-label']];
-  function aplicaIdioma(l, desa) {
-    html.lang = l;
-    d.title = TITOL[l];
-    ATRIBUTS.forEach(function (par) {
-      d.querySelectorAll('[' + par[0] + ']').forEach(function (el) {
-        if (!el.hasAttribute('data-ca-' + par[1])) el.setAttribute('data-ca-' + par[1], el.getAttribute(par[1]) || '');
-        el.setAttribute(par[1], l === 'es' ? el.getAttribute(par[0]) : el.getAttribute('data-ca-' + par[1]));
-      });
-    });
-    if (desa) guarda('sm-idioma', l);
-    SM.idioma = l;
-    SM.alCanviarIdioma.forEach(function (f) { f(l); });
-  }
-  SM.t = function (ca, es) { return SM.idioma === 'es' ? es : ca; };
-  SM.idioma = html.lang === 'es' ? 'es' : 'ca';
-  // Un solo botón que lleva al otro idioma: nada se queda marcado
-  d.querySelectorAll('[data-idioma-canvi]').forEach(function (b) {
-    b.addEventListener('click', function () { aplicaIdioma(SM.idioma === 'es' ? 'ca' : 'es', true); });
-  });
-  aplicaIdioma(SM.idioma, false);
 
   /* ---------- Texto grande ---------- */
   function aplicaText(gran) {
@@ -97,7 +72,6 @@
           });
           node.replaceChild(frag, fill);
         } else if (fill.nodeType === 1) {
-          if (fill.getAttribute('lang')) n = 0;
           parteix(fill);
         }
       });
