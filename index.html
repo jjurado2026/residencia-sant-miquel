@@ -20,12 +20,11 @@
 <!-- Su favicon tal cual (su web no tiene icono propio) -->
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
 <script>
-  /* Caducidad: la propuesta se ve 10 días desde su envío (el día de envío cuenta). PROVISIONAL, como si se
-     enviara el 27-oct-2026: visible hasta el jueves 5 de noviembre de 2026 a las 23:59 de Madrid
-     (6-nov 00:00 CET = 5-nov 23:00 UTC). Ajustar al día real de envío. En local no caduca;
-     ?caducada lo simula. */
+  /* Caducidad: la propuesta se ve 10 días desde su envío (el día de envío cuenta). Enviada el 31-oct-2026:
+     visible hasta el lunes 9 de noviembre de 2026 a las 23:59 de Madrid (10-nov 00:00 CET = 9-nov 23:00 UTC).
+     En local no caduca; ?caducada lo simula. */
   (function () {
-    var fin = Date.UTC(2026, 10, 5, 23, 0);
+    var fin = Date.UTC(2026, 10, 9, 23, 0);
     if (/[?&]caducada\b/.test(location.search) || (location.protocol !== 'file:' && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && Date.now() >= fin)) {
       document.documentElement.style.display = 'none';
       location.replace('caducada.html');
@@ -49,10 +48,10 @@
 <link rel="preload" href="assets/fonts/zodiak.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/commissioner.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="assets/img/fachada-1200.webp" imagesrcset="assets/img/fachada-480.webp 480w, assets/img/fachada-800.webp 800w, assets/img/fachada-1200.webp 1200w" imagesizes="(min-width: 900px) 62vw, 92vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/base.css?v=6">
-<link rel="stylesheet" href="assets/css/home.css?v=6">
-<script src="assets/js/base.js?v=6" defer></script>
-<script src="assets/js/home.js?v=6" defer></script>
+<link rel="stylesheet" href="assets/css/base.css?v=7">
+<link rel="stylesheet" href="assets/css/home.css?v=7">
+<script src="assets/js/base.js?v=7" defer></script>
+<script src="assets/js/home.js?v=7" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
