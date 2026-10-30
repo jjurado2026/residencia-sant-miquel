@@ -12,7 +12,7 @@ Prototipo de web en una sola página para la **Residència d'avis Sant Miquel Ar
 Antes de maquetar se capturaron las homes de seis residencias (Sanitas Mayores, Colisée, Ballesol, Amavir, DomusVi, emeis). Lo que comparten: títulos de sección centrados, servicios y profesionales en rejillas iguales, cifras destacadas, contacto en dos columnas simétricas, banda de llamada a la acción. La propuesta toma ese orden y da un paso más con piezas propias: el contador de sus plazas, los oficios en órbita alrededor de su frase, la casa que gira como un cubo y las filas de fotos simétricas.
 
 ## Dirección estética
-**Los colores de su web**: el carbón rayado de su fondo, el taupe de su caja de contenido, el rosa de la banda de su pie y las **flores de cerezo** de su cabecera, que ahora acompañan toda la página. Los fondos claros van del pétalo al rosa y al melocotón en un solo lavado, sin cortes; encima, un papel pintado de flores muy tenue y sus ramas en las esquinas, siempre una a cada lado. Titulares en **Zodiak**, serif contemporánea; texto en **Commissioner**, sans moderna y legible, a 20 px. Todo en el eje: cada sección con su título centrado y un adorno simétrico debajo; columnas del mismo ancho; filas de fotos que se reflejan.
+**Los colores de su web**: el carbón rayado de su fondo, el taupe de su caja de contenido, el rosa de la banda de su pie y las **flores de cerezo** de su cabecera, que ahora acompañan toda la página. Los fondos claros van del pétalo al rosa y al melocotón en un solo lavado, sin cortes; encima, un papel pintado de flores muy tenue y sus ramas en las esquinas, siempre una a cada lado. Titulares en **Zodiak**, serif contemporánea; texto en **Commissioner**, sans moderna y legible, a 19 px. Todo en el eje: cada sección con su título centrado y un adorno simétrico debajo; columnas del mismo ancho; filas de fotos que se reflejan.
 
 - **Color:** carbón `#2A2624` · rosa `#B48797` / `#8E5F71` · flor `#E8B9C6` · pétalo `#FDF2F1` / `#FBE7E6` · rosa `#F6D6D8` · melocotón `#FCEBE0`.
 - **Flores:** dibujadas a partir de las suyas (pétalo pálido con el corazón magenta, ramitas en zigzag), en SVG, en `assets/img/flors/` (generadas con `_interno/herramientas/flors.py`). También en el adorno bajo los títulos.
@@ -45,7 +45,7 @@ HTML, CSS y JavaScript puro. Cero dependencias, cero build. Zodiak (licencia ITF
 Parámetros útiles: `?ss` (sin animaciones, para capturas) · `?caducada` (simula la caducidad).
 
 ## Caducidad
-**Provisional, como si se enviara el 27-oct-2026:** la propuesta se ve hasta el **jueves 5 de noviembre de 2026 a las 23:59** (hora de Madrid). Desde el 6, `index.html` lleva a `caducada.html`: «No puedes ver esta página porque han pasado más de 10 días desde su envío. Si sigues con interés, escríbeme a jjuradogarciadelrio@gmail.com.» y la home entera en miniatura. La fecha está en el primer `<script>` de `index.html` (`Date.UTC(2026, 10, 5, 23, 0)`): se ajusta al día real de envío. En local no caduca.
+**Enviada el 31-oct-2026** (el día de envío cuenta): la propuesta se ve hasta el **lunes 9 de noviembre de 2026 a las 23:59** (hora de Madrid). Desde el 10, `index.html` lleva a `caducada.html`: «No puedes ver esta página porque han pasado más de 10 días desde su envío. Si sigues con interés, escríbeme a jjuradogarciadelrio@gmail.com.» y la home entera en miniatura. La fecha está en el primer `<script>` de `index.html` (`Date.UTC(2026, 10, 9, 23, 0)`). En local no caduca; `?caducada` lo simula.
 
 ## Ver en local
 ```bash
